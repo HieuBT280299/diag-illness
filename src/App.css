@@ -1,38 +1,223 @@
-.App {
-  text-align: center;
+:root {
+  --mainColor: #ffa800;
 }
 
-.App-logo {
-  height: 40vmin;
+body {
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.home {
+  /* background-image: url(./images/background.png); */
+  height: 100%;
+  /* background-size: cover; */
+}
+
+.intro-section {
+  /* background-color: #fff; */
+  float: left;
+  width: 100%;
+}
+
+.services-sect {
+  padding: 0 20px;
+}
+
+.services-title-text {
+  /* type 1 */
+  background: linear-gradient(
+    to right,
+    var(--mainColor) 0%,
+    var(--mainColor) 5px,
+    transparent 5px
+  );
+  background-repeat: repeat-x;
+  background-size: 100%;
+  color: #000;
+  padding-left: 10px;
+  text-decoration: none;
+  transition: background-color 0.5s;
+
+  /* type 2 */
+  /* background:
+     linear-gradient(
+       to bottom, var(--mainColor) 0%,
+       var(--mainColor) 100%
+     );
+  background-position: 0 100%;
+  background-repeat: repeat-x;
+  background-size: 4px 4px;
+  color: #000;
+  text-decoration: none;
+  transition: background-size .2s; */
+}
+
+.services-title-text:hover {
+  /* type 1 */
+  background: linear-gradient(
+    to right,
+    var(--mainColor) 0%,
+    var(--mainColor) 5px,
+    transparent
+  );
+
+  /* type 2 */
+  /* background-size: 4px 50px; */
+}
+
+.service-detail-link:hover {
+  text-decoration: none;
+  color: #ffa800 !important;
+}
+
+.row-header {
+  margin: 0px auto;
+  padding: 0px auto;
+}
+
+.row-content {
+  margin: 0px auto;
+  padding: 50px 0px 50px 0px;
+  border-bottom: 1px ridge;
+  min-height: 400px;
+}
+
+.App > .container {
+  min-height: calc(100vh - 15rem); /*to push footer to the bottom */
+}
+
+.footer {
+  background-color: #eef1f4;
+  margin: 0px auto;
+  padding: 20px 0px 20px 0px;
+}
+
+.footer div,
+.footer address {
+  font-weight: 400;
+  font-size: 16px;
+  margin-bottom: 0;
+  line-height: 26px;
+}
+
+.jumbotron {
+  padding: 70px 30px 70px 30px;
+  margin: 0px auto;
+  background: none;
+}
+
+.jumbotron h2 {
+  font-family: "Bebas Neue", cursive;
+  color: #21211e;
+  font-size: 60px;
+  font-weight: 700;
+  text-transform: capitalize;
+  margin-top: 0;
+}
+
+.jumbotron h4 {
+  font-family: "Open Sans", sans-serif;
+  color: #21211e;
+  font-weight: 300;
+  line-height: 30px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-top: 50px;
+}
+
+address {
+  font-size: 80%;
+  margin: 0px;
+  color: #0f0f0f;
+}
+
+.navbar-light {
+  background-color: #eef1f4;
+}
+
+.nav-link {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #21211e !important;
+}
+
+.nav-link.active {
+  color: #ffa800 !important;
+}
+
+.nav-link:hover {
+  color: #ffa800 !important;
+}
+
+.dropdown-item {
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.dropdown-item:hover {
+  background-color: #ffa800 !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.dropdown-item a {
+  text-decoration: none;
+  color: #21211e;
+  pointer-events: auto;
 }
 
-.App-link {
-  color: #61dafb;
+.dropdown-item a:hover {
+  text-decoration: none;
+  color: #21211e;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.breadcrumb {
+  background-color: #fff;
+}
+
+.submitButton:hover {
+  background-color: #ffa800;
+  border-color: #ffa800;
+  color: #000;
+}
+
+.page-enter {
+  opacity: 0.01;
+  transform: translateX(-100%);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateX(0%);
+  transition: all 300ms ease-in;
+}
+
+.page-exit {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.page-exit-active {
+  opacity: 0.01;
+  transform: translateX(100%);
+  transition: all 300ms ease-out;
+}
+
+.table-paging .link {
+  font-size: large;
+  color: #000;
+}
+
+.table-paging .link.active {
+  font-weight: bold;
+  color: #ffa800;
+}
+
+th {
+  border-right: 1px solid #e0e0e0;
+}
+
+th:last-of-type {
+  border: none;
 }
