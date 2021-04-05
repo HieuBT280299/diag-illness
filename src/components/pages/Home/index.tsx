@@ -3,8 +3,6 @@ import GuestContent from "./GuestContent";
 import HomeContent from "./HomeContent";
 
 const Home = () => {
-  // const account = { firstName: "Hieu", lastName: "Bui" };
-  const account = null;
   return (
     <div className="home">
       <Jumbotron className="d-none d-sm-block">
@@ -18,7 +16,7 @@ const Home = () => {
         </div>
       </Jumbotron>
 
-      {account == null ? <GuestContent /> : <HomeContent account={account} />}
+      {/* {account == null ? <GuestContent /> : <HomeContent account={account} />} */}
     </div>
   );
 };
