@@ -8,8 +8,8 @@ import { withRouter } from "react-router";
 const drawerWidth = 240;
 
 const Main = () => {
-  // const account = { firstName: "Hieu", lastName: "Bui" };
-  const account = null;
+  const account = { firstName: "Hieu", lastName: "Bui" };
+  // const account = null;
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);

@@ -1,17 +1,34 @@
+import { makeStyles } from "@material-ui/core/styles";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { Routes } from "../../shared/constants";
 import Home from "../pages/Home";
+import Hospital from "../pages/Hospital";
 import Login from "../pages/Login";
+import News from "../pages/News";
 import SignUp from "../pages/SignUp";
 
+const useStyles = makeStyles((theme) => ({
+  content: {
+    marginTop: 64,
+    width: "100%",
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(6),
+  },
+}));
+
 const SwitchRoutes = ({ account }: any) => {
+  const classes = useStyles();
   return (
-    <Switch>
-      <Route path={`${Routes.HOME}`} component={Home} />
-      <Route path={`${Routes.LOGIN}`} component={Login} />
-      <Route path={`${Routes.SIGN_UP}`} component={SignUp} />
-      <Redirect to={`${Routes.HOME}`} />
-    </Switch>
+    <div className={classes.content}>
+      <Switch>
+        <Route path={`${Routes.HOME}`} component={Home} />
+        <Route path={`${Routes.LOGIN}`} component={Login} />
+        <Route path={`${Routes.SIGN_UP}`} component={SignUp} />
+        <Route path={`${Routes.NEWS}`} component={News} />
+        <Route path={`${Routes.HOSPITAL}`} component={Hospital} />
+        <Redirect to={`${Routes.HOME}`} />
+      </Switch>
+    </div>
   );
 };
 

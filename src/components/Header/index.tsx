@@ -8,6 +8,9 @@ import Badge from "@material-ui/core/Badge";
 import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { mainList, preLoginList } from "../../shared/constants";
+import { getHeaderTitle } from "../../shared/helper";
+import { useMemo } from "react";
 
 type HeaderProps = RouteComponentProps<any> & {
   account: any;
@@ -27,7 +30,6 @@ const Header = ({
     toolbar: {
       paddingRight: 24, // keep right padding when drawer closed
     },
-
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
       transition: theme.transitions.create(["width", "margin"], {
@@ -55,7 +57,13 @@ const Header = ({
   }));
 
   const classes = useStyles();
+  const titleList = account ? mainList : preLoginList;
   const { pathname } = location;
+  const headerText = useMemo(() => getHeaderTitle(titleList, pathname), [
+    titleList,
+    pathname,
+  ]);
+
   return (
     <AppBar
       position="absolute"
@@ -78,7 +86,7 @@ const Header = ({
           noWrap
           className={classes.title}
         >
-          {pathname}
+          {headerText}
         </Typography>
         {account && (
           <IconButton color="inherit">
