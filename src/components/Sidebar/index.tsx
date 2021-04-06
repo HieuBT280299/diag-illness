@@ -1,24 +1,25 @@
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import { mainListItems, preLoginListItems } from "./listItems";
+import { MainListItems, PreLoginListItems } from "./listItems";
+import { RouteComponentProps, withRouter } from "react-router";
 
-interface SidebarProps {
+type SidebarProps = RouteComponentProps<any> & {
   account: any;
   drawerWidth: number;
   open: boolean;
   handleDrawerClose: () => void;
-}
+};
 
 const Sidebar = ({
   account,
   drawerWidth,
   open,
   handleDrawerClose,
+  location,
 }: SidebarProps) => {
   const useStyles = makeStyles((theme) => ({
     toolbarIcon: {
@@ -70,6 +71,8 @@ const Sidebar = ({
   }));
 
   const classes = useStyles();
+  const { pathname } = location;
+
   return (
     <Drawer
       variant="permanent"
@@ -85,12 +88,12 @@ const Sidebar = ({
       </div>
       <Divider />
       {account ? (
-        <List>{mainListItems}</List>
+        <MainListItems pathname={pathname} />
       ) : (
-        <List>{preLoginListItems}</List>
+        <PreLoginListItems pathname={pathname} />
       )}
     </Drawer>
   );
 };
 
-export default Sidebar;
+export default withRouter(Sidebar);
