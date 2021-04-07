@@ -7,6 +7,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import HeaderCell from "../../tables/HeaderCell";
+import { Grid, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles({
   table: {
@@ -18,6 +19,7 @@ const headCells = [
   { id: "id", numeric: true, disablePadding: false, label: "ID" },
   { id: "name", numeric: false, disablePadding: false, label: "Name" },
   { id: "address", numeric: false, disablePadding: false, label: "Address" },
+  { id: "phone", numeric: false, disablePadding: false, label: "Phone number" },
 ];
 
 const HospitalListTableHead = () => {
@@ -38,7 +40,9 @@ const HospitalListTableHead = () => {
   );
 };
 
-const rows = [{ id: "1", name: "Hospital 1", address: "Hanoi" }];
+const rows = [
+  { id: "1", name: "Hospital 1", address: "Hanoi", phone: "040400404" },
+];
 
 const HospitalListTable = () => {
   const classes = useStyles();
@@ -46,11 +50,13 @@ const HospitalListTable = () => {
     return str;
   };
   return (
-    <React.Fragment>
-      <div className="col-12">
-        <h5>Number of entries: 10</h5>
-      </div>
-      <div className="col-12">
+    <Grid container style={{ margin: 12 }}>
+      <Grid item xs={12}>
+        <Typography variant="h6" style={{ marginBottom: 12 }}>
+          Number of entries: 10
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="customized table">
             <HospitalListTableHead />
@@ -58,13 +64,14 @@ const HospitalListTable = () => {
               {rows.map((row) => {
                 return (
                   <TableRow>
-                    <HeaderCell width="10%" align="right">
+                    <HeaderCell width="5%" align="right">
                       {getValueOf(row.id)}
                     </HeaderCell>
                     <HeaderCell width="15%">{getValueOf(row.name)}</HeaderCell>
-                    <HeaderCell width="10%">
+                    <HeaderCell width="15%">
                       {getValueOf(row.address)}
                     </HeaderCell>
+                    <HeaderCell width="15%">{getValueOf(row.phone)}</HeaderCell>
                   </TableRow>
                 );
               })}
@@ -72,8 +79,8 @@ const HospitalListTable = () => {
           </Table>
         </TableContainer>
         <br />
-      </div>
-    </React.Fragment>
+      </Grid>
+    </Grid>
   );
 };
 

@@ -7,3 +7,8 @@ export const getHeaderTitle = (list: SidebarListItem[], path: string) => {
   }
   return "Illness Diagnosis System";
 };
+
+export const sortByName = (
+  a: { id: string; name: string },
+  b: { id: string; name: string }
+) => a.name.localeCompare(b.name);

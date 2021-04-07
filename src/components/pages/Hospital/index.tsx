@@ -1,17 +1,15 @@
-import { Grid, makeStyles } from "@material-ui/core";
-import styled from "styled-components";
+import { Grid } from "@material-ui/core";
 import HospitalListTable from "./HospitalListTable";
 import HospitalSearchForm from "./HospitalSearchForm";
 
 const Hospital = () => {
   return (
     <Grid container>
-      <Grid item xs={12}>
-        <h4>Search</h4>
+      <Grid item xs={12} style={{ margin: 12 }}>
         <HospitalSearchForm />
       </Grid>
 
-      <Grid item xs={12} style={{ marginTop: 12 }}>
+      <Grid item xs={12} style={{ marginTop: 48 }}>
         <HospitalListTable />
       </Grid>
     </Grid>
