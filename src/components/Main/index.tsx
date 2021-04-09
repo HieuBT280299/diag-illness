@@ -4,12 +4,13 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import { withRouter } from "react-router";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 
 const Main = () => {
-  const account = { firstName: "Hieu", lastName: "Bui" };
-  // const account = null;
+  const account = useSelector((state: any) => state.loginAccount?.account);
+
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);

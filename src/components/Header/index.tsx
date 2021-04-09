@@ -11,6 +11,7 @@ import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { mainList, preLoginList } from "../../shared/constants";
 import { getHeaderTitle } from "../../shared/helper";
 import { useMemo } from "react";
+import { AccountCircle } from "@material-ui/icons";
 
 type HeaderProps = RouteComponentProps<any> & {
   account: any;
@@ -89,17 +90,12 @@ const Header = ({
           {headerText}
         </Typography>
         {account && (
-          <IconButton color="inherit">
-            <Link
-              to="/"
-              style={{ color: "white", textDecoration: "none", marginRight: 5 }}
-            >
-              {account.firstName}
-            </Link>
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          <>
+            <Typography variant="h6">{account.name}</Typography>
+            <IconButton color="inherit">
+              <AccountCircle />
+            </IconButton>
+          </>
         )}
       </Toolbar>
     </AppBar>

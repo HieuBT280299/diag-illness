@@ -10,6 +10,7 @@ export enum Routes {
   SIGN_UP = "/signup",
   NEWS = "/news",
   HOSPITAL = "/hospital",
+  DIAGNOSE = "/diagnose",
 }
 
 export type SidebarListItem = {
@@ -27,17 +28,17 @@ export const mainList: SidebarListItem[] = [
   {
     icon: <ShoppingCartIcon />,
     text: "News",
-    to: "/news",
+    to: Routes.NEWS,
   },
   {
     icon: <PeopleIcon />,
     text: "Diagnose",
-    to: "/diagnose",
+    to: Routes.DIAGNOSE,
   },
   {
     icon: <BarChartIcon />,
     text: "Find Hospital",
-    to: "/hospital",
+    to: Routes.HOSPITAL,
   },
   // {
   //   icon: <LayersIcon />,
@@ -50,12 +51,12 @@ export const preLoginList: SidebarListItem[] = [
   {
     icon: <AssignmentIcon />,
     text: "Login",
-    to: "/login",
+    to: Routes.LOGIN,
   },
   {
     icon: <AssignmentIcon />,
     text: "Sign Up",
-    to: "/signup",
+    to: Routes.SIGN_UP,
   },
   {
     icon: <AssignmentIcon />,

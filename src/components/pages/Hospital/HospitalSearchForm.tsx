@@ -13,9 +13,9 @@ const initialValues = {
   name: "",
   number: "",
   phone: "",
-  city: "0",
-  district: "0",
-  ward: "0",
+  cityCode: "0",
+  districtCode: "0",
+  wardCode: "0",
 };
 
 const HospitalSearchForm = () => {
@@ -28,13 +28,13 @@ const HospitalSearchForm = () => {
   });
 
   const cityChange = (e: React.ChangeEvent<any>) => {
-    formik.values.district = "0";
-    formik.values.ward = "0";
+    formik.values.districtCode = "0";
+    formik.values.wardCode = "0";
     formik.handleChange(e);
   };
 
   const districtChange = (e: React.ChangeEvent<any>) => {
-    formik.values.ward = "0";
+    formik.values.wardCode = "0";
     formik.handleChange(e);
   };
 
@@ -62,10 +62,10 @@ const HospitalSearchForm = () => {
               <TextField
                 select
                 fullWidth
-                name="city"
+                name="cityCode"
                 label="City/Province"
                 variant="outlined"
-                value={formik.values.city}
+                value={formik.values.cityCode}
                 onChange={cityChange}
               >
                 <MenuItem value="0">--Select--</MenuItem>
@@ -80,15 +80,15 @@ const HospitalSearchForm = () => {
               <TextField
                 select
                 fullWidth
-                name="district"
+                name="districtCode"
                 label="District"
                 variant="outlined"
-                value={formik.values.district}
+                value={formik.values.districtCode}
                 onChange={districtChange}
               >
                 <MenuItem value="0">--Select--</MenuItem>
                 {DISTRICTS.filter(
-                  (district) => district.upperId === formik.values.city
+                  (district) => district.upperId === formik.values.cityCode
                 )
                   .sort(sortByName)
                   .map((district) => (
@@ -102,14 +102,16 @@ const HospitalSearchForm = () => {
               <TextField
                 select
                 fullWidth
-                name="ward"
+                name="wardCode"
                 label="Ward/Commune"
                 variant="outlined"
-                value={formik.values.ward}
+                value={formik.values.wardCode}
                 onChange={formik.handleChange}
               >
                 <MenuItem value="0">--Select--</MenuItem>
-                {WARDS.filter((ward) => ward.upperId === formik.values.district)
+                {WARDS.filter(
+                  (ward) => ward.upperId === formik.values.districtCode
+                )
                   .sort(sortByName)
                   .map((ward) => (
                     <MenuItem key={ward.id} value={ward.id}>
