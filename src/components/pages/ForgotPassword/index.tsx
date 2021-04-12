@@ -32,22 +32,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const initialValues = { email: "", password: "" };
+const initialValues = { email: "" };
 
-const Login = () => {
-  const account = useSelector((state: any) => state.loginAccount?.account);
+const ForgotPassword = () => {
+  // const account = useSelector((state: any) => state.loginAccount?.account);
 
-  const dispatch = useDispatch();
-  const dispatchPostLogin = (loginDetails: {
-    email: string;
-    password: string;
-  }) => dispatch(postLogin(loginDetails));
+  // const dispatch = useDispatch();
+  // const dispatchPostLogin = (loginDetails: {
+  //   email: string;
+  //   password: string;
+  // }) => dispatch(postLogin(loginDetails));
 
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-      dispatchPostLogin(values);
     },
   });
 
@@ -60,7 +59,7 @@ const Login = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Reset your password
         </Typography>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
           <TextField
@@ -71,22 +70,10 @@ const Login = () => {
             id="email"
             label="Email Address"
             name="email"
-            autoComplete="email"
             autoFocus
             onChange={formik.handleChange}
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={formik.handleChange}
-          />
+
           <Button
             type="submit"
             fullWidth
@@ -94,12 +81,9 @@ const Login = () => {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Reset
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link to="/">Forgot password?</Link>
-            </Grid>
+          <Grid container justify="flex-end">
             <Grid item>
               {"Don't have an account? "}
               <Link to="/signup">{"Sign Up"}</Link>
@@ -111,4 +95,4 @@ const Login = () => {
   );
 };
 
-export default React.memo(Login);
+export default React.memo(ForgotPassword);

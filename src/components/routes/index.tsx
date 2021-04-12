@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { Routes } from "../../shared/constants";
 import Diagnose from "../pages/Diagnose";
+import ForgotPassword from "../pages/ForgotPassword";
 import Home from "../pages/Home";
 import Hospital from "../pages/Hospital";
 import Login from "../pages/Login";
@@ -25,6 +26,7 @@ const SwitchRoutes = ({ account }: any) => {
         <Route path={`${Routes.HOME}`} component={Home} />
         <Route path={`${Routes.LOGIN}`} component={Login} />
         <Route path={`${Routes.SIGN_UP}`} component={SignUp} />
+        <Route path={`${Routes.FORGOT_PASSWORD}`} component={ForgotPassword} />
         <Route path={`${Routes.NEWS}`} component={News} />
         <Route path={`${Routes.HOSPITAL}`} component={Hospital} />
         <Route path={`${Routes.DIAGNOSE}`} component={Diagnose} />

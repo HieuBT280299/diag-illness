@@ -15,9 +15,11 @@ const fakeAccount = {
   lastAccess: null,
 };
 
+const account = JSON.parse(sessionStorage.getItem("account") || "{}");
+
 export const LoginAccount = (
   state = {
-    account: fakeAccount,
+    account: Object.keys(account).length === 0 ? null : account,
     errMess: null,
   },
   action: { type: string; payload: any }

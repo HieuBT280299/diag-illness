@@ -8,6 +8,7 @@ export enum Routes {
   HOME = "/home",
   LOGIN = "/login",
   SIGN_UP = "/signup",
+  FORGOT_PASSWORD = "/forgotpassword",
   NEWS = "/news",
   HOSPITAL = "/hospital",
   DIAGNOSE = "/diagnose",
@@ -61,6 +62,6 @@ export const preLoginList: SidebarListItem[] = [
   {
     icon: <AssignmentIcon />,
     text: "Forgot Password",
-    to: "/",
+    to: Routes.FORGOT_PASSWORD,
   },
 ];

@@ -4,14 +4,13 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
 import MenuIcon from "@material-ui/icons/Menu";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import { mainList, preLoginList } from "../../shared/constants";
 import { getHeaderTitle } from "../../shared/helper";
 import { useMemo } from "react";
-import { AccountCircle } from "@material-ui/icons";
+import AccountButton from "./AccountButton";
+
 
 type HeaderProps = RouteComponentProps<any> & {
   account: any;
@@ -93,7 +92,7 @@ const Header = ({
           <>
             <Typography variant="h6">{account.name}</Typography>
             <IconButton color="inherit">
-              <AccountCircle />
+              <AccountButton />
             </IconButton>
           </>
         )}
