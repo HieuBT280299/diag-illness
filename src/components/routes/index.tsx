@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { Routes } from "../../shared/constants";
 import Diagnose from "../pages/Diagnose";
@@ -18,20 +19,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SwitchRoutes = ({ account }: any) => {
+const SwitchRoutes = () => {
+  const account = useSelector((state: any) => state.loginAccount?.account);
   const classes = useStyles();
+
+  const SwitchRoutes = account ? (
+    <>
+      <Route path={`${Routes.HOME}`} component={Home} />
+      <Route path={`${Routes.NEWS}`} component={News} />
+      <Route path={`${Routes.HOSPITAL}`} component={Hospital} />
+      <Route path={`${Routes.DIAGNOSE}`} component={Diagnose} />
+      <Redirect to={`${Routes.HOME}`} />
+    </>
+  ) : (
+    <>
+      <Route path={`${Routes.LOGIN}`} component={Login} />
+      <Route path={`${Routes.SIGN_UP}`} component={SignUp} />
+      <Route path={`${Routes.FORGOT_PASSWORD}`} component={ForgotPassword} />
+      <Redirect to={`${Routes.LOGIN}`} />
+    </>
+  );
+
   return (
     <div className={classes.content}>
-      <Switch>
-        <Route path={`${Routes.HOME}`} component={Home} />
-        <Route path={`${Routes.LOGIN}`} component={Login} />
-        <Route path={`${Routes.SIGN_UP}`} component={SignUp} />
-        <Route path={`${Routes.FORGOT_PASSWORD}`} component={ForgotPassword} />
-        <Route path={`${Routes.NEWS}`} component={News} />
-        <Route path={`${Routes.HOSPITAL}`} component={Hospital} />
-        <Route path={`${Routes.DIAGNOSE}`} component={Diagnose} />
-        <Redirect to={`${Routes.HOME}`} />
-      </Switch>
+      <Switch>{SwitchRoutes}</Switch>
     </div>
   );
 };

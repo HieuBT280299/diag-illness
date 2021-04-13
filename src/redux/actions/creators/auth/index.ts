@@ -1,5 +1,60 @@
 import * as AuthActionTypes from "../../types/auth";
 import { baseUrl } from "../../../../shared/baseUrl";
+import { RegisterDetails } from "../../../../components/pages/SignUp";
+
+export const signUpSuccessfully = (account: any) => {
+  return {
+    type: AuthActionTypes.SIGN_UP_SUCCESSFULLY,
+    payload: account,
+  };
+};
+
+export const signUpFailed = (errMess: any) => {
+  return {
+    type: AuthActionTypes.SIGN_UP_FAILED,
+    payload: errMess,
+  };
+};
+
+export const postSignUp = (registerDetails: RegisterDetails) => (
+  dispatch: any
+) => {
+  const data = JSON.stringify(registerDetails);
+  console.log(data);
+  return fetch(baseUrl + "auth/register", {
+    method: "POST",
+    body: data,
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  })
+    .then((response) => {
+      if (response.ok || response.status === 400) {
+        return response;
+      } else {
+        var error = new Error(
+          "Error " + response.status + ": " + response.statusText
+        );
+        throw error;
+      }
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      if (response.error) {
+        dispatch(signUpFailed(response.error));
+      } else {
+        const account = response.data;
+        console.log(account);
+        dispatch(signUpSuccessfully(account));
+      }
+    })
+    .catch((error) => {
+      console.log("Login ", error.message);
+      // dispatch(submitFailed(ERROR_MESSAGE_SUBMIT_GENERAL));
+    });
+};
 
 export const loginSuccessfully = (account: any) => {
   return {
@@ -24,11 +79,10 @@ export const postLogin = (loginDetails: {
   return fetch(baseUrl + "auth/login", {
     method: "POST",
     body: data,
-    // mode: "cors",
+
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
     },
-    // credentials: "include",
   })
     .then((response) => {
       if (response.ok || response.status === 400) {
@@ -37,7 +91,7 @@ export const postLogin = (loginDetails: {
         var error = new Error(
           "Error " + response.status + ": " + response.statusText
         );
-        // error.response = response;
+
         throw error;
       }
     })
@@ -53,7 +107,6 @@ export const postLogin = (loginDetails: {
         const account = { ...data.user, token: data.token };
         console.log(account);
         sessionStorage.setItem("account", JSON.stringify(account));
-
         dispatch(loginSuccessfully(account));
       }
     })
@@ -70,44 +123,44 @@ export const logoutSuccessfully = (message: any) => {
   };
 };
 
-// export const postLogout = (token: string) => (dispatch: any) => {
-//   return fetch(baseUrl + "auth/logout", {
-//     method: "POST",
-//     // mode: "cors",
-//     // credentials: "include",
-//     headers: {
-//       "Token": token,
-//     },
-//   })
-//     .then(
-//       (response) => {
-//         if (response.ok) {
-//           return response;
-//         } else {
-//           var error = new Error(
-//             "Error " + response.status + ": " + response.statusText
-//           );
-//           error.response = response;
-//           throw error;
-//         }
-//       },
-//       (error) => {
-//         var errMess = new Error(error.message);
-//         throw errMess;
-//       }
-//     )
-//     .then((response) => {
-//       Cookies.remove("account");
-//       return response.json();
-//     })
-//     .then(async (response) => {
-//       await dispatch(logoutSuccessfully(response.message));
-//       await setTimeout(() => {
-//         window.location.reload(false);
-//       }, 500);
-//     })
-//     .catch((error) => {
-//       console.log("Logout ", error.message);
-//       dispatch(submitFailed(ERROR_MESSAGE_SUBMIT_GENERAL));
-//     });
-// };
+export const getLogout = (token: string) => (dispatch: any) => {
+  return fetch(baseUrl + "auth/signout", {
+    method: "GET",
+    mode: "cors",
+
+    headers: {
+      Authorization: token,
+    },
+  })
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+
+          throw error;
+        }
+      },
+      (error) => {
+        var errMess = new Error(error.message);
+        throw errMess;
+      }
+    )
+    .then((response) => {
+      sessionStorage.removeItem("account");
+      return response.json();
+    })
+    .then(async (response) => {
+      await dispatch(logoutSuccessfully(response.message));
+      await setTimeout(() => {
+        window.location.reload(false);
+      }, 500);
+    })
+    .catch((error) => {
+      console.log("Logout ", error.message);
+      // dispatch(submitFailed(ERROR_MESSAGE_SUBMIT_GENERAL));
+    });
+};

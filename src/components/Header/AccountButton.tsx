@@ -4,10 +4,17 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { Link } from "react-router-dom";
+import { getLogout } from "../../redux/actions/creators/auth";
+import { useDispatch, useSelector } from "react-redux";
 
-const AccountButton = (props: any) => {
+const AccountButton = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  const account = useSelector((state: any) => state.loginAccount?.account);
+
+  const dispatch = useDispatch();
+  const dispatchGetLogout = (token: string) => dispatch(getLogout(token));
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -17,12 +24,9 @@ const AccountButton = (props: any) => {
     setAnchorEl(null);
   };
 
-  // const history = useHistory();
-
-  const logout = () => {
-    // history.push({ROUTE_HOME});
-    // props.postLogout();
+  const logout = (token: string) => {
     console.log("logout");
+    dispatchGetLogout(token);
   };
 
   return (
@@ -68,7 +72,7 @@ const AccountButton = (props: any) => {
         </Link>
 
         <Link
-          onClick={handleClose}
+          onClick={() => logout(account.token)}
           to="/"
           style={{ color: "inherit", textDecoration: "none" }}
         >
@@ -79,4 +83,4 @@ const AccountButton = (props: any) => {
   );
 };
 
-export default AccountButton;
+export default React.memo(AccountButton);

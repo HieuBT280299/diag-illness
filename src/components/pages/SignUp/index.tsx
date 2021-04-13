@@ -9,6 +9,10 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import { MenuItem } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { postSignUp } from "../../../redux/actions/creators/auth";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -29,8 +33,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+export type RegisterDetails = {
+  email: string;
+  password: string;
+  name: string;
+  dateOfBirth: Date;
+  gender: 1 | 0;
+};
+
+const initialValues: RegisterDetails = {
+  name: "",
+  dateOfBirth: new Date(),
+  email: "",
+  password: "",
+  gender: 0,
+};
+
 const SignUp = () => {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+  const dispatchPostSignUp = (registerDetails: RegisterDetails) =>
+    dispatch(postSignUp(registerDetails));
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    // validationSchema: validationSchema,
+    onSubmit: (values) => {
+      const submitValues = {
+        ...values,
+        dateOfBirth: new Date(values.dateOfBirth),
+      };
+      dispatchPostSignUp(submitValues);
+      alert(JSON.stringify(submitValues, null, 2));
+    },
+  });
 
   return (
     <Container component="main" maxWidth="xs">
@@ -42,27 +79,48 @@ const SignUp = () => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
-                name="firstName"
+                name="name"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
+                id="name"
+                label="Name"
+                value={formik.values.name}
+                onChange={formik.handleChange}
                 autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
+              <TextField
+                select
+                fullWidth
+                name="gender"
+                label="Gender"
+                variant="outlined"
+                value={formik.values.gender}
+                onChange={formik.handleChange}
+              >
+                <MenuItem value={0}>Male</MenuItem>
+                <MenuItem value={1}>Female</MenuItem>
+              </TextField>
+            </Grid>
+            <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                required
+                id="dateOfBirth"
+                name="dateOfBirth"
+                label="Date of birth"
+                type="date"
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
+                value={formik.values.dateOfBirth}
+                onChange={formik.handleChange}
+                InputLabelProps={{
+                  shrink: true,
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -73,6 +131,8 @@ const SignUp = () => {
                 id="email"
                 label="Email Address"
                 name="email"
+                value={formik.values.email}
+                onChange={formik.handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -84,6 +144,8 @@ const SignUp = () => {
                 label="Password"
                 type="password"
                 id="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
               />
             </Grid>
           </Grid>

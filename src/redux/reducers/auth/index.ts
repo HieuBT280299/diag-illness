@@ -1,4 +1,4 @@
-import * as AuthActionTypes from "../../../actions/types/auth";
+import * as AuthActionTypes from "../../actions/types/auth";
 
 const fakeAccount = {
   id: 9,

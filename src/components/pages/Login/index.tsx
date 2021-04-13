@@ -46,7 +46,6 @@ const Login = () => {
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
       dispatchPostLogin(values);
     },
   });
