@@ -8,6 +8,7 @@ import Home from "../pages/Home";
 import Hospital from "../pages/Hospital";
 import Login from "../pages/Login";
 import News from "../pages/News";
+import Profile from "../pages/Profile";
 import SignUp from "../pages/SignUp";
 
 const useStyles = makeStyles((theme) => ({
@@ -29,6 +30,7 @@ const SwitchRoutes = () => {
       <Route path={`${Routes.NEWS}`} component={News} />
       <Route path={`${Routes.HOSPITAL}`} component={Hospital} />
       <Route path={`${Routes.DIAGNOSE}`} component={Diagnose} />
+      <Route path={`${Routes.PROFILE}`} component={Profile} />
       <Redirect to={`${Routes.HOME}`} />
     </>
   ) : (

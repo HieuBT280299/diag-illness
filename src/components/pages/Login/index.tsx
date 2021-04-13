@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postLogin } from "../../../redux/actions/creators/auth";
 import { useFormik } from "formik";
+import { FormHelperText } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,16 +33,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const initialValues = { email: "", password: "" };
+export type LoginDetails = {
+  email: string;
+  password: string;
+};
+
+const initialValues: LoginDetails = { email: "", password: "" };
 
 const Login = () => {
   const account = useSelector((state: any) => state.loginAccount?.account);
+  const errMess = useSelector((state: any) => state.loginAccount?.errMess);
 
   const dispatch = useDispatch();
-  const dispatchPostLogin = (loginDetails: {
-    email: string;
-    password: string;
-  }) => dispatch(postLogin(loginDetails));
+  const dispatchPostLogin = (loginDetails: LoginDetails) =>
+    dispatch(postLogin(loginDetails));
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -86,6 +91,7 @@ const Login = () => {
             autoComplete="current-password"
             onChange={formik.handleChange}
           />
+          {errMess && <FormHelperText error>{errMess}</FormHelperText>}
           <Button
             type="submit"
             fullWidth

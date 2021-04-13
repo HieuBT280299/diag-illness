@@ -6,6 +6,7 @@ import Menu from "@material-ui/core/Menu";
 import { Link } from "react-router-dom";
 import { getLogout } from "../../redux/actions/creators/auth";
 import { useDispatch, useSelector } from "react-redux";
+import { Routes } from "../../shared/constants";
 
 const AccountButton = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -57,7 +58,7 @@ const AccountButton = () => {
       >
         <Link
           onClick={handleClose}
-          to="/"
+          to={Routes.PROFILE}
           style={{ color: "inherit", textDecoration: "none" }}
         >
           <MenuItem>My account</MenuItem>

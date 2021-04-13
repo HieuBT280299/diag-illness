@@ -9,6 +9,7 @@ export enum Routes {
   LOGIN = "/login",
   SIGN_UP = "/signup",
   FORGOT_PASSWORD = "/forgotpassword",
+  PROFILE = "/profile",
   NEWS = "/news",
   HOSPITAL = "/hospital",
   DIAGNOSE = "/diagnose",
@@ -24,7 +25,7 @@ export const mainList: SidebarListItem[] = [
   {
     icon: <DashboardIcon />,
     text: "Home",
-    to: "/",
+    to: Routes.HOME,
   },
   {
     icon: <ShoppingCartIcon />,

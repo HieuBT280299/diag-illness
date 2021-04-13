@@ -1,3 +1,4 @@
+import React from "react";
 import { Grid } from "@material-ui/core";
 import HospitalListTable from "./HospitalListTable";
 import HospitalSearchForm from "./HospitalSearchForm";
@@ -16,4 +17,4 @@ const Hospital = () => {
   );
 };
 
-export default Hospital;
+export default React.memo(Hospital);

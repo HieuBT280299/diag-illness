@@ -1,19 +1,18 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
-import DiagnoseForm from "./DiagnoseForm";
 
-const Diagnose = () => {
+const Profile = () => {
   return (
     <Grid container>
       <Grid item xs={12} style={{ margin: 12 }}>
-        <DiagnoseForm />
+        Profile
       </Grid>
 
       <Grid item xs={12} style={{ marginTop: 48 }}>
-        HospitalListTable
+        Profile
       </Grid>
     </Grid>
   );
 };
 
-export default React.memo(Diagnose);
+export default React.memo(Profile);

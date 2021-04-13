@@ -1,6 +1,7 @@
 import * as AuthActionTypes from "../../types/auth";
 import { baseUrl } from "../../../../shared/baseUrl";
 import { RegisterDetails } from "../../../../components/pages/SignUp";
+import { LoginDetails } from "../../../../components/pages/Login";
 
 export const signUpSuccessfully = (account: any) => {
   return {
@@ -43,7 +44,7 @@ export const postSignUp = (registerDetails: RegisterDetails) => (
     })
     .then((response) => {
       if (response.error) {
-        dispatch(signUpFailed(response.error));
+        dispatch(signUpFailed(response.message));
       } else {
         const account = response.data;
         console.log(account);
@@ -70,10 +71,7 @@ export const loginFailed = (errMess: any) => {
   };
 };
 
-export const postLogin = (loginDetails: {
-  email: string;
-  password: string;
-}) => (dispatch: any) => {
+export const postLogin = (loginDetails: LoginDetails) => (dispatch: any) => {
   const data = JSON.stringify(loginDetails);
   console.log(data);
   return fetch(baseUrl + "auth/login", {
@@ -100,7 +98,7 @@ export const postLogin = (loginDetails: {
     })
     .then((response) => {
       if (response.error) {
-        dispatch(loginFailed(response.error));
+        dispatch(loginFailed(response.message));
       } else {
         // console.log(response);
         const data = response.data;
