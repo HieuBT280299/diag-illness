@@ -6,25 +6,30 @@ import { Link } from "react-router-dom";
 import {
   mainList,
   preLoginList,
-  SidebarListItem,
+  PageListItem,
 } from "../../shared/constants";
 
 type ListItemProps = {
-  list: SidebarListItem[];
+  list: PageListItem[];
   pathname: string;
 };
 
 const ListItems = ({ list, pathname }: ListItemProps) => {
   return (
     <List>
-      {list.map((item) => (
-        <Link to={item.to} style={{ color: "inherit", textDecoration: "none" }}>
-          <ListItem button selected={item.to === pathname}>
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} />
-          </ListItem>
-        </Link>
-      ))}
+      {list
+        .filter((item) => !item.hidden)
+        .map((item) => (
+          <Link
+            to={item.to}
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            <ListItem button selected={item.to === pathname}>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItem>
+          </Link>
+        ))}
     </List>
   );
 };

@@ -162,3 +162,57 @@ export const getLogout = (token: string) => (dispatch: any) => {
       // dispatch(submitFailed(ERROR_MESSAGE_SUBMIT_GENERAL));
     });
 };
+
+export const editAccountSuccessfully = (account: any) => {
+  return {
+    type: AuthActionTypes.EDIT_ACCOUNT_SUCCESSFULLY,
+    payload: account,
+  };
+};
+
+export const editAccountFailed = (errMess: any) => {
+  return {
+    type: AuthActionTypes.EDIT_ACCOUNT_FAILED,
+    payload: errMess,
+  };
+};
+
+// export const postEditAccount = (accountDetails: any) => (
+//   dispatch: any
+// ) => {
+//   const data = JSON.stringify(accountDetails);
+//   console.log(data);
+//   return fetch(baseUrl + "auth/account", {
+//     method: "POST",
+//     body: data,
+//     headers: {
+//       "Content-Type": "application/json;charset=UTF-8",
+//     },
+//   })
+//     .then((response) => {
+//       if (response.ok || response.status === 400) {
+//         return response;
+//       } else {
+//         var error = new Error(
+//           "Error " + response.status + ": " + response.statusText
+//         );
+//         throw error;
+//       }
+//     })
+//     .then((response) => {
+//       return response.json();
+//     })
+//     .then((response) => {
+//       if (response.error) {
+//         dispatch(editAccountFailed(response.message));
+//       } else {
+//         const account = response.data;
+//         console.log(account);
+//         dispatch(editAccountSuccessfully(account));
+//       }
+//     })
+//     .catch((error) => {
+//       console.log("Login ", error.message);
+//       // dispatch(submitFailed(ERROR_MESSAGE_SUBMIT_GENERAL));
+//     });
+// };

@@ -15,54 +15,63 @@ export enum Routes {
   DIAGNOSE = "/diagnose",
 }
 
-export type SidebarListItem = {
+export type PageListItem = {
   icon: any;
   text: string;
   to: string;
+  hidden: boolean;
 };
 
-export const mainList: SidebarListItem[] = [
+export const mainList: PageListItem[] = [
   {
     icon: <DashboardIcon />,
     text: "Home",
     to: Routes.HOME,
+    hidden: false,
   },
   {
     icon: <ShoppingCartIcon />,
     text: "News",
     to: Routes.NEWS,
+    hidden: false,
   },
   {
     icon: <PeopleIcon />,
     text: "Diagnose",
     to: Routes.DIAGNOSE,
+    hidden: false,
   },
   {
     icon: <BarChartIcon />,
     text: "Find Hospital",
     to: Routes.HOSPITAL,
+    hidden: false,
   },
-  // {
-  //   icon: <LayersIcon />,
-  //   text: "Item 5",
-  //   to: "/",
-  // },
+  {
+    icon: null,
+    text: "My Account Profile",
+    to: Routes.PROFILE,
+    hidden: true,
+  },
 ];
 
-export const preLoginList: SidebarListItem[] = [
+export const preLoginList: PageListItem[] = [
   {
     icon: <AssignmentIcon />,
     text: "Login",
     to: Routes.LOGIN,
+    hidden: false,
   },
   {
     icon: <AssignmentIcon />,
     text: "Sign Up",
     to: Routes.SIGN_UP,
+    hidden: false,
   },
   {
     icon: <AssignmentIcon />,
     text: "Forgot Password",
     to: Routes.FORGOT_PASSWORD,
+    hidden: false,
   },
 ];

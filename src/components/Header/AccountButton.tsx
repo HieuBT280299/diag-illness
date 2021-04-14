@@ -61,7 +61,7 @@ const AccountButton = () => {
           to={Routes.PROFILE}
           style={{ color: "inherit", textDecoration: "none" }}
         >
-          <MenuItem>My account</MenuItem>
+          <MenuItem>My account profile</MenuItem>
         </Link>
 
         <Link
