@@ -2,13 +2,13 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { Container, makeStyles, MenuItem, Typography } from "@material-ui/core";
-import { Label } from "reactstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { putEditAccount } from "../../../redux/actions/creators/auth";
 
 export type ProfileDetails = {
+  id: string;
   email: string;
   name: string;
   dateOfBirth: Date;
@@ -38,7 +38,12 @@ const Profile = () => {
   };
 
   const account = useSelector((state: any) => state.loginAccount?.account);
+  const dispatch = useDispatch();
+  const dispatchPutEditAccount = (accountDetails: any) =>
+    dispatch(putEditAccount(accountDetails, account.token));
+
   const initialValues: ProfileDetails = {
+    id: account.id,
     name: account.name,
     dateOfBirth: account.dateOfBirth,
     email: account.email,
@@ -50,6 +55,7 @@ const Profile = () => {
     // validationSchema: validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
+      dispatchPutEditAccount(values);
     },
   });
 

@@ -25,28 +25,28 @@ const SwitchRoutes = () => {
   const classes = useStyles();
 
   const SwitchRoutes = account ? (
-    <>
+    <Switch>
       <Route path={`${Routes.HOME}`} component={Home} />
-      <Route path={`${Routes.NEWS}`} component={News} />
-      <Route path={`${Routes.HOSPITAL}`} component={Hospital} />
-      <Route path={`${Routes.DIAGNOSE}`} component={Diagnose} />
-      <Route path={`${Routes.PROFILE}`} component={Profile} />
+      <Route exact path={`${Routes.NEWS}`} component={News} />
+      <Route exact path={`${Routes.HOSPITAL}`} component={Hospital} />
+      <Route exact path={`${Routes.DIAGNOSE}`} component={Diagnose} />
+      <Route exact path={`${Routes.PROFILE}`} component={Profile} />
       <Redirect to={`${Routes.HOME}`} />
-    </>
+    </Switch>
   ) : (
-    <>
+    <Switch>
       <Route path={`${Routes.LOGIN}`} component={Login} />
-      <Route path={`${Routes.SIGN_UP}`} component={SignUp} />
-      <Route path={`${Routes.FORGOT_PASSWORD}`} component={ForgotPassword} />
+      <Route exact path={`${Routes.SIGN_UP}`} component={SignUp} />
+      <Route
+        exact
+        path={`${Routes.FORGOT_PASSWORD}`}
+        component={ForgotPassword}
+      />
       <Redirect to={`${Routes.LOGIN}`} />
-    </>
+    </Switch>
   );
 
-  return (
-    <div className={classes.content}>
-      <Switch>{SwitchRoutes}</Switch>
-    </div>
-  );
+  return <div className={classes.content}>{SwitchRoutes}</div>;
 };
 
 export default SwitchRoutes;

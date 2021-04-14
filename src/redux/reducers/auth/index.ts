@@ -15,16 +15,13 @@ const fakeAccount = {
   lastAccess: null,
 };
 
-const account = JSON.parse(sessionStorage.getItem("account") || "{}");
-
 export const LoginAccount = (
   state = {
-    account: Object.keys(account).length === 0 ? null : account,
+    account: null,
     errMess: null,
   },
   action: { type: string; payload: any }
 ): any => {
-  // console.log(currentAccount);
   switch (action.type) {
     case AuthActionTypes.LOGIN_FAILED:
       return { ...state, errMess: action.payload };
@@ -34,6 +31,38 @@ export const LoginAccount = (
 
     case AuthActionTypes.LOGOUT_SUCCESSFULLY:
       return { ...state, account: null };
+
+    case AuthActionTypes.EDIT_ACCOUNT_SUCCESSFULLY:
+      return {
+        ...state,
+        account: action.payload,
+        errMess: null,
+      };
+
+    case AuthActionTypes.EDIT_ACCOUNT_FAILED:
+      return { ...state, errMess: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const ForgotPassword = (
+  state = {
+    message: null,
+    errMess: null,
+  },
+  action: { type: string; payload: any }
+): any => {
+  switch (action.type) {
+    case AuthActionTypes.GET_OTP_SUCCESSFULLY:
+      return { ...state, message: action.payload };
+
+    case AuthActionTypes.RESET_PASSWORD_SUCCESSFULLY:
+      return { ...state, account: action.payload, errMess: null };
+
+    case AuthActionTypes.RESET_PASSWORD_FAILED:
+      return { ...state, account: null, errMess: action.payload };
 
     default:
       return state;
