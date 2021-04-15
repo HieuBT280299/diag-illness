@@ -47,7 +47,7 @@ export const LoginAccount = (
   }
 };
 
-export const ForgotPassword = (
+export const ManagePassword = (
   state = {
     message: null,
     errMess: null,
@@ -62,6 +62,12 @@ export const ForgotPassword = (
       return { ...state, account: action.payload, errMess: null };
 
     case AuthActionTypes.RESET_PASSWORD_FAILED:
+      return { ...state, account: null, errMess: action.payload };
+
+    case AuthActionTypes.CHANGE_PASSWORD_SUCCESSFULLY:
+      return { ...state, message: action.payload, errMess: null };
+
+    case AuthActionTypes.CHANGE_PASSWORD_FAILED:
       return { ...state, account: null, errMess: action.payload };
 
     default:

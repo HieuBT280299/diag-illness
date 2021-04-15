@@ -66,7 +66,7 @@ const AccountButton = () => {
 
         <Link
           onClick={handleClose}
-          to="/"
+          to={Routes.CHANGE_PASSWORD}
           style={{ color: "inherit", textDecoration: "none" }}
         >
           <MenuItem>Change password</MenuItem>

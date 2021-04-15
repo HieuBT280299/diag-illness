@@ -1,18 +1,19 @@
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { applyMiddleware, combineReducers, createStore } from "redux";
-import { ForgotPassword, LoginAccount } from "../reducers/auth";
+import { ManagePassword, LoginAccount } from "../reducers/auth";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 
 const persistConfig = {
   key: "root",
   storage,
+  blacklist: ["managePassword"],
 };
 
 const rootReducer = combineReducers({
   loginAccount: LoginAccount,
-  forgotPassword: ForgotPassword,
+  managePassword: ManagePassword,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

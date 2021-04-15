@@ -4,6 +4,7 @@ import { RegisterDetails } from "../../../../components/pages/SignUp";
 import { LoginDetails } from "../../../../components/pages/Login";
 import qs from "qs";
 import { ProfileDetails } from "../../../../components/pages/Profile";
+import { ChangePasswordDetails } from "../../../../components/pages/ChangePassword";
 
 export const signUpSuccessfully = (account: any) => {
   return {
@@ -32,7 +33,7 @@ export const postSignUp = (registerDetails: RegisterDetails) => (
     },
   })
     .then((response) => {
-      if (response.ok || response.status === 400) {
+      if (response.ok) {
         return response;
       } else {
         var error = new Error(
@@ -85,7 +86,7 @@ export const postLogin = (loginDetails: LoginDetails) => (dispatch: any) => {
     },
   })
     .then((response) => {
-      if (response.ok || response.status === 400) {
+      if (response.ok) {
         return response;
       } else {
         var error = new Error(
@@ -217,6 +218,60 @@ export const putEditAccount = (
     })
     .catch((error) => {
       console.log("Edit account ", error.message);
+    });
+};
+
+export const changePasswordSuccessfully = (message: any) => {
+  return {
+    type: AuthActionTypes.CHANGE_PASSWORD_SUCCESSFULLY,
+    payload: message,
+  };
+};
+
+export const changePasswordFailed = (errMess: any) => {
+  return {
+    type: AuthActionTypes.CHANGE_PASSWORD_FAILED,
+    payload: errMess,
+  };
+};
+
+export const postChangePassword = (
+  changePasswordDetails: ChangePasswordDetails,
+  token: string
+) => (dispatch: any) => {
+  const data = JSON.stringify(changePasswordDetails);
+  console.log(data);
+  //TODO
+  return fetch(baseUrl + "auth/changePassword", {
+    method: "POST",
+    body: data,
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+      Authorization: token,
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response;
+      } else {
+        var error = new Error(
+          "Error " + response.status + ": " + response.statusText
+        );
+        throw error;
+      }
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      if (response.error) {
+        dispatch(changePasswordFailed(response.message));
+      } else {
+        dispatch(changePasswordSuccessfully(response.message));
+      }
+    })
+    .catch((error) => {
+      console.log("Login ", error.message);
     });
 };
 

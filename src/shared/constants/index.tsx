@@ -10,6 +10,7 @@ export enum Routes {
   SIGN_UP = "/signup",
   FORGOT_PASSWORD = "/forgotpassword",
   PROFILE = "/profile",
+  CHANGE_PASSWORD = "/changepassword",
   NEWS = "/news",
   HOSPITAL = "/hospital",
   DIAGNOSE = "/diagnose",
@@ -50,6 +51,12 @@ export const mainList: PageListItem[] = [
   {
     icon: null,
     text: "My Account Profile",
+    to: Routes.PROFILE,
+    hidden: true,
+  },
+  {
+    icon: null,
+    text: "Change Password",
     to: Routes.PROFILE,
     hidden: true,
   },

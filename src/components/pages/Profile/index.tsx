@@ -2,8 +2,15 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
+import FaceIcon from "@material-ui/icons/Face";
 import { useFormik } from "formik";
-import { Container, makeStyles, MenuItem, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Container,
+  makeStyles,
+  MenuItem,
+  Typography,
+} from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { putEditAccount } from "../../../redux/actions/creators/auth";
 
@@ -16,6 +23,15 @@ export type ProfileDetails = {
 };
 
 const useStyles = makeStyles((theme) => ({
+  paper: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
@@ -65,8 +81,11 @@ const Profile = () => {
   };
 
   return (
-    <Container component="main" maxWidth="md">
-      <div style={{ display: "flex" }}>
+    <Container component="main" maxWidth="sm">
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <FaceIcon />
+        </Avatar>
         <Typography
           component="h1"
           variant="h5"
@@ -155,7 +174,7 @@ const Profile = () => {
           </Grid>
         </Grid>
         {isEditing && (
-          <Grid item container xs={12} sm={6} md={4} spacing={2}>
+          <Grid item container xs={12} sm={6} spacing={2}>
             <Grid item xs={6}>
               <Button
                 className={classes.submit}

@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { Routes } from "../../shared/constants";
+import ChangePassword from "../pages/ChangePassword";
 import Diagnose from "../pages/Diagnose";
 import ForgotPassword from "../pages/ForgotPassword";
 import Home from "../pages/Home";
@@ -31,6 +32,11 @@ const SwitchRoutes = () => {
       <Route exact path={`${Routes.HOSPITAL}`} component={Hospital} />
       <Route exact path={`${Routes.DIAGNOSE}`} component={Diagnose} />
       <Route exact path={`${Routes.PROFILE}`} component={Profile} />
+      <Route
+        exact
+        path={`${Routes.CHANGE_PASSWORD}`}
+        component={ChangePassword}
+      />
       <Redirect to={`${Routes.HOME}`} />
     </Switch>
   ) : (

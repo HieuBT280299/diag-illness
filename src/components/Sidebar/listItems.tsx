@@ -3,11 +3,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
 import { Link } from "react-router-dom";
-import {
-  mainList,
-  preLoginList,
-  PageListItem,
-} from "../../shared/constants";
+import { mainList, preLoginList, PageListItem } from "../../shared/constants";
 
 type ListItemProps = {
   list: PageListItem[];
@@ -21,6 +17,7 @@ const ListItems = ({ list, pathname }: ListItemProps) => {
         .filter((item) => !item.hidden)
         .map((item) => (
           <Link
+            key={item.to}
             to={item.to}
             style={{ color: "inherit", textDecoration: "none" }}
           >

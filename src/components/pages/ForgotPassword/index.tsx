@@ -30,12 +30,6 @@ const ForgotPassword = () => {
     setTokenFormDisplaying(true);
   };
 
-  // const dispatch = useDispatch();
-  // const dispatchPostLogin = (loginDetails: {
-  //   email: string;
-  //   password: string;
-  // }) => dispatch(postLogin(loginDetails));
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
