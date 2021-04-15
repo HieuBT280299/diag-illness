@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import FaceIcon from "@material-ui/icons/Face";
+import FaceOutlinedIcon from "@material-ui/icons/FaceOutlined";
 import { useFormik } from "formik";
 import {
   Avatar,
@@ -84,7 +84,7 @@ const Profile = () => {
     <Container component="main" maxWidth="sm">
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <FaceIcon />
+          <FaceOutlinedIcon />
         </Avatar>
         <Typography
           component="h1"
@@ -190,8 +190,8 @@ const Profile = () => {
               <Button
                 className={classes.submit}
                 type="reset"
-                variant="contained"
-                color="default"
+                variant="outlined"
+                color="primary"
                 fullWidth
               >
                 Back

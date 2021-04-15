@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postLogin } from "../../../redux/actions/creators/auth";
 import { useFormik } from "formik";
 import { FormHelperText } from "@material-ui/core";
+import { Routes } from "../../../shared/constants";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -103,11 +104,11 @@ const Login = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to="/">Forgot password?</Link>
+              <Link to={Routes.FORGOT_PASSWORD}>Forgot password?</Link>
             </Grid>
             <Grid item>
               {"Don't have an account? "}
-              <Link to="/signup">{"Sign Up"}</Link>
+              <Link to={Routes.SIGN_UP}>{"Sign Up"}</Link>
             </Grid>
           </Grid>
         </form>
