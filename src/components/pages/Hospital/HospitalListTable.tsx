@@ -133,8 +133,6 @@ const HospitalListTable = () => {
             count={totalPages}
             page={currentPage}
             onChange={handleChange}
-            showFirstButton
-            showLastButton
           />
         )}
       </Grid>

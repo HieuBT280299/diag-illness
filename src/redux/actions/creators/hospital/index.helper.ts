@@ -14,7 +14,7 @@ export const getSearchParams = (searchData: any) => {
         break;
     }
   });
-  params = params.trim().replace("AND", ""); // remove the first "AND" and trim spaces
+  params = params.replace("AND", "").trim(); // remove the first "AND" and trim spaces
   if (params === "") return "";
   return `(${params})`;
 };
