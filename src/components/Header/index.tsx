@@ -11,7 +11,6 @@ import { getHeaderTitle } from "../../shared/helper";
 import { useMemo } from "react";
 import AccountButton from "./AccountButton";
 
-
 type HeaderProps = RouteComponentProps<any> & {
   account: any;
   drawerWidth: number;
@@ -91,9 +90,7 @@ const Header = ({
         {account && (
           <>
             <Typography variant="h6">{account.name}</Typography>
-            <IconButton color="inherit">
-              <AccountButton />
-            </IconButton>
+            <AccountButton />
           </>
         )}
       </Toolbar>

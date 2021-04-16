@@ -5,8 +5,9 @@ export const Hospitals = (
     isLoading: true,
     errMess: null,
     hospitals: null,
-    currentPageNumber: 0,
-    numberOfPages: 0,
+    currentPage: 1,
+    pageSize: 5,
+    totalPages: 0,
     totalEntries: 0,
     searchData: null,
     successStatus: false,
@@ -21,9 +22,10 @@ export const Hospitals = (
         isLoading: false,
         errMess: null,
         hospitals: action.payload?.data?.list,
-        numberOfPages: action.payload?.data?.numberOfPages,
-        totalEntries: action.payload?.data?.total,
-        currentPageNumber: action.payload?.paginationData.page,
+        totalPages: action.payload?.data?.totalPage,
+        totalEntries: action.payload?.data?.totalEntries,
+        currentPage: action.payload?.paginationData?.page,
+        searchData: action.payload?.searchData
       };
 
     case HospitalActionTypes.HOSPITALS_FAILED:

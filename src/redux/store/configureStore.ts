@@ -4,16 +4,18 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { ManagePassword, LoginAccount } from "../reducers/auth";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import { Hospitals } from "../reducers/hospital";
 
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["managePassword"],
+  blacklist: ["managePassword", "hospitals"],
 };
 
 const rootReducer = combineReducers({
   loginAccount: LoginAccount,
   managePassword: ManagePassword,
+  hospitals: Hospitals,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

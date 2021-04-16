@@ -5,15 +5,16 @@ export const getSearchParams = (searchData: any) => {
       case "name":
       case "number":
       case "phone":
-        params += ` AND ${key}:'*${searchData[key]}*'`;
+        if (searchData[key]) params += ` AND ${key}:'*${searchData[key]}*'`;
         break;
       case "cityCode":
       case "districtCode":
       case "wardCode":
-        params += ` AND ${key}:${searchData[key]}`;
+        if (searchData[key]) params += ` AND ${key}:${searchData[key]}`;
         break;
     }
   });
   params = params.trim().replace("AND", ""); // remove the first "AND" and trim spaces
+  if (params === "") return "";
   return `(${params})`;
 };

@@ -6,6 +6,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useFormik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { getHospitalList } from "../../../redux/actions/creators/hospital";
 import { CITIES, DISTRICTS, WARDS } from "../../../shared/constants/geodata";
 import { sortByName } from "../../../shared/helper";
 
@@ -19,11 +21,24 @@ const initialValues = {
 };
 
 const HospitalSearchForm = () => {
+  const { pageSize } = useSelector((state: any) => state.hospitals);
+  const account = useSelector((state: any) => state.loginAccount?.account);
+
+  const paginationData = { page: 1, size: pageSize };
+  const dispatch = useDispatch();
+  const dispatchHospitalList = (searchData: any) =>
+    dispatch(getHospitalList(searchData, paginationData, account.token));
+
   const formik = useFormik({
     initialValues: initialValues,
-    // validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      const submitValues = {
+        ...values,
+        cityCode: values.cityCode === "0" ? null : values.cityCode,
+        districtCode: values.districtCode === "0" ? null : values.districtCode,
+        wardCode: values.wardCode === "0" ? null : values.wardCode,
+      };
+      dispatchHospitalList(submitValues);
     },
   });
 
@@ -43,7 +58,7 @@ const HospitalSearchForm = () => {
       <Typography variant="h5" style={{ marginBottom: 12 }}>
         Search for a hospital
       </Typography>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
         <Grid container spacing={2}>
           <Grid item container>
             <Grid item xs={12} lg={9}>
@@ -149,6 +164,14 @@ const HospitalSearchForm = () => {
             <Grid item>
               <Button type="submit" color="primary" variant="contained">
                 Search
+              </Button>
+              <Button
+                type="reset"
+                color="primary"
+                variant="outlined"
+                style={{ marginLeft: 12 }}
+              >
+                Reset Form
               </Button>
             </Grid>
           </Grid>

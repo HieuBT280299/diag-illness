@@ -19,18 +19,22 @@ export const getHospitalListFailed = (message: any) => {
 
 export const getHospitalList = (
   searchData: any,
-  paginationData: any = { page: 0, size: 5 },
+  paginationData: any,
   token: string
 ) => (dispatch: any) => {
+  const paginationParams = qs.stringify(paginationData);
+  console.log(paginationParams);
+
   return fetch(
-    `${baseUrl}auth/hospital?search=${getSearchParams(searchData)}`,
+    `${baseUrl}hospital?search=${getSearchParams(
+      searchData
+    )}&${paginationParams}`,
     {
       method: "GET",
       mode: "cors",
       headers: {
         Authorization: token,
       },
-      body: JSON.stringify(paginationData),
     }
   )
     .then(
@@ -59,6 +63,7 @@ export const getHospitalList = (
         const payload = {
           data: response.data,
           paginationData,
+          searchData,
         };
         dispatch(getHospitalListSuccessfully(payload));
       }
