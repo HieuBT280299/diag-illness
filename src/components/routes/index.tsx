@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { Routes } from "../../shared/constants";
+import AdminManageAccount from "../pages/AdminManageAccount";
 import ChangePassword from "../pages/ChangePassword";
 import Diagnose from "../pages/Diagnose";
 import ForgotPassword from "../pages/ForgotPassword";
@@ -47,6 +48,11 @@ const SwitchRoutes = () => {
         exact
         path={`${Routes.FORGOT_PASSWORD}`}
         component={ForgotPassword}
+      />
+      <Route
+        exact
+        path={`${Routes.MANAGE_ACCOUNT}`}
+        component={AdminManageAccount}
       />
       <Redirect to={`${Routes.LOGIN}`} />
     </Switch>
