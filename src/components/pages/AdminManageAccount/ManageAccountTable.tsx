@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,7 +7,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import HeaderCell from "../../tables/HeaderCell";
-import { Grid, Typography } from "@material-ui/core";
+import { Button, Grid, Link, Typography } from "@material-ui/core";
 import {
   getGenderValue,
   getRoleValue,
@@ -17,44 +17,15 @@ import {
 } from "./ManageAccountTable.helper";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "@material-ui/lab/Pagination";
-import { getHospitalList } from "../../../redux/actions/creators/hospital";
+import { getUserList } from "../../../redux/actions/creators/user";
+import CustomizedDialog from "../../Dialog";
+import AccountDetailContent from "./AccountDetailContent";
 
 const useStyles = makeStyles({
   table: {
     minWidth: 900,
   },
 });
-
-const mockData = [
-  {
-    id: 8,
-    createAt: "2021-04-05T13:58:12.000+0000",
-    modifyAt: "2021-04-05T14:43:55.000+0000",
-    email: "ngattaro@gmail.com",
-    password: "$2a$10$UkHDQbzof/2YN1E2BJKmEOaZ7ayGxMfxp1CRXhvepYdz6s0RPZwHC",
-    name: "Do Thi Hong Ngat",
-    dateOfBirth: "1999-03-03T23:45:58.000+0000",
-    gender: 1,
-    address: null,
-    roleId: 2,
-    enabled: 1,
-    lastAccess: "2021-04-10T01:37:30.000+0000",
-  },
-  {
-    id: 9,
-    createAt: "2021-04-05T14:45:39.000+0000",
-    modifyAt: null,
-    email: "ngattar1q@gmail.com",
-    password: "$2a$10$QZA2oGTQ6JHoLaGJDr/ka.fuGW2qNzYgC.YYfGka08p0ix3ZB7JWS",
-    name: "Do Thi Hong Ngat",
-    dateOfBirth: "1999-03-03T23:45:58.000+0000",
-    gender: 1,
-    address: null,
-    roleId: 1,
-    enabled: 0,
-    lastAccess: null,
-  },
-];
 
 const headCells = [
   { id: "email", numeric: false, disablePadding: false, label: "Email" },
@@ -85,6 +56,12 @@ const headCells = [
     disablePadding: false,
     label: "Last modified",
   },
+  {
+    id: "action",
+    numeric: false,
+    disablePadding: false,
+    label: "",
+  },
 ];
 
 const ManageAccountTableHead = () => {
@@ -109,10 +86,18 @@ const ManageAccountTable = () => {
   const classes = useStyles();
 
   const account = useSelector((state: any) => state.loginAccount?.account);
-  // const hospitalList: any[] =
-  //   useSelector((state: any) => state.hospitals?.hospitals) || [];
+  const userList: any[] = useSelector((state: any) => state.users?.users) || [];
 
-  const accountList = mockData;
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState({});
+  const toggleDialog = () => {
+    setDialogOpen(!dialogOpen);
+  };
+  const detailsButtonClicked = (row: any) => {
+    console.log("view");
+    setSelectedRow(row);
+    setDialogOpen(true);
+  };
 
   const {
     totalPages,
@@ -120,16 +105,16 @@ const ManageAccountTable = () => {
     currentPage,
     pageSize,
     searchData,
-  } = useSelector((state: any) => state.hospitals);
+  } = useSelector((state: any) => state.users);
 
   const dispatch = useDispatch();
-  const dispatchHospitalList = (paginationData: any) =>
-    dispatch(getHospitalList(searchData, paginationData, account.token));
+  const dispatchUserList = (paginationData: any) =>
+    dispatch(getUserList(searchData, paginationData, account.token));
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    console.log(value);
+    // console.log(value);
     const paginationData = { page: value, size: pageSize };
-    dispatchHospitalList(paginationData);
+    dispatchUserList(paginationData);
   };
 
   return (
@@ -148,39 +133,49 @@ const ManageAccountTable = () => {
         )}
       </Grid>
       <Grid item xs={12}>
-        {accountList.length > 0 && (
+        {userList.length > 0 && (
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table">
               <ManageAccountTableHead />
               <TableBody>
-                {accountList.map((row: any) => {
+                {userList.map((row: any) => {
                   return (
-                    <TableRow key={row.id}>
-                      <HeaderCell width="20%">
-                        {getValueOf(row.email)}
-                      </HeaderCell>
-                      <HeaderCell width="15%">
-                        {getValueOf(row.name)}
-                      </HeaderCell>
-                      <HeaderCell width="10%">
-                        {getGenderValue(row.gender)}
-                      </HeaderCell>
-                      <HeaderCell width="15%">
-                        {toLocalDate(row.dateOfBirth)}
-                      </HeaderCell>
-                      <HeaderCell width="20%">
-                        {getValueOf(row.address)}
-                      </HeaderCell>
-                      <HeaderCell width="10%">
-                        {getRoleValue(row.roleId)}
-                      </HeaderCell>
-                      <HeaderCell width="15%">
-                        {toLocalDateAndTime(row.createAt)}
-                      </HeaderCell>
-                      <HeaderCell width="15%">
-                        {toLocalDateAndTime(row.modifyAt)}
-                      </HeaderCell>
-                    </TableRow>
+                    <>
+                      <TableRow key={row.id}>
+                        <HeaderCell width="15%">
+                          {getValueOf(row.email)}
+                        </HeaderCell>
+                        <HeaderCell width="10%">
+                          {getValueOf(row.name)}
+                        </HeaderCell>
+                        <HeaderCell width="5%">
+                          {getGenderValue(row.gender)}
+                        </HeaderCell>
+                        <HeaderCell width="10%">
+                          {toLocalDate(row.dateOfBirth)}
+                        </HeaderCell>
+                        <HeaderCell width="15%">
+                          {getValueOf(row.address)}
+                        </HeaderCell>
+                        <HeaderCell width="5%">
+                          {getRoleValue(row.roleId)}
+                        </HeaderCell>
+                        <HeaderCell width="10%">
+                          {toLocalDateAndTime(row.createAt)}
+                        </HeaderCell>
+                        <HeaderCell width="10%">
+                          {toLocalDateAndTime(row.modifyAt)}
+                        </HeaderCell>
+                        <HeaderCell width="10%">
+                          <Link
+                            style={{ cursor: "pointer" }}
+                            onClick={() => detailsButtonClicked(row)}
+                          >
+                            Details
+                          </Link>
+                        </HeaderCell>
+                      </TableRow>
+                    </>
                   );
                 })}
               </TableBody>
@@ -197,6 +192,17 @@ const ManageAccountTable = () => {
           />
         )}
       </Grid>
+      <CustomizedDialog
+        open={dialogOpen}
+        title="User account details"
+        content={<AccountDetailContent row={selectedRow} />}
+        actions={
+          <Button autoFocus onClick={toggleDialog} color="primary">
+            Close
+          </Button>
+        }
+        toggleDialog={toggleDialog}
+      />
     </Grid>
   );
 };

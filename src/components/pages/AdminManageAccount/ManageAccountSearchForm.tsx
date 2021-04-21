@@ -7,30 +7,31 @@ import {
 } from "@material-ui/core";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { getHospitalList } from "../../../redux/actions/creators/hospital";
+import { getUserList } from "../../../redux/actions/creators/user";
 import { sortByName } from "../../../shared/helper";
 
 export type AccountSearchFields = {
   email?: string;
   name?: string;
-  dateOfBirth?: Date;
+  dateOfBirth?: string;
   gender?: 1 | 0 | "Any";
 };
 
 const initialValues: AccountSearchFields = {
   name: "",
   email: "",
+  dateOfBirth: "",
   gender: "Any",
 };
 
 const ManageAccountSearchForm = () => {
-  const { pageSize } = useSelector((state: any) => state.hospitals);
+  const { pageSize } = useSelector((state: any) => state.users);
   const account = useSelector((state: any) => state.loginAccount?.account);
 
   const paginationData = { page: 1, size: pageSize };
   const dispatch = useDispatch();
-  const dispatchHospitalList = (searchData: any) =>
-    dispatch(getHospitalList(searchData, paginationData, account.token));
+  const dispatchUserList = (searchData: any) =>
+    dispatch(getUserList(searchData, paginationData, account.token));
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -38,10 +39,12 @@ const ManageAccountSearchForm = () => {
       const submitValues = {
         ...values,
         gender: values.gender === "Any" ? null : values.gender,
-        dateOfBirth: values.dateOfBirth ? new Date(values.dateOfBirth) : null,
+        dateOfBirth: values.dateOfBirth
+          ? new Date(values.dateOfBirth).toISOString()
+          : null,
       };
       console.log(submitValues);
-      // dispatchHospitalList(submitValues);
+      dispatchUserList(submitValues);
     },
   });
 
