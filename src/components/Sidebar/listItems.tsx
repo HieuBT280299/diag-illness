@@ -3,7 +3,12 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
 import { Link } from "react-router-dom";
-import { mainList, preLoginList, PageListItem } from "../../shared/constants";
+import {
+  userPageList,
+  adminPageList,
+  preLoginList,
+  PageListItem,
+} from "../../shared/constants";
 
 type ListItemProps = {
   list: PageListItem[];
@@ -31,8 +36,12 @@ const ListItems = ({ list, pathname }: ListItemProps) => {
   );
 };
 
-export const MainListItems = ({ pathname }: any) => (
-  <ListItems list={mainList} pathname={pathname} />
+export const UserPageListItems = ({ pathname }: any) => (
+  <ListItems list={userPageList} pathname={pathname} />
+);
+
+export const AdminPageListItems = ({ pathname }: any) => (
+  <ListItems list={adminPageList} pathname={pathname} />
 );
 
 export const PreLoginListItems = ({ pathname }: any) => (

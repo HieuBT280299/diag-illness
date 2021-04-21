@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { Routes } from "../../shared/constants";
+import { RoleIDs, Routes } from "../../shared/constants";
 import AdminManageAccount from "../pages/AdminManageAccount";
 import ChangePassword from "../pages/ChangePassword";
 import Diagnose from "../pages/Diagnose";
@@ -27,19 +27,31 @@ const SwitchRoutes = () => {
   const classes = useStyles();
 
   const SwitchRoutes = account ? (
-    <Switch>
-      <Route path={`${Routes.HOME}`} component={Home} />
-      <Route exact path={`${Routes.NEWS}`} component={News} />
-      <Route exact path={`${Routes.HOSPITAL}`} component={Hospital} />
-      <Route exact path={`${Routes.DIAGNOSE}`} component={Diagnose} />
-      <Route exact path={`${Routes.PROFILE}`} component={Profile} />
-      <Route
-        exact
-        path={`${Routes.CHANGE_PASSWORD}`}
-        component={ChangePassword}
-      />
-      <Redirect to={`${Routes.HOME}`} />
-    </Switch>
+    account.roleId === RoleIDs.ROLE_ADMIN ? (
+      <Switch>
+        <Route path={`${Routes.HOME}`} component={Home} />
+        <Route
+          exact
+          path={`${Routes.MANAGE_ACCOUNT}`}
+          component={AdminManageAccount}
+        />
+        <Redirect to={`${Routes.HOME}`} />
+      </Switch>
+    ) : (
+      <Switch>
+        <Route path={`${Routes.HOME}`} component={Home} />
+        <Route exact path={`${Routes.NEWS}`} component={News} />
+        <Route exact path={`${Routes.HOSPITAL}`} component={Hospital} />
+        <Route exact path={`${Routes.DIAGNOSE}`} component={Diagnose} />
+        <Route exact path={`${Routes.PROFILE}`} component={Profile} />
+        <Route
+          exact
+          path={`${Routes.CHANGE_PASSWORD}`}
+          component={ChangePassword}
+        />
+        <Redirect to={`${Routes.HOME}`} />
+      </Switch>
+    )
   ) : (
     <Switch>
       <Route path={`${Routes.LOGIN}`} component={Login} />
@@ -48,11 +60,6 @@ const SwitchRoutes = () => {
         exact
         path={`${Routes.FORGOT_PASSWORD}`}
         component={ForgotPassword}
-      />
-      <Route
-        exact
-        path={`${Routes.MANAGE_ACCOUNT}`}
-        component={AdminManageAccount}
       />
       <Redirect to={`${Routes.LOGIN}`} />
     </Switch>

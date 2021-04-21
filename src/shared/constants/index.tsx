@@ -10,8 +10,8 @@ export enum Gender {
 }
 
 export enum RoleIDs {
-  ROLE_USER = 1,
-  ROLE_ADMIN = 2,
+  ROLE_USER = 2,
+  ROLE_ADMIN = 1,
 }
 
 export enum Routes {
@@ -39,7 +39,7 @@ export type PageListItem = {
   hidden: boolean;
 };
 
-export const mainList: PageListItem[] = [
+export const userPageList: PageListItem[] = [
   {
     icon: <DashboardIcon />,
     text: "Home",
@@ -78,6 +78,15 @@ export const mainList: PageListItem[] = [
   },
 ];
 
+export const adminPageList: PageListItem[] = [
+  {
+    icon: <DashboardIcon />,
+    text: "Manage Account",
+    to: Routes.MANAGE_ACCOUNT,
+    hidden: false,
+  },
+];
+
 export const preLoginList: PageListItem[] = [
   {
     icon: <AssignmentIcon />,
@@ -95,12 +104,6 @@ export const preLoginList: PageListItem[] = [
     icon: <AssignmentIcon />,
     text: "Forgot Password",
     to: Routes.FORGOT_PASSWORD,
-    hidden: false,
-  },
-  {
-    icon: <DashboardIcon />,
-    text: "Manage Account",
-    to: Routes.MANAGE_ACCOUNT,
     hidden: false,
   },
 ];

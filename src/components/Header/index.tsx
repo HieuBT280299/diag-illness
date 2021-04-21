@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { mainList, preLoginList } from "../../shared/constants";
+import { userPageList, preLoginList } from "../../shared/constants";
 import { getHeaderTitle } from "../../shared/helper";
 import { useMemo } from "react";
 import AccountButton from "./AccountButton";
@@ -56,7 +56,7 @@ const Header = ({
   }));
 
   const classes = useStyles();
-  const titleList = account ? mainList : preLoginList;
+  const titleList = account ? userPageList : preLoginList;
   const { pathname } = location;
   const headerText = useMemo(() => getHeaderTitle(titleList, pathname), [
     titleList,

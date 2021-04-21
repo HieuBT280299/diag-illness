@@ -4,8 +4,13 @@ import Drawer from "@material-ui/core/Drawer";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import { MainListItems, PreLoginListItems } from "./listItems";
+import {
+  UserPageListItems,
+  PreLoginListItems,
+  AdminPageListItems,
+} from "./listItems";
 import { RouteComponentProps, withRouter } from "react-router";
+import { RoleIDs } from "../../shared/constants";
 
 type SidebarProps = RouteComponentProps<any> & {
   account: any;
@@ -88,7 +93,11 @@ const Sidebar = ({
       </div>
       <Divider />
       {account ? (
-        <MainListItems pathname={pathname} />
+        account.roleId === RoleIDs.ROLE_ADMIN ? (
+          <AdminPageListItems pathname={pathname} />
+        ) : (
+          <UserPageListItems pathname={pathname} />
+        )
       ) : (
         <PreLoginListItems pathname={pathname} />
       )}
