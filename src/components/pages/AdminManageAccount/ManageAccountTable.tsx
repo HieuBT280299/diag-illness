@@ -20,6 +20,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import { getUserList } from "../../../redux/actions/creators/user";
 import CustomizedDialog from "../../Dialog";
 import AccountDetailContent from "./AccountDetailContent";
+import ConfirmDialog from "../../ConfirmDialog";
 
 const useStyles = makeStyles({
   table: {
@@ -88,10 +89,15 @@ const ManageAccountTable = () => {
   const account = useSelector((state: any) => state.loginAccount?.account);
   const userList: any[] = useSelector((state: any) => state.users?.users) || [];
 
-  const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState({});
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
+
   const toggleDialog = () => {
     setDialogOpen(!dialogOpen);
+  };
+  const toggleConfirmDialog = () => {
+    setConfirmDialogOpen(!confirmDialogOpen);
   };
   const detailsButtonClicked = (row: any) => {
     console.log("view");
@@ -197,11 +203,26 @@ const ManageAccountTable = () => {
         title="User account details"
         content={<AccountDetailContent row={selectedRow} />}
         actions={
-          <Button autoFocus onClick={toggleDialog} color="primary">
-            Close
-          </Button>
+          <>
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ marginRight: 8 }}
+              onClick={() => setConfirmDialogOpen(true)}
+            >
+              Promote
+            </Button>
+            <Button autoFocus onClick={toggleDialog} color="secondary">
+              Close
+            </Button>
+          </>
         }
         toggleDialog={toggleDialog}
+      />
+      <ConfirmDialog
+        open={confirmDialogOpen}
+        toggleDialog={toggleConfirmDialog}
+        content={<div>Are you sure to promote this account to admin?</div>}
       />
     </Grid>
   );

@@ -14,6 +14,15 @@ export const getGenderValue = (gender: number) => {
   }
 };
 
+export const getEnabledValue = (enabled: number) => {
+  switch (enabled) {
+    case 1:
+      return "Yes";
+    case 0:
+      return "No";
+  }
+};
+
 export const getRoleValue = (roleId: number) => {
   switch (roleId) {
     case RoleIDs.ROLE_USER:
