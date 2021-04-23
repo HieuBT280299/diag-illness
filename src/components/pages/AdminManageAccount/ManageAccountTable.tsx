@@ -21,6 +21,7 @@ import { getUserList } from "../../../redux/actions/creators/user";
 import CustomizedDialog from "../../Dialog";
 import AccountDetailContent from "./AccountDetailContent";
 import ConfirmDialog from "../../ConfirmDialog";
+import { RoleIDs } from "../../../shared/constants";
 
 const useStyles = makeStyles({
   table: {
@@ -89,7 +90,7 @@ const ManageAccountTable = () => {
   const account = useSelector((state: any) => state.loginAccount?.account);
   const userList: any[] = useSelector((state: any) => state.users?.users) || [];
 
-  const [selectedRow, setSelectedRow] = useState({});
+  const [selectedRow, setSelectedRow] = useState<any>({});
   const [dialogOpen, setDialogOpen] = useState(false);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
 
@@ -204,15 +205,17 @@ const ManageAccountTable = () => {
         content={<AccountDetailContent row={selectedRow} />}
         actions={
           <>
-            <Button
-              variant="contained"
-              color="primary"
-              style={{ marginRight: 8 }}
-              onClick={() => setConfirmDialogOpen(true)}
-            >
-              Promote
-            </Button>
-            <Button autoFocus onClick={toggleDialog} color="secondary">
+            {selectedRow.roleId && selectedRow.roleId !== RoleIDs.ROLE_ADMIN && (
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ marginRight: 8 }}
+                onClick={() => setConfirmDialogOpen(true)}
+              >
+                Promote
+              </Button>
+            )}
+            <Button onClick={toggleDialog} color="secondary">
               Close
             </Button>
           </>
