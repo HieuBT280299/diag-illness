@@ -17,7 +17,10 @@ import {
 } from "./ManageAccountTable.helper";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "@material-ui/lab/Pagination";
-import { getUserList } from "../../../redux/actions/creators/user";
+import {
+  getUserList,
+  postPromoteUser,
+} from "../../../redux/actions/creators/user";
 import CustomizedDialog from "../../Dialog";
 import AccountDetailContent from "./AccountDetailContent";
 import ConfirmDialog from "../../ConfirmDialog";
@@ -86,10 +89,6 @@ const ManageAccountTableHead = () => {
 
 const ManageAccountTable = () => {
   const classes = useStyles();
-
-  const account = useSelector((state: any) => state.loginAccount?.account);
-  const userList: any[] = useSelector((state: any) => state.users?.users) || [];
-
   const [selectedRow, setSelectedRow] = useState<any>({});
   const [dialogOpen, setDialogOpen] = useState(false);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
@@ -101,10 +100,12 @@ const ManageAccountTable = () => {
     setConfirmDialogOpen(!confirmDialogOpen);
   };
   const detailsButtonClicked = (row: any) => {
-    console.log("view");
     setSelectedRow(row);
     setDialogOpen(true);
   };
+
+  const account = useSelector((state: any) => state.loginAccount?.account);
+  const userList: any[] = useSelector((state: any) => state.users?.users) || [];
 
   const {
     totalPages,
@@ -112,28 +113,45 @@ const ManageAccountTable = () => {
     currentPage,
     pageSize,
     searchData,
+    successMessage,
   } = useSelector((state: any) => state.users);
 
   const dispatch = useDispatch();
   const dispatchUserList = (paginationData: any) =>
     dispatch(getUserList(searchData, paginationData, account.token));
 
+  const dispatchPostPromoteUser = (email: string) =>
+    dispatch(postPromoteUser(email, account.token));
+
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    // console.log(value);
     const paginationData = { page: value, size: pageSize };
     dispatchUserList(paginationData);
+  };
+
+  const handlePromoteUser = async () => {
+    await dispatchPostPromoteUser(selectedRow.email);
+    await setConfirmDialogOpen(false);
+    await setDialogOpen(false);
+    const paginationData = { page: currentPage, size: pageSize };
+    await dispatchUserList(paginationData);
   };
 
   return (
     <Grid container>
       <Grid item xs={12}>
+        {successMessage && (
+          <Typography variant="h6" style={{ marginBottom: 12, color: "green" }}>
+            {successMessage}
+          </Typography>
+        )}
+
         {totalEntries > 0 && (
           <Typography variant="h6" style={{ marginBottom: 12 }}>
             Number of entries: {totalEntries || 0}
           </Typography>
         )}
 
-        {totalEntries === 0 && searchData !== null && (
+        {totalEntries === 0 && searchData && (
           <Typography variant="h6" style={{ marginBottom: 12 }}>
             No data matches your search
           </Typography>
@@ -226,6 +244,8 @@ const ManageAccountTable = () => {
         open={confirmDialogOpen}
         toggleDialog={toggleConfirmDialog}
         content={<div>Are you sure to promote this account to admin?</div>}
+        onYesButtonClicked={handlePromoteUser}
+        onNoButtonClicked={toggleConfirmDialog}
       />
     </Grid>
   );

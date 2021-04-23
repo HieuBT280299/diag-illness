@@ -2,19 +2,28 @@ import { Button } from "@material-ui/core";
 import React from "react";
 import CustomizedDialog, { DialogProps } from "../Dialog";
 
-export default function ConfirmDialog({ ...props }: DialogProps) {
+export type ConfirmDialogProps = DialogProps & {
+  onYesButtonClicked?: () => void;
+  onNoButtonClicked?: () => void;
+};
+
+export default function ConfirmDialog({
+  onYesButtonClicked,
+  onNoButtonClicked,
+  ...rest
+}: ConfirmDialogProps) {
   const actionButtons = (
     <>
-      <Button onClick={props.toggleDialog} color="primary">
+      <Button onClick={onYesButtonClicked} color="primary">
         Yes
       </Button>
-      <Button onClick={props.toggleDialog} color="default">
+      <Button onClick={onNoButtonClicked} color="default">
         No
       </Button>
     </>
   );
 
   return (
-    <CustomizedDialog {...props} title="Confirmation" actions={actionButtons} />
+    <CustomizedDialog {...rest} title="Confirmation" actions={actionButtons} />
   );
 }

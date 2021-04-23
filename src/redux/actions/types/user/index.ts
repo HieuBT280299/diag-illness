@@ -1,3 +1,6 @@
 export const FETCH_USERS = "FETCH_USERS";
 export const USERS_FAILED = "USERS_FAILED";
 export const USERS_LOADING = "USERS_LOADING";
+
+export const PROMOTE_USERS = "PROMOTE_USERS";
+export const PROMOTE_USERS_FAILED = "PROMOTE_USERS_FAILED";
