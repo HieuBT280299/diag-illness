@@ -27,7 +27,7 @@ const ForgotPassword = () => {
     setTokenFormDisplaying(true);
   };
   const switchToEmailForm = () => {
-    setTokenFormDisplaying(true);
+    setTokenFormDisplaying(false);
   };
 
   return (

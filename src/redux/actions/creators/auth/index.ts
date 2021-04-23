@@ -1,6 +1,6 @@
 import * as AuthActionTypes from "../../types/auth";
 import { baseUrl } from "../../../../shared/baseUrl";
-import { RegisterDetails } from "../../../../components/pages/SignUp";
+import { RegisterDetails } from "../../../../components/pages/SignUp/SignUpForm";
 import { LoginDetails } from "../../../../components/pages/Login";
 import qs from "qs";
 import { ProfileDetails } from "../../../../components/pages/Profile";
