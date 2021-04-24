@@ -39,7 +39,7 @@ const SignUpForm = ({ switchToTokenForm }: any) => {
 
   const dispatch = useDispatch();
   const dispatchPostSignUp = (registerDetails: RegisterDetails) =>
-    dispatch(postSignUp(registerDetails));
+    dispatch(postSignUp(registerDetails, switchToTokenForm));
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -50,7 +50,7 @@ const SignUpForm = ({ switchToTokenForm }: any) => {
         dateOfBirth: new Date(values.dateOfBirth),
       };
       dispatchPostSignUp(submitValues);
-    //   alert(JSON.stringify(submitValues, null, 2));
+      //   alert(JSON.stringify(submitValues, null, 2));
     },
   });
   return (

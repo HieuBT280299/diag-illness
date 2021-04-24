@@ -20,9 +20,10 @@ export const signUpFailed = (errMess: any) => {
   };
 };
 
-export const postSignUp = (registerDetails: RegisterDetails) => (
-  dispatch: any
-) => {
+export const postSignUp = (
+  registerDetails: RegisterDetails,
+  callback: () => void
+) => (dispatch: any) => {
   const data = JSON.stringify(registerDetails);
   console.log(data);
   return fetch(baseUrl + "auth/register", {
@@ -49,14 +50,76 @@ export const postSignUp = (registerDetails: RegisterDetails) => (
       if (response.error) {
         dispatch(signUpFailed(response.message));
       } else {
-        const account = response.data;
-        console.log(account);
-        dispatch(signUpSuccessfully(account));
+        const payload = {
+          account: response.data,
+          successMessage: response.message,
+        };
+        console.log(payload);
+        dispatch(signUpSuccessfully(payload));
+        callback();
       }
     })
     .catch((error) => {
-      console.log("Login ", error.message);
-      // dispatch(submitFailed(ERROR_MESSAGE_SUBMIT_GENERAL));
+      console.log("Register ", error.message);
+    });
+};
+
+export const confirmSignUpSuccessfully = (account: any) => {
+  return {
+    type: AuthActionTypes.SIGN_UP_SUCCESSFULLY,
+    payload: account,
+  };
+};
+
+export const confirmSignUpFailed = (errMess: any) => {
+  return {
+    type: AuthActionTypes.SIGN_UP_FAILED,
+    payload: errMess,
+  };
+};
+
+export const postConfirmSignUp = (
+  email: string,
+  token: string,
+  callback: () => void
+) => (dispatch: any) => {
+  const data = JSON.stringify({ email, token });
+  console.log(data);
+  return fetch(baseUrl + "auth/confirm", {
+    method: "POST",
+    body: data,
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response;
+      } else {
+        var error = new Error(
+          "Error " + response.status + ": " + response.statusText
+        );
+        throw error;
+      }
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      if (response.error) {
+        dispatch(confirmSignUpFailed(response.message));
+      } else {
+        const payload = {
+          account: response.data,
+          successMessage: response.message,
+        };
+        console.log(payload);
+        dispatch(confirmSignUpSuccessfully(payload));
+        callback();
+      }
+    })
+    .catch((error) => {
+      console.log("Register ", error.message);
     });
 };
 
