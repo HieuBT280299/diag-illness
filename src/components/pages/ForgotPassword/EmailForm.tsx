@@ -2,6 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { Button, Grid, TextField } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { sendForgotPasswordToken } from "../../../redux/actions/creators/auth";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -17,10 +19,16 @@ const initialValues = { email: "" };
 
 const EmailForm = ({ switchToTokenForm }: any) => {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+  const dispatchSendForgotPasswordToken = (email: string) =>
+    dispatch(sendForgotPasswordToken(email, switchToTokenForm));
+
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
+      dispatchSendForgotPasswordToken(values.email);
     },
   });
   return (

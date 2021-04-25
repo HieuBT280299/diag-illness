@@ -95,23 +95,37 @@ export const RegisterAccount = (
 
 export const ManagePassword = (
   state = {
-    message: null,
+    email: null, //for reset password
+    successMessage: null,
     errMess: null,
   },
   action: { type: string; payload: any }
 ): any => {
   switch (action.type) {
-    case AuthActionTypes.GET_OTP_SUCCESSFULLY:
-      return { ...state, message: action.payload };
+    case AuthActionTypes.SEND_RESET_PASSWORD_TOKEN_FAILED:
+      return {
+        ...state,
+        email: action.payload.email,
+        errMess: action.payload.errMess,
+        successMessage: null,
+      };
+
+    case AuthActionTypes.SEND_RESET_PASSWORD_TOKEN_SUCCESSFULLY:
+      return {
+        ...state,
+        errMess: null,
+        email: action.payload.email,
+        successMessage: action.payload.successMessage,
+      };
 
     case AuthActionTypes.RESET_PASSWORD_SUCCESSFULLY:
-      return { ...state, account: action.payload, errMess: null };
+      return { ...state, successMessage: action.payload, errMess: null };
 
     case AuthActionTypes.RESET_PASSWORD_FAILED:
-      return { ...state, account: null, errMess: action.payload };
+      return { ...state, successMessage: null, errMess: action.payload };
 
     case AuthActionTypes.CHANGE_PASSWORD_SUCCESSFULLY:
-      return { ...state, message: action.payload, errMess: null };
+      return { ...state, successMessage: action.payload, errMess: null };
 
     case AuthActionTypes.CHANGE_PASSWORD_FAILED:
       return { ...state, account: null, errMess: action.payload };

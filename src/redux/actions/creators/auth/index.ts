@@ -5,6 +5,7 @@ import { LoginDetails } from "../../../../components/pages/Login";
 import qs from "qs";
 import { ProfileDetails } from "../../../../components/pages/Profile";
 import { ChangePasswordDetails } from "../../../../components/pages/ChangePassword";
+import { ResetPasswordDetails } from "../../../../components/pages/ForgotPassword/TokenForm";
 
 export const signUpSuccessfully = (account: any) => {
   return {
@@ -387,13 +388,6 @@ export const postChangePassword = (
     });
 };
 
-export const getOTPSuccessfully = (message: any) => {
-  return {
-    type: AuthActionTypes.GET_OTP_SUCCESSFULLY,
-    payload: message,
-  };
-};
-
 export const resetPasswordSuccessfully = (message: any) => {
   return {
     type: AuthActionTypes.RESET_PASSWORD_SUCCESSFULLY,
@@ -408,12 +402,64 @@ export const resetPasswordFailed = (errMess: any) => {
   };
 };
 
-export const getSendForgotPasswordToken = (email: string) => (
-  dispatch: any
-) => {
-  const params = qs.stringify({ email });
-  console.log(params);
-  return fetch(`${baseUrl}auth/sendForgotPasswordToken?${params}`, {
+export const postResetPassword = (
+  resetPasswordDetails: ResetPasswordDetails,
+  callback: () => void
+) => (dispatch: any) => {
+  const data = JSON.stringify(resetPasswordDetails);
+  console.log(data);
+  return fetch(baseUrl + "auth/forgotPassword", {
+    method: "POST",
+    body: data,
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response;
+      } else {
+        var error = new Error(
+          "Error " + response.status + ": " + response.statusText
+        );
+        throw error;
+      }
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      if (response.error) {
+        dispatch(resetPasswordFailed(response.message));
+      } else {
+        dispatch(resetPasswordSuccessfully(response.message));
+        callback();
+      }
+    })
+    .catch((error) => {
+      console.log("Register ", error.message);
+    });
+};
+
+export const sendResetPasswordTokenSuccessfully = (payload: any) => {
+  return {
+    type: AuthActionTypes.SEND_RESET_PASSWORD_TOKEN_SUCCESSFULLY,
+    payload: payload,
+  };
+};
+
+export const sendResetPasswordTokenFailed = (payload: any) => {
+  return {
+    type: AuthActionTypes.SEND_RESET_PASSWORD_TOKEN_FAILED,
+    payload: payload,
+  };
+};
+
+export const sendForgotPasswordToken = (
+  email: string,
+  callback: () => void
+) => (dispatch: any) => {
+  return fetch(`${baseUrl}auth/sendForgotPasswordToken?email=${email}`, {
     method: "GET",
     mode: "cors",
   })
@@ -437,10 +483,17 @@ export const getSendForgotPasswordToken = (email: string) => (
       return response.json();
     })
     .then((response) => {
-      if (!response.error) dispatch(getOTPSuccessfully(response.message));
-      else dispatch(resetPasswordFailed(response.message));
+      if (!response.error) {
+        const payload = { email, successMessage: response.message };
+        dispatch(sendResetPasswordTokenSuccessfully(payload));
+        callback();
+      } else {
+        const payload = { email, errMess: response.message };
+        dispatch(sendResetPasswordTokenFailed(payload));
+        callback(); //TODO remove later
+      }
     })
     .catch((error) => {
-      console.log("Send OTP ", error.message);
+      console.log("Send reset password token ", error.message);
     });
 };

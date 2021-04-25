@@ -70,7 +70,7 @@ const ForgotPassword = () => {
         oldPassword: values.oldPassword,
         newPassword: values.newPassword,
       };
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
       dispatchPostChangePassword(submitValues);
     },
     validationSchema: validationSchema,
