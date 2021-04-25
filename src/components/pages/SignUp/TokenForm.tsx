@@ -1,9 +1,19 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { useFormik } from "formik";
-import { Button, Link, TextField, Typography } from "@material-ui/core";
+import {
+  Button,
+  Link as MuiLink,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { postConfirmSignUp } from "../../../redux/actions/creators/auth";
+import {
+  postConfirmSignUp,
+  resendTokenSignUp,
+} from "../../../redux/actions/creators/auth";
 import { useState } from "react";
+import { Routes } from "../../../shared/constants";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -21,23 +31,28 @@ const TokenForm = ({ switchToEmailForm }: any) => {
   const classes = useStyles();
 
   const [success, setSuccess] = useState(false);
+  const [showResendMessage, setShowResendMessage] = useState(false);
   const confirmSignUpSuccessfully = () => {
     setSuccess(true);
+    setShowResendMessage(false);
+  };
+  const resendSuccessfully = () => {
+    setShowResendMessage(true);
   };
 
   const { registeredAccount, errMess, successMessage } = useSelector(
     (state: any) => state.registerAccount
   );
 
+  const email = registeredAccount?.email;
+
   const dispatch = useDispatch();
+
   const dispatchPostConfirmSignUp = (token: string) =>
-    dispatch(
-      postConfirmSignUp(
-        registeredAccount?.email,
-        token,
-        confirmSignUpSuccessfully
-      )
-    );
+    dispatch(postConfirmSignUp(email, token, confirmSignUpSuccessfully));
+
+  const dispatchResendTokenSignUp = () =>
+    dispatch(resendTokenSignUp(email, resendSuccessfully));
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -47,11 +62,27 @@ const TokenForm = ({ switchToEmailForm }: any) => {
     },
   });
   return success ? (
-    <Typography variant="h6" style={{ marginBottom: 12, color: "green" }}>
-      {successMessage}
-    </Typography>
+    <>
+      <Typography variant="h6" style={{ marginBottom: 12, color: "green" }}>
+        {successMessage}
+      </Typography>
+      <Link to={Routes.LOGIN}>
+        <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+        >
+          Back to login
+        </Button>
+      </Link>
+    </>
   ) : (
     <form className={classes.form} onSubmit={formik.handleSubmit}>
+      <Typography variant="body2" style={{ alignSelf: "start" }}>
+        {showResendMessage ? "Another confirmation" : "Confirmation"} code has
+        been sent to <b>{email}</b>
+      </Typography>
       <TextField
         variant="outlined"
         margin="normal"
@@ -80,17 +111,14 @@ const TokenForm = ({ switchToEmailForm }: any) => {
       >
         Submit
       </Button>
-      <Typography
-        variant="subtitle1"
-        style={{ alignSelf: "start" }}
-      >
+      <Typography variant="subtitle1" style={{ alignSelf: "start" }}>
         {"Don't see the code? "}
-        <Link
+        <MuiLink
           style={{ cursor: "pointer" }}
-          onClick={() => console.log("resend")}
+          onClick={dispatchResendTokenSignUp}
         >
           Resend
-        </Link>
+        </MuiLink>
       </Typography>
     </form>
   );

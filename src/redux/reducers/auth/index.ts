@@ -67,13 +67,23 @@ export const RegisterAccount = (
         successMessage: action.payload.successMessage,
       };
 
-    case AuthActionTypes.GET_SIGNUP_TOKEN_FAILED:
+    case AuthActionTypes.POST_SIGNUP_TOKEN_FAILED:
       return { ...state, errMess: action.payload, successMessage: null };
 
-    case AuthActionTypes.GET_SIGNUP_TOKEN_SUCCESSFULLY:
+    case AuthActionTypes.POST_SIGNUP_TOKEN_SUCCESSFULLY:
       return {
         ...state,
         registeredAccount: action.payload.account,
+        errMess: null,
+        successMessage: action.payload.successMessage,
+      };
+
+    case AuthActionTypes.RESEND_SIGNUP_TOKEN_FAILED:
+      return { ...state, errMess: action.payload, successMessage: null };
+
+    case AuthActionTypes.RESEND_SIGNUP_TOKEN_SUCCESSFULLY:
+      return {
+        ...state,
         errMess: null,
         successMessage: action.payload.successMessage,
       };

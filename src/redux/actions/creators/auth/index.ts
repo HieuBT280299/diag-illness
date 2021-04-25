@@ -123,6 +123,55 @@ export const postConfirmSignUp = (
     });
 };
 
+export const resendTokenSignUpSuccessfully = (successMessage: any) => {
+  return {
+    type: AuthActionTypes.RESEND_SIGNUP_TOKEN_SUCCESSFULLY,
+    payload: successMessage,
+  };
+};
+
+export const resendTokenSignUpFailed = (errMess: any) => {
+  return {
+    type: AuthActionTypes.RESEND_SIGNUP_TOKEN_FAILED,
+    payload: errMess,
+  };
+};
+
+export const resendTokenSignUp = (email: string, callback: () => void) => (
+  dispatch: any
+) => {
+  return fetch(`${baseUrl}auth/sendConfirmToken?email=${email}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response;
+      } else {
+        var error = new Error(
+          "Error " + response.status + ": " + response.statusText
+        );
+        throw error;
+      }
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      if (response.error) {
+        dispatch(resendTokenSignUpFailed(response.message));
+      } else {
+        dispatch(resendTokenSignUpSuccessfully(response.message));
+        callback();
+      }
+    })
+    .catch((error) => {
+      console.log("Register ", error.message);
+    });
+};
+
 export const loginSuccessfully = (account: any) => {
   return {
     type: AuthActionTypes.LOGIN_SUCCESSFULLY,
