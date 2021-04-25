@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,7 +7,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import HeaderCell from "../../tables/HeaderCell";
-import { Grid, Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import {
   getFullAddress,
   getFullContact,
@@ -16,6 +16,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "@material-ui/lab/Pagination";
 import { getHospitalList } from "../../../redux/actions/creators/hospital";
+import { RoleIDs } from "../../../shared/constants";
 
 const useStyles = makeStyles({
   table: {
@@ -39,9 +40,15 @@ const headCells = [
     disablePadding: false,
     label: "Service",
   },
+  {
+    id: "details",
+    numeric: false,
+    disablePadding: false,
+    label: "",
+  },
 ];
 
-const HospitalListTableHead = () => {
+const HospitalListTableHead = ({ isAdmin }: any) => {
   return (
     <TableHead>
       <TableRow>
@@ -66,6 +73,10 @@ const HospitalListTable = () => {
   const hospitalList: any[] =
     useSelector((state: any) => state.hospitals?.hospitals) || [];
 
+  const isAdmin = useMemo(() => account.roleId === RoleIDs.ROLE_ADMIN, [
+    account,
+  ]);
+
   const {
     totalPages,
     totalEntries,
@@ -86,7 +97,7 @@ const HospitalListTable = () => {
 
   return (
     <Grid container>
-      <Grid item xs={12}>
+      <Grid item xs={12} md={6}>
         {totalEntries > 0 && (
           <Typography variant="h6" style={{ marginBottom: 12 }}>
             Number of entries: {totalEntries || 0}
@@ -99,16 +110,34 @@ const HospitalListTable = () => {
           </Typography>
         )}
       </Grid>
+      {isAdmin && (
+        <Grid
+          item
+          container
+          xs={12}
+          md={6}
+          direction="row"
+          justify="flex-end"
+          alignItems="center"
+        >
+          <Button color="primary" variant="text">
+            Add with CSV
+          </Button>
+          <Button color="primary" variant="text" style={{ marginLeft: 12 }}>
+            Add with Form
+          </Button>
+        </Grid>
+      )}
       <Grid item xs={12}>
         {hospitalList.length > 0 && (
           <TableContainer component={Paper}>
             <Table className={classes.table} aria-label="customized table">
-              <HospitalListTableHead />
+              <HospitalListTableHead isAdmin={isAdmin} />
               <TableBody>
                 {hospitalList.map((row: any) => {
                   return (
                     <TableRow key={row.id}>
-                      <HeaderCell width="25%">
+                      <HeaderCell width="20%">
                         {getValueOf(row.name)}
                       </HeaderCell>
                       <HeaderCell width="20%">{getFullAddress(row)}</HeaderCell>
@@ -116,9 +145,10 @@ const HospitalListTable = () => {
                         {getValueOf(row.workingTime)}
                       </HeaderCell>
                       <HeaderCell width="20%">{getFullContact(row)}</HeaderCell>
-                      <HeaderCell width="25%">
+                      <HeaderCell width="20%">
                         {getValueOf(row.service)}
                       </HeaderCell>
+                      <HeaderCell width="10%">Details</HeaderCell>
                     </TableRow>
                   );
                 })}

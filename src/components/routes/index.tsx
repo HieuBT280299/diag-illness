@@ -35,6 +35,8 @@ const SwitchRoutes = () => {
           path={`${Routes.MANAGE_ACCOUNT}`}
           component={AdminManageAccount}
         />
+        <Route exact path={`${Routes.NEWS}`} component={News} />
+        <Route exact path={`${Routes.HOSPITAL}`} component={Hospital} />
         <Redirect to={`${Routes.HOME}`} />
       </Switch>
     ) : (

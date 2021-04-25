@@ -85,6 +85,18 @@ export const adminPageList: PageListItem[] = [
     to: Routes.MANAGE_ACCOUNT,
     hidden: false,
   },
+  {
+    icon: <ShoppingCartIcon />,
+    text: "Manage News",
+    to: Routes.NEWS,
+    hidden: false,
+  },
+  {
+    icon: <BarChartIcon />,
+    text: "Manage Hospital",
+    to: Routes.HOSPITAL,
+    hidden: false,
+  },
 ];
 
 export const preLoginList: PageListItem[] = [
