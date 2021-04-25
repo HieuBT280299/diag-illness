@@ -76,20 +76,22 @@ const HospitalListTableHead = ({ isAdmin }: any) => {
   );
 };
 
+type HospitalDialogType = "close" | "edit" | "view";
+
 const HospitalListTable = () => {
   const classes = useStyles();
   const [selectedRow, setSelectedRow] = useState<any>({});
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState<HospitalDialogType>("close");
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
-  const toggleDialog = () => {
-    setDialogOpen(!dialogOpen);
+  const closeDialog = () => {
+    setDialogOpen("close");
   };
   const toggleConfirmDialog = () => {
     setConfirmDialogOpen(!confirmDialogOpen);
   };
   const detailsButtonClicked = (row: any) => {
     setSelectedRow(row);
-    setDialogOpen(true);
+    setDialogOpen("view");
   };
   const deleteButtonClicked = (row: any) => {
     setSelectedRow(row);
@@ -124,7 +126,26 @@ const HospitalListTable = () => {
 
   return (
     <Grid container>
-      <Grid item xs={12} md={6}>
+      {isAdmin && (
+        <Grid item container xs={12} md={6}>
+          <Button color="primary" variant="text">
+            Add with CSV
+          </Button>
+          <Button color="primary" variant="text" style={{ marginLeft: 12 }}>
+            Add with Form
+          </Button>
+        </Grid>
+      )}
+
+      <Grid
+        item
+        container
+        xs={12}
+        md={6}
+        direction="row"
+        justify="flex-end"
+        alignItems="center"
+      >
         {totalEntries > 0 && (
           <Typography variant="h6" style={{ marginBottom: 12 }}>
             Number of entries: {totalEntries || 0}
@@ -137,24 +158,7 @@ const HospitalListTable = () => {
           </Typography>
         )}
       </Grid>
-      {isAdmin && (
-        <Grid
-          item
-          container
-          xs={12}
-          md={6}
-          direction="row"
-          justify="flex-end"
-          alignItems="center"
-        >
-          <Button color="primary" variant="text">
-            Add with CSV
-          </Button>
-          <Button color="primary" variant="text" style={{ marginLeft: 12 }}>
-            Add with Form
-          </Button>
-        </Grid>
-      )}
+
       <Grid item xs={12}>
         {hospitalList.length > 0 && (
           <TableContainer component={Paper}>
@@ -209,17 +213,17 @@ const HospitalListTable = () => {
         )}
       </Grid>
       <CustomizedDialog
-        open={dialogOpen}
+        open={dialogOpen !== "close"}
         title="Hospital Details"
         content={<HospitalDetailContent row={selectedRow} isAdmin={isAdmin} />}
         actions={
           <>
-            <Button onClick={toggleDialog} color="secondary">
+            <Button onClick={closeDialog} color="secondary">
               Close
             </Button>
           </>
         }
-        toggleDialog={toggleDialog}
+        toggleDialog={closeDialog}
       />
       <ConfirmDialog
         open={confirmDialogOpen}
