@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,7 +7,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import HeaderCell from "../../tables/HeaderCell";
-import { Button, Grid, Typography } from "@material-ui/core";
+import { Button, Grid, Link as MuiLink, Typography } from "@material-ui/core";
 import {
   getFullAddress,
   getFullContact,
@@ -17,12 +17,22 @@ import { useDispatch, useSelector } from "react-redux";
 import Pagination from "@material-ui/lab/Pagination";
 import { getHospitalList } from "../../../redux/actions/creators/hospital";
 import { RoleIDs } from "../../../shared/constants";
+import styled from "styled-components";
+import HospitalDetailContent from "./HospitalDetailContent";
+import ConfirmDialog from "../../ConfirmDialog";
+import CustomizedDialog from "../../Dialog";
 
 const useStyles = makeStyles({
   table: {
     minWidth: 900,
   },
 });
+
+const Link = styled(MuiLink)`
+  &&& {
+    cursor: pointer;
+  }
+`;
 
 const headCells = [
   { id: "name", numeric: false, disablePadding: false, label: "Name" },
@@ -68,6 +78,23 @@ const HospitalListTableHead = ({ isAdmin }: any) => {
 
 const HospitalListTable = () => {
   const classes = useStyles();
+  const [selectedRow, setSelectedRow] = useState<any>({});
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
+  const toggleDialog = () => {
+    setDialogOpen(!dialogOpen);
+  };
+  const toggleConfirmDialog = () => {
+    setConfirmDialogOpen(!confirmDialogOpen);
+  };
+  const detailsButtonClicked = (row: any) => {
+    setSelectedRow(row);
+    setDialogOpen(true);
+  };
+  const deleteButtonClicked = (row: any) => {
+    setSelectedRow(row);
+    setConfirmDialogOpen(true);
+  };
 
   const account = useSelector((state: any) => state.loginAccount?.account);
   const hospitalList: any[] =
@@ -148,7 +175,22 @@ const HospitalListTable = () => {
                       <HeaderCell width="20%">
                         {getValueOf(row.service)}
                       </HeaderCell>
-                      <HeaderCell width="10%">Details</HeaderCell>
+                      <HeaderCell width="10%">
+                        <Link onClick={() => detailsButtonClicked(row)}>
+                          Details
+                        </Link>
+
+                        {isAdmin && (
+                          <span>
+                            {` | `}
+                            {
+                              <Link onClick={() => deleteButtonClicked(row)}>
+                                Delete
+                              </Link>
+                            }
+                          </span>
+                        )}
+                      </HeaderCell>
                     </TableRow>
                   );
                 })}
@@ -166,6 +208,26 @@ const HospitalListTable = () => {
           />
         )}
       </Grid>
+      <CustomizedDialog
+        open={dialogOpen}
+        title="Hospital Details"
+        content={<HospitalDetailContent row={selectedRow} isAdmin={isAdmin} />}
+        actions={
+          <>
+            <Button onClick={toggleDialog} color="secondary">
+              Close
+            </Button>
+          </>
+        }
+        toggleDialog={toggleDialog}
+      />
+      <ConfirmDialog
+        open={confirmDialogOpen}
+        toggleDialog={toggleConfirmDialog}
+        content={<div>Are you sure to delete this hospital?</div>}
+        onYesButtonClicked={() => console.log(`delete id=${selectedRow.id}`)}
+        onNoButtonClicked={toggleConfirmDialog}
+      />
     </Grid>
   );
 };
