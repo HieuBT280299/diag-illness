@@ -19,6 +19,7 @@ import { getHospitalList } from "../../../redux/actions/creators/hospital";
 import { RoleIDs } from "../../../shared/constants";
 import styled from "styled-components";
 import HospitalDetailContent from "./HospitalDetailContent";
+import HospitalDetailEdit from "./HospitalDetailEdit";
 import ConfirmDialog from "../../ConfirmDialog";
 import CustomizedDialog from "../../Dialog";
 
@@ -93,6 +94,10 @@ const HospitalListTable = () => {
     setSelectedRow(row);
     setDialogOpen("view");
   };
+  const editButtonClicked = (row: any) => {
+    setSelectedRow(row);
+    setDialogOpen("edit");
+  };
   const deleteButtonClicked = (row: any) => {
     setSelectedRow(row);
     setConfirmDialogOpen(true);
@@ -143,7 +148,7 @@ const HospitalListTable = () => {
         xs={12}
         md={6}
         direction="row"
-        justify="flex-end"
+        justify={isAdmin ? "flex-end" : "flex-start"}
         alignItems="center"
       >
         {totalEntries > 0 && (
@@ -188,6 +193,12 @@ const HospitalListTable = () => {
                           <span>
                             {` | `}
                             {
+                              <Link onClick={() => editButtonClicked(row)}>
+                                Edit
+                              </Link>
+                            }
+                            {` | `}
+                            {
                               <Link onClick={() => deleteButtonClicked(row)}>
                                 Delete
                               </Link>
@@ -213,7 +224,7 @@ const HospitalListTable = () => {
         )}
       </Grid>
       <CustomizedDialog
-        open={dialogOpen !== "close"}
+        open={dialogOpen === "view"}
         title="Hospital Details"
         content={<HospitalDetailContent row={selectedRow} isAdmin={isAdmin} />}
         actions={
@@ -222,6 +233,14 @@ const HospitalListTable = () => {
               Close
             </Button>
           </>
+        }
+        toggleDialog={closeDialog}
+      />
+      <CustomizedDialog
+        open={dialogOpen === "edit"}
+        title="Edit Hospital Details"
+        content={
+          <HospitalDetailEdit row={selectedRow} closeDialog={closeDialog} />
         }
         toggleDialog={closeDialog}
       />

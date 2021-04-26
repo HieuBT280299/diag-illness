@@ -13,16 +13,8 @@ import { sortByName } from "../../../shared/helper";
 
 //TODO
 
-const HospitalDetailEdit = ({ row }: any) => {
-  const { name, number, phone, cityCode, districtCode, wardCode } = row;
-  const initialValues = {
-    name,
-    number,
-    phone,
-    cityCode,
-    districtCode,
-    wardCode,
-  };
+const HospitalDetailEdit = ({ row, closeDialog }: any) => {
+  const initialValues = row;
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
@@ -49,13 +41,10 @@ const HospitalDetailEdit = ({ row }: any) => {
 
   return (
     <>
-      <Typography variant="h5" style={{ marginBottom: 12 }}>
-        Edit hospital
-      </Typography>
       <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
         <Grid container spacing={2}>
           <Grid item container>
-            <Grid item xs={12} lg={9}>
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 name="name"
@@ -67,7 +56,7 @@ const HospitalDetailEdit = ({ row }: any) => {
             </Grid>
           </Grid>
           <Grid item container spacing={2}>
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12}>
               <TextField
                 select
                 fullWidth
@@ -85,7 +74,7 @@ const HospitalDetailEdit = ({ row }: any) => {
                 ))}
               </TextField>
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12}>
               <TextField
                 select
                 fullWidth
@@ -107,7 +96,7 @@ const HospitalDetailEdit = ({ row }: any) => {
                   ))}
               </TextField>
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12}>
               <TextField
                 select
                 fullWidth
@@ -131,7 +120,7 @@ const HospitalDetailEdit = ({ row }: any) => {
             </Grid>
           </Grid>
           <Grid item container>
-            <Grid item xs={12} lg={9}>
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 name="number"
@@ -143,7 +132,7 @@ const HospitalDetailEdit = ({ row }: any) => {
             </Grid>
           </Grid>
           <Grid item container>
-            <Grid item xs={12} lg={9}>
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 name="phone"
@@ -154,21 +143,44 @@ const HospitalDetailEdit = ({ row }: any) => {
               />
             </Grid>
           </Grid>
-          <Grid item container style={{ marginTop: 12 }}>
-            <Grid item>
-              <Button type="submit" color="primary" variant="contained">
-                Search
-              </Button>
-              <Button
-                type="reset"
-                color="primary"
+          <Grid item container>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                name="email"
+                label="Email"
                 variant="outlined"
-                style={{ marginLeft: 12 }}
-              >
-                Reset Form
-              </Button>
+                value={formik.values.email}
+                onChange={formik.handleChange}
+              />
             </Grid>
           </Grid>
+          <Grid item container>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                name="workingTime"
+                label="Working time"
+                variant="outlined"
+                value={formik.values.workingTime}
+                onChange={formik.handleChange}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          container
+          justify="flex-end"
+          xs={12}
+          style={{ marginTop: 12 }}
+        >
+          <Button type="submit" color="primary">
+            Submit
+          </Button>
+          <Button onClick={closeDialog} color="secondary">
+            Close
+          </Button>
         </Grid>
       </form>
     </>
