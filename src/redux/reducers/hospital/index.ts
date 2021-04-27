@@ -10,7 +10,7 @@ export const Hospitals = (
     totalPages: 0,
     totalEntries: 0,
     searchData: null,
-    successStatus: false,
+    successMessage: null,
     deleteSuccessStatus: false,
   },
   action: { type: string; payload: any }
@@ -25,11 +25,32 @@ export const Hospitals = (
         totalPages: action.payload?.data?.totalPage,
         totalEntries: action.payload?.data?.totalEntries,
         currentPage: action.payload?.paginationData?.page,
-        searchData: action.payload?.searchData
+        searchData: action.payload?.searchData,
       };
 
     case HospitalActionTypes.HOSPITALS_FAILED:
-      return { ...state, isLoading: false, errMess: action.payload };
+      return {
+        ...state,
+        isLoading: false,
+        errMess: action.payload,
+        successMessage: null,
+      };
+
+    case HospitalActionTypes.UPLOAD_HOSPITALS:
+      return {
+        ...state,
+        isLoading: false,
+        successMessage: action.payload,
+        errMess: null,
+      };
+
+    case HospitalActionTypes.UPLOAD_HOSPITALS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        errMess: action.payload,
+        successMessage: null,
+      };
 
     default:
       return state;

@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core";
 import React from "react";
 import { Jumbotron as Jumbo } from "reactstrap";
 import styled from "styled-components";
+import HospitalCsvUpload from "../UploadCsv/HospitalCsvUpload";
 
 const useStyles = makeStyles((theme) => ({
   content: {

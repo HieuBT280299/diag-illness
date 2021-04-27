@@ -72,3 +72,59 @@ export const getHospitalList = (
       console.log("Get hospital list ", error.message);
     });
 };
+
+export const uploadHospitalCsvSuccessfully = (payload: any) => {
+  return {
+    type: HospitalActionTypes.UPLOAD_HOSPITALS,
+    payload,
+  };
+};
+
+export const uploadHospitalCsvFailed = (message: any) => {
+  return {
+    type: HospitalActionTypes.UPLOAD_HOSPITALS_FAILED,
+    payload: message,
+  };
+};
+
+export const uploadHospitalCsv = (formData: any, token: string) => (
+  dispatch: any
+) => {
+  return fetch(`${baseUrl}hospital/upload`, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      Authorization: token,
+      "Content-Type": "multipart/form-data",
+    },
+  })
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+          throw error;
+        }
+      },
+      (error) => {
+        var errMess = new Error(error.message);
+        throw errMess;
+      }
+    )
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      if (response.error) {
+        dispatch(uploadHospitalCsvFailed(response.message));
+      } else {
+        dispatch(uploadHospitalCsvSuccessfully(response.message));
+      }
+    })
+    .catch((error) => {
+      console.log("Get hospital list ", error.message);
+    });
+};

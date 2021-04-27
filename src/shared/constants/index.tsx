@@ -30,6 +30,7 @@ export enum Routes {
 
   //admin routes
   MANAGE_ACCOUNT = "/manageaccount",
+  UPLOAD = "/upload",
 }
 
 export type PageListItem = {
@@ -96,6 +97,18 @@ export const adminPageList: PageListItem[] = [
     text: "Manage Hospital",
     to: Routes.HOSPITAL,
     hidden: false,
+  },
+  {
+    icon: <BarChartIcon />,
+    text: "Upload News",
+    to: `${Routes.UPLOAD}/news`,
+    hidden: true,
+  },
+  {
+    icon: <BarChartIcon />,
+    text: "Upload Hospital",
+    to: `${Routes.UPLOAD}/hospital`,
+    hidden: true,
   },
 ];
 

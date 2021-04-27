@@ -12,6 +12,7 @@ import Login from "../pages/Login";
 import News from "../pages/News";
 import Profile from "../pages/Profile";
 import SignUp from "../pages/SignUp";
+import UploadCsvPage from "../pages/UploadCsv";
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -37,6 +38,7 @@ const SwitchRoutes = () => {
         />
         <Route exact path={`${Routes.NEWS}`} component={News} />
         <Route exact path={`${Routes.HOSPITAL}`} component={Hospital} />
+        <Route path={`${Routes.UPLOAD}/:type`} component={UploadCsvPage} />
         <Redirect to={`${Routes.HOME}`} />
       </Switch>
     ) : (
