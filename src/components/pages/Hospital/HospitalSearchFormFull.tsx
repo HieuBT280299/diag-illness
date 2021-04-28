@@ -20,7 +20,7 @@ const initialValues = {
   wardCode: "0",
 };
 
-const HospitalSearchForm = () => {
+const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
   const { pageSize } = useSelector((state: any) => state.hospitals);
   const account = useSelector((state: any) => state.loginAccount?.account);
 
@@ -172,6 +172,14 @@ const HospitalSearchForm = () => {
                 style={{ marginLeft: 12 }}
               >
                 Reset Form
+              </Button>
+              <Button
+                color="primary"
+                variant="outlined"
+                style={{ marginLeft: 12 }}
+                onClick={toggleSimpleSearch}
+              >
+                Simple Search
               </Button>
             </Grid>
           </Grid>

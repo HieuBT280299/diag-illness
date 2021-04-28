@@ -26,7 +26,6 @@ export enum Routes {
   //user routes
   NEWS = "/news",
   HOSPITAL = "/hospital",
-  DIAGNOSE = "/diagnose",
 
   //admin routes
   MANAGE_ACCOUNT = "/manageaccount",
@@ -43,8 +42,8 @@ export type PageListItem = {
 export const userPageList: PageListItem[] = [
   {
     icon: <DashboardIcon />,
-    text: "Home",
-    to: Routes.HOME,
+    text: "My Account Profile",
+    to: Routes.PROFILE,
     hidden: false,
   },
   {
@@ -54,22 +53,10 @@ export const userPageList: PageListItem[] = [
     hidden: false,
   },
   {
-    icon: <PeopleIcon />,
-    text: "Diagnose",
-    to: Routes.DIAGNOSE,
-    hidden: false,
-  },
-  {
     icon: <BarChartIcon />,
     text: "Find Hospital",
     to: Routes.HOSPITAL,
     hidden: false,
-  },
-  {
-    icon: null,
-    text: "My Account Profile",
-    to: Routes.PROFILE,
-    hidden: true,
   },
   {
     icon: null,
