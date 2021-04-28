@@ -1,7 +1,5 @@
 import { Button, Grid, makeStyles } from "@material-ui/core";
-import { useFormik } from "formik";
-import React from "react";
-import * as Yup from "yup";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadHospitalCsv } from "../../../redux/actions/creators/hospital";
 
@@ -15,49 +13,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const initialValues = {
-  file: "",
-};
-
-const validationSchema = Yup.object().shape({
-  file: Yup.mixed().required("A file is required"),
-});
-
 const HospitalCsvUpload = () => {
   const classes = useStyles();
+
+  const [file, setFile] = useState<string | Blob>("");
 
   const account = useSelector((state: any) => state.loginAccount?.account);
   const dispatch = useDispatch();
   const dispatchUploadHospitalCsv = (formData: any) =>
     dispatch(uploadHospitalCsv(formData, account.token));
 
-  const formik = useFormik({
-    initialValues: initialValues,
-    onSubmit: (values) => {
+  const handleChange = (event: any) => {
+    setFile(event.target.files[0] !== undefined ? event.target.files[0] : "");
+  };
+
+  const handleSubmit = (e: any) => {
+    if (file !== "") {
       const formData = new FormData();
-      formData.append("csvfile", values.file);
-      alert(JSON.stringify(values, null, 2));
+      formData.append("csvfile", file);
       dispatchUploadHospitalCsv(formData);
-    },
-    validationSchema: validationSchema,
-  });
+    } else {
+      console.log("null");
+    }
+  };
 
   return (
-    <form className={classes.form} onSubmit={formik.handleSubmit}>
+    <form className={classes.form}>
       <Grid container>
         <Grid item xs={12}>
           <input
             name="file"
             type="file"
             accept=".csv"
-            onChange={formik.handleChange}
-            value={formik.values.file}
+            onChange={handleChange}
           />
         </Grid>
-        <span style={{ color: "red" }}>{formik.errors.file}</span>
         <Grid item xs={12}>
           <Button
-            type="submit"
+            onClick={handleSubmit}
             variant="contained"
             color="primary"
             className={classes.submit}
