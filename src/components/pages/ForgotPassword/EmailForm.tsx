@@ -39,7 +39,7 @@ const EmailForm = ({ switchToTokenForm }: any) => {
         required
         fullWidth
         id="email"
-        label="Email Address"
+        label="Email"
         name="email"
         autoFocus
         onChange={formik.handleChange}
@@ -51,12 +51,12 @@ const EmailForm = ({ switchToTokenForm }: any) => {
         color="primary"
         className={classes.submit}
       >
-        Reset password
+        Đặt lại mật khẩu
       </Button>
       <Grid container justify="flex-end">
         <Grid item>
-          {"Don't have an account? "}
-          <Link to="/signup">{"Sign Up"}</Link>
+          {"Không có tài khoản? "}
+          <Link to="/signup">{"Đăng ký"}</Link>
         </Grid>
       </Grid>
     </form>

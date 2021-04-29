@@ -84,7 +84,7 @@ const TokenForm = ({ switchToEmailForm }: any) => {
           color="primary"
           className={classes.submit}
         >
-          Back to login
+          Quay lại trang đăng nhập
         </Button>
       </Link>
     </>
@@ -96,7 +96,7 @@ const TokenForm = ({ switchToEmailForm }: any) => {
         required
         fullWidth
         id="token"
-        label="Reset Token"
+        label="Mã OTP"
         name="token"
         autoFocus
         onChange={formik.handleChange}
@@ -107,7 +107,7 @@ const TokenForm = ({ switchToEmailForm }: any) => {
         required
         fullWidth
         id="newPassword"
-        label="New Password"
+        label="Mật khẩu mới"
         name="newPassword"
         type="password"
         autoFocus
@@ -119,7 +119,7 @@ const TokenForm = ({ switchToEmailForm }: any) => {
         required
         fullWidth
         id="confirmPassword"
-        label="Confirm Password"
+        label="Xác nhận mật khẩu"
         name="confirmPassword"
         type="password"
         autoFocus
@@ -140,15 +140,15 @@ const TokenForm = ({ switchToEmailForm }: any) => {
         color="primary"
         className={classes.submit}
       >
-        Submit
+        Đổi mật khẩu
       </Button>
       <Typography variant="subtitle1" style={{ alignSelf: "start" }}>
-        {"Don't see the code? "}
+        {"Không nhận được mã? "}
         <MuiLink
           style={{ cursor: "pointer" }}
           onClick={dispatchSendForgotPasswordToken}
         >
-          Resend
+          Gửi lại mã
         </MuiLink>
       </Typography>
     </form>

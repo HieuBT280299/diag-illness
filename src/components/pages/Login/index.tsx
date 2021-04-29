@@ -65,7 +65,7 @@ const Login = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Đăng nhập
         </Typography>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
           <TextField
@@ -74,7 +74,7 @@ const Login = () => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email"
             name="email"
             autoComplete="email"
             autoFocus
@@ -86,7 +86,7 @@ const Login = () => {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Mật khẩu"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -100,15 +100,15 @@ const Login = () => {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Đăng nhập
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to={Routes.FORGOT_PASSWORD}>Forgot password?</Link>
+              <Link to={Routes.FORGOT_PASSWORD}>Quên mật khẩu?</Link>
             </Grid>
             <Grid item>
-              {"Don't have an account? "}
-              <Link to={Routes.SIGN_UP}>{"Sign Up"}</Link>
+              {"Không có tài khoản? "}
+              <Link to={Routes.SIGN_UP}>{"Đăng ký"}</Link>
             </Grid>
           </Grid>
         </form>

@@ -45,10 +45,7 @@ const initialValues = {
 const validationSchema = Yup.object().shape({
   confirmPassword: Yup.string().when("newPassword", {
     is: (val: string) => (val && val.length > 0 ? true : false),
-    then: Yup.string().oneOf(
-      [Yup.ref("newPassword")],
-      "Confirm password does not match"
-    ),
+    then: Yup.string().oneOf([Yup.ref("newPassword")], "Không khớp"),
   }),
 });
 
@@ -84,7 +81,7 @@ const ForgotPassword = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Change your password
+          Đổi mật khẩu
         </Typography>
         <form className={classes.form} onSubmit={formik.handleSubmit}>
           <TextField
@@ -93,7 +90,7 @@ const ForgotPassword = () => {
             required
             fullWidth
             id="oldPassword"
-            label="Old Password"
+            label="Mật khẩu cũ"
             name="oldPassword"
             type="password"
             autoFocus
@@ -105,7 +102,7 @@ const ForgotPassword = () => {
             required
             fullWidth
             id="newPassword"
-            label="New Password"
+            label="Mật khẩu mới"
             name="newPassword"
             type="password"
             autoFocus
@@ -117,7 +114,7 @@ const ForgotPassword = () => {
             required
             fullWidth
             id="confirmPassword"
-            label="Confirm Password"
+            label="Xác nhận mật khẩu mới"
             name="confirmPassword"
             type="password"
             autoFocus
@@ -133,7 +130,7 @@ const ForgotPassword = () => {
             color="primary"
             className={classes.submit}
           >
-            Change password
+            Đổi mật khẩu
           </Button>
         </form>
       </div>

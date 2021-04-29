@@ -39,7 +39,7 @@ const SignUp = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Đăng ký
         </Typography>
         {isTokenFormDisplaying ? (
           <TokenForm switchToEmailForm={switchToEmailForm} />

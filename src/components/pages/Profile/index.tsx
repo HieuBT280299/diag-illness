@@ -95,11 +95,11 @@ const Profile = () => {
             justifyContent: "center",
           }}
         >
-          My Account Profile
+          Tài khoản của tôi
         </Typography>
         {!isEditing && (
           <Button variant="text" color="secondary" onClick={toggleEditing}>
-            Edit
+            Sửa đổi
           </Button>
         )}
       </div>
@@ -118,7 +118,7 @@ const Profile = () => {
               required
               fullWidth
               id="name"
-              label="Name"
+              label="Họ và tên"
               value={formik.values.name}
               onChange={formik.handleChange}
               autoFocus
@@ -131,14 +131,14 @@ const Profile = () => {
               select
               fullWidth
               name="gender"
-              label="Gender"
+              label="Giới tính"
               variant="outlined"
               value={formik.values.gender}
               onChange={formik.handleChange}
               disabled={!isEditing}
             >
-              <MenuItem value={0}>Male</MenuItem>
-              <MenuItem value={1}>Female</MenuItem>
+              <MenuItem value={0}>Nam</MenuItem>
+              <MenuItem value={1}>Nữ</MenuItem>
             </TextField>
           </Grid>
           <Grid item xs={12}>
@@ -147,7 +147,7 @@ const Profile = () => {
               variant="outlined"
               id="dateOfBirth"
               name="dateOfBirth"
-              label="Date of birth"
+              label="Ngày sinh"
               type="date"
               fullWidth
               value={formik.values.dateOfBirth}
@@ -165,7 +165,7 @@ const Profile = () => {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Email"
               name="email"
               value={formik.values.email}
               onChange={formik.handleChange}
@@ -183,7 +183,7 @@ const Profile = () => {
                 color="primary"
                 fullWidth
               >
-                Save
+                Lưu
               </Button>
             </Grid>
             <Grid item xs={6}>
@@ -194,7 +194,7 @@ const Profile = () => {
                 color="primary"
                 fullWidth
               >
-                Back
+                Quay lại
               </Button>
             </Grid>
           </Grid>

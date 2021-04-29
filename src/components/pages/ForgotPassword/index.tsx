@@ -38,7 +38,7 @@ const ForgotPassword = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Reset your password
+          Đặt lại mật khẩu
         </Typography>
         {isTokenFormDisplaying ? (
           <TokenForm switchToEmailForm={switchToEmailForm} />

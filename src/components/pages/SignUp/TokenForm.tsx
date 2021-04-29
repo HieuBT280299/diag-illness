@@ -73,15 +73,15 @@ const TokenForm = ({ switchToEmailForm }: any) => {
           color="primary"
           className={classes.submit}
         >
-          Back to login
+          Quay lại trang đăng nhập
         </Button>
       </Link>
     </>
   ) : (
     <form className={classes.form} onSubmit={formik.handleSubmit}>
       <Typography variant="body2" style={{ alignSelf: "start" }}>
-        {showResendMessage ? "Another confirmation" : "Confirmation"} code has
-        been sent to <b>{email}</b>
+        {showResendMessage ? "Một mã xác nhận khác" : "Mã xác nhận"} đã được gửi
+        tới <b>{email}</b>
       </Typography>
       <TextField
         variant="outlined"
@@ -89,7 +89,7 @@ const TokenForm = ({ switchToEmailForm }: any) => {
         required
         fullWidth
         id="token"
-        label="Sign Up Token"
+        label="Mã xác nhận"
         name="token"
         autoFocus
         onChange={formik.handleChange}
@@ -109,15 +109,15 @@ const TokenForm = ({ switchToEmailForm }: any) => {
         color="primary"
         className={classes.submit}
       >
-        Submit
+        Đăng ký
       </Button>
       <Typography variant="subtitle1" style={{ alignSelf: "start" }}>
-        {"Don't see the code? "}
+        {"Không nhận được mã? "}
         <MuiLink
           style={{ cursor: "pointer" }}
           onClick={dispatchResendTokenSignUp}
         >
-          Resend
+          Gửi lại mã
         </MuiLink>
       </Typography>
     </form>

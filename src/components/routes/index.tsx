@@ -36,6 +36,12 @@ const SwitchRoutes = () => {
         <Route exact path={`${Routes.NEWS}`} component={News} />
         <Route exact path={`${Routes.HOSPITAL}`} component={Hospital} />
         <Route path={`${Routes.UPLOAD}/:type`} component={UploadCsvPage} />
+        <Route exact path={`${Routes.PROFILE}`} component={Profile} />
+        <Route
+          exact
+          path={`${Routes.CHANGE_PASSWORD}`}
+          component={ChangePassword}
+        />
         <Redirect to={`${Routes.HOSPITAL}`} />
       </Switch>
     ) : (

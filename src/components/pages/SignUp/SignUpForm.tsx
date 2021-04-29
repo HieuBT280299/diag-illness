@@ -63,7 +63,7 @@ const SignUpForm = ({ switchToTokenForm }: any) => {
             required
             fullWidth
             id="name"
-            label="Name"
+            label="Họ và tên"
             value={formik.values.name}
             onChange={formik.handleChange}
             autoFocus
@@ -74,13 +74,13 @@ const SignUpForm = ({ switchToTokenForm }: any) => {
             select
             fullWidth
             name="gender"
-            label="Gender"
+            label="Giới tính"
             variant="outlined"
             value={formik.values.gender}
             onChange={formik.handleChange}
           >
-            <MenuItem value={0}>Male</MenuItem>
-            <MenuItem value={1}>Female</MenuItem>
+            <MenuItem value={0}>Nam</MenuItem>
+            <MenuItem value={1}>Nữ</MenuItem>
           </TextField>
         </Grid>
         <Grid item xs={12}>
@@ -88,7 +88,7 @@ const SignUpForm = ({ switchToTokenForm }: any) => {
             variant="outlined"
             id="dateOfBirth"
             name="dateOfBirth"
-            label="Date of birth"
+            label="Ngày sinh"
             type="date"
             fullWidth
             value={formik.values.dateOfBirth}
@@ -104,7 +104,7 @@ const SignUpForm = ({ switchToTokenForm }: any) => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email"
             name="email"
             value={formik.values.email}
             onChange={formik.handleChange}
@@ -116,7 +116,7 @@ const SignUpForm = ({ switchToTokenForm }: any) => {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Mật khẩu"
             type="password"
             id="password"
             value={formik.values.password}
@@ -131,12 +131,12 @@ const SignUpForm = ({ switchToTokenForm }: any) => {
         color="primary"
         className={classes.submit}
       >
-        Sign Up
+        Đăng ký
       </Button>
       <Grid container justify="flex-end">
         <Grid item>
-          {"Already have an account? "}
-          <Link to="/login">Sign in</Link>
+          {"Đã có tài khoản? "}
+          <Link to="/login">Đăng nhập</Link>
         </Grid>
       </Grid>
     </form>

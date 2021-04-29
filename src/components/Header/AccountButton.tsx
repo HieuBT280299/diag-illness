@@ -61,7 +61,7 @@ const AccountButton = () => {
           to={Routes.PROFILE}
           style={{ color: "inherit", textDecoration: "none" }}
         >
-          <MenuItem>My account profile</MenuItem>
+          <MenuItem>Tài khoản của tôi</MenuItem>
         </Link>
 
         <Link
@@ -69,7 +69,7 @@ const AccountButton = () => {
           to={Routes.CHANGE_PASSWORD}
           style={{ color: "inherit", textDecoration: "none" }}
         >
-          <MenuItem>Change password</MenuItem>
+          <MenuItem>Đổi mật khẩu</MenuItem>
         </Link>
 
         <Link
@@ -77,7 +77,7 @@ const AccountButton = () => {
           to="/"
           style={{ color: "inherit", textDecoration: "none" }}
         >
-          <MenuItem>Logout</MenuItem>
+          <MenuItem>Đăng xuất</MenuItem>
         </Link>
       </Menu>
     </div>
