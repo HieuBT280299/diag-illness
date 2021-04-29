@@ -36,20 +36,20 @@ const Link = styled(MuiLink)`
 `;
 
 const headCells = [
-  { id: "name", numeric: false, disablePadding: false, label: "Name" },
-  { id: "address", numeric: false, disablePadding: false, label: "Address" },
+  { id: "name", numeric: false, disablePadding: false, label: "Tên bệnh viện" },
+  { id: "address", numeric: false, disablePadding: false, label: "Địa chỉ" },
   {
     id: "workingTime",
     numeric: false,
     disablePadding: false,
-    label: "Working time",
+    label: "Giờ làm việc",
   },
-  { id: "contact", numeric: false, disablePadding: false, label: "Contact" },
+  { id: "contact", numeric: false, disablePadding: false, label: "Liên hệ" },
   {
     id: "service",
     numeric: false,
     disablePadding: false,
-    label: "Service",
+    label: "Dịch vụ",
   },
   {
     id: "details",
@@ -134,10 +134,10 @@ const HospitalListTable = () => {
       {isAdmin && (
         <Grid item container xs={12} md={6}>
           <Button color="primary" variant="text">
-            Add with CSV
+            Thêm bằng file CSV
           </Button>
           <Button color="primary" variant="text" style={{ marginLeft: 12 }}>
-            Add with Form
+            Thêm bằng form
           </Button>
         </Grid>
       )}
@@ -153,13 +153,13 @@ const HospitalListTable = () => {
       >
         {totalEntries > 0 && (
           <Typography variant="h6" style={{ marginBottom: 12 }}>
-            Number of entries: {totalEntries || 0}
+            Số kết quả tìm được: {totalEntries || 0}
           </Typography>
         )}
 
         {totalEntries === 0 && searchData !== null && (
           <Typography variant="h6" style={{ marginBottom: 12 }}>
-            No data matches your search
+            Không tìm được kết quả nào
           </Typography>
         )}
       </Grid>
@@ -186,7 +186,7 @@ const HospitalListTable = () => {
                       </HeaderCell>
                       <HeaderCell width="10%">
                         <Link onClick={() => detailsButtonClicked(row)}>
-                          Details
+                          Chi tiết
                         </Link>
 
                         {isAdmin && (
@@ -194,13 +194,13 @@ const HospitalListTable = () => {
                             {` | `}
                             {
                               <Link onClick={() => editButtonClicked(row)}>
-                                Edit
+                                Sửa
                               </Link>
                             }
                             {` | `}
                             {
                               <Link onClick={() => deleteButtonClicked(row)}>
-                                Delete
+                                Xoá
                               </Link>
                             }
                           </span>
@@ -225,12 +225,12 @@ const HospitalListTable = () => {
       </Grid>
       <CustomizedDialog
         open={dialogOpen === "view"}
-        title="Hospital Details"
+        title="Chi tiết bệnh viện"
         content={<HospitalDetailContent row={selectedRow} isAdmin={isAdmin} />}
         actions={
           <>
             <Button onClick={closeDialog} color="secondary">
-              Close
+              Đóng
             </Button>
           </>
         }
@@ -238,7 +238,7 @@ const HospitalListTable = () => {
       />
       <CustomizedDialog
         open={dialogOpen === "edit"}
-        title="Edit Hospital Details"
+        title="Sửa thông tin bệnh viện"
         content={
           <HospitalDetailEdit row={selectedRow} closeDialog={closeDialog} />
         }
@@ -247,7 +247,7 @@ const HospitalListTable = () => {
       <ConfirmDialog
         open={confirmDialogOpen}
         toggleDialog={toggleConfirmDialog}
-        content={<div>Are you sure to delete this hospital?</div>}
+        content={<div>Bạn có chắc chắn muốn xoá?</div>}
         onYesButtonClicked={() => console.log(`delete id=${selectedRow.id}`)}
         onNoButtonClicked={toggleConfirmDialog}
       />

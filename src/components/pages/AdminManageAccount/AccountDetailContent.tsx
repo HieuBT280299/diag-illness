@@ -29,11 +29,11 @@ const AccountDetailContent = ({ row }: any) => {
       content: getValueOf(row.id),
     },
     {
-      title: "Name",
+      title: "Họ và tên",
       content: getValueOf(row.name),
     },
     {
-      title: "Date of birth",
+      title: "Ngày sinh",
       content: toLocalDate(row.dateOfBirth),
     },
     {
@@ -41,27 +41,27 @@ const AccountDetailContent = ({ row }: any) => {
       content: getValueOf(row.email),
     },
     {
-      title: "Address",
+      title: "Địa chỉ",
       content: getValueOf(row.address),
     },
     {
-      title: "Role",
+      title: "Loại tài khoản",
       content: getRoleValue(row.roleId),
     },
     {
-      title: "Enabled",
+      title: "Còn hoạt động",
       content: getEnabledValue(row.enabled),
     },
     {
-      title: "Created at",
+      title: "Được tạo lúc",
       content: toLocalDateAndTime(row.createAt),
     },
     {
-      title: "Last modified",
+      title: "Sửa lần cuối",
       content: toLocalDateAndTime(row.modifyAt),
     },
     {
-      title: "Last access",
+      title: "Truy cập lần cuối",
       content: toLocalDateAndTime(row.lastAccess),
     },
   ];

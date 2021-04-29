@@ -56,7 +56,7 @@ const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
   return (
     <>
       <Typography variant="h5" style={{ marginBottom: 12 }}>
-        Search for a hospital
+        Tìm kiếm bệnh viện
       </Typography>
       <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
         <Grid container spacing={2}>
@@ -65,7 +65,7 @@ const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
               <TextField
                 fullWidth
                 name="name"
-                label="Name"
+                label="Tên"
                 variant="outlined"
                 value={formik.values.name}
                 onChange={formik.handleChange}
@@ -78,12 +78,12 @@ const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
                 select
                 fullWidth
                 name="cityCode"
-                label="City/Province"
+                label="Tỉnh/Thành phố"
                 variant="outlined"
                 value={formik.values.cityCode}
                 onChange={cityChange}
               >
-                <MenuItem value="0">--Select--</MenuItem>
+                <MenuItem value="0">--Lựa chọn--</MenuItem>
                 {CITIES.sort(sortByName).map((city) => (
                   <MenuItem key={city.id} value={city.id}>
                     {city.name}
@@ -96,12 +96,12 @@ const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
                 select
                 fullWidth
                 name="districtCode"
-                label="District"
+                label="Quận/Huyện"
                 variant="outlined"
                 value={formik.values.districtCode}
                 onChange={districtChange}
               >
-                <MenuItem value="0">--Select--</MenuItem>
+                <MenuItem value="0">--Lựa chọn--</MenuItem>
                 {DISTRICTS.filter(
                   (district) => district.upperId === formik.values.cityCode
                 )
@@ -118,12 +118,12 @@ const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
                 select
                 fullWidth
                 name="wardCode"
-                label="Ward/Commune"
+                label="Phường/Xã"
                 variant="outlined"
                 value={formik.values.wardCode}
                 onChange={formik.handleChange}
               >
-                <MenuItem value="0">--Select--</MenuItem>
+                <MenuItem value="0">--Lựa chọn--</MenuItem>
                 {WARDS.filter(
                   (ward) => ward.upperId === formik.values.districtCode
                 )
@@ -141,7 +141,7 @@ const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
               <TextField
                 fullWidth
                 name="number"
-                label="Detailed address"
+                label="Địa chỉ chi tiết"
                 variant="outlined"
                 value={formik.values.number}
                 onChange={formik.handleChange}
@@ -153,7 +153,7 @@ const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
               <TextField
                 fullWidth
                 name="phone"
-                label="Phone number"
+                label="Điện thoại"
                 variant="outlined"
                 value={formik.values.phone}
                 onChange={formik.handleChange}
@@ -163,7 +163,7 @@ const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
           <Grid item container style={{ marginTop: 12 }}>
             <Grid item>
               <Button type="submit" color="primary" variant="contained">
-                Search
+                Tìm kiếm
               </Button>
               <Button
                 type="reset"
@@ -171,7 +171,7 @@ const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
                 variant="outlined"
                 style={{ marginLeft: 12 }}
               >
-                Reset Form
+                Xoá
               </Button>
               <Button
                 color="primary"
@@ -179,7 +179,7 @@ const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
                 style={{ marginLeft: 12 }}
                 onClick={toggleSimpleSearch}
               >
-                Simple Search
+                Tìm kiếm đơn giản
               </Button>
             </Grid>
           </Grid>

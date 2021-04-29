@@ -28,7 +28,7 @@ const HospitalSearchFormSimple = ({ toggleSimpleSearch }: any) => {
   return (
     <>
       <Typography variant="h5" style={{ marginBottom: 12 }}>
-        Search for a hospital
+        Tìm kiếm bệnh viện
       </Typography>
       <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
         <Grid container spacing={2}>
@@ -36,7 +36,7 @@ const HospitalSearchFormSimple = ({ toggleSimpleSearch }: any) => {
             <Grid item xs={12} lg={9}>
               <TextField
                 fullWidth
-                placeholder="Search for anything..."
+                placeholder="Hãy nhập gì đó..."
                 name="search"
                 variant="outlined"
                 value={formik.values.search}
@@ -47,7 +47,7 @@ const HospitalSearchFormSimple = ({ toggleSimpleSearch }: any) => {
           <Grid item container style={{ marginTop: 12 }}>
             <Grid item>
               <Button type="submit" color="primary" variant="contained">
-                Search
+                Tìm kiếm
               </Button>
               <Button
                 type="reset"
@@ -55,7 +55,7 @@ const HospitalSearchFormSimple = ({ toggleSimpleSearch }: any) => {
                 variant="outlined"
                 style={{ marginLeft: 12 }}
               >
-                Reset
+                Xoá
               </Button>
               <Button
                 color="primary"
@@ -63,7 +63,7 @@ const HospitalSearchFormSimple = ({ toggleSimpleSearch }: any) => {
                 style={{ marginLeft: 12 }}
                 onClick={toggleSimpleSearch}
               >
-                More Details
+                Tìm kiếm chi tiết
               </Button>
             </Grid>
           </Grid>

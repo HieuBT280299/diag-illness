@@ -19,19 +19,19 @@ const Field = ({ title, content }: any) => {
 const HospitalDetailContent = ({ row, isAdmin }: any) => {
   const userFields = [
     {
-      title: "Name",
+      title: "Họ và tên",
       content: getValueOf(row.name),
     },
     {
-      title: "Address",
+      title: "Địa chỉ",
       content: getFullAddress(row),
     },
     {
-      title: "Working time",
+      title: "Giờ làm việc",
       content: getValueOf(row.workingTime),
     },
     {
-      title: "Phone",
+      title: "Điện thoại",
       content: getValueOf(row.phone),
     },
     {
@@ -39,15 +39,15 @@ const HospitalDetailContent = ({ row, isAdmin }: any) => {
       content: getValueOf(row.website),
     },
     {
-      title: "Introduction",
+      title: "Giới thiệu",
       content: getValueOf(row.introduction),
     },
     {
-      title: "Service",
+      title: "Dịch vụ",
       content: getValueOf(row.service),
     },
     {
-      title: "Department",
+      title: "Khoa khám bệnh",
       content: getValueOf(row.department),
     },
   ];

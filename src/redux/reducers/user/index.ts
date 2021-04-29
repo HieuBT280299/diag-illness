@@ -6,7 +6,7 @@ export const Users = (
     errMess: null,
     users: null,
     currentPage: 1,
-    pageSize: 5,
+    pageSize: 10,
     totalPages: 0,
     totalEntries: 0,
     searchData: null,

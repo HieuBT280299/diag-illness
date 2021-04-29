@@ -42,25 +42,25 @@ export type PageListItem = {
 export const userPageList: PageListItem[] = [
   {
     icon: <DashboardIcon />,
-    text: "My Account Profile",
+    text: "Tài khoản của tôi",
     to: Routes.PROFILE,
     hidden: false,
   },
   {
     icon: <ShoppingCartIcon />,
-    text: "News",
+    text: "Tin tức",
     to: Routes.NEWS,
     hidden: false,
   },
   {
     icon: <BarChartIcon />,
-    text: "Find Hospital",
+    text: "Tìm Bệnh viện",
     to: Routes.HOSPITAL,
     hidden: false,
   },
   {
     icon: null,
-    text: "Change Password",
+    text: "Đổi Mật khẩu",
     to: Routes.PROFILE,
     hidden: true,
   },
@@ -69,31 +69,31 @@ export const userPageList: PageListItem[] = [
 export const adminPageList: PageListItem[] = [
   {
     icon: <DashboardIcon />,
-    text: "Manage Account",
+    text: "Quản lý Tài khoản",
     to: Routes.MANAGE_ACCOUNT,
     hidden: false,
   },
   {
     icon: <ShoppingCartIcon />,
-    text: "Manage News",
+    text: "Quản lý Tin tức",
     to: Routes.NEWS,
     hidden: false,
   },
   {
     icon: <BarChartIcon />,
-    text: "Manage Hospital",
+    text: "Quản lý Bệnh viện",
     to: Routes.HOSPITAL,
     hidden: false,
   },
   {
     icon: <BarChartIcon />,
-    text: "Upload News",
+    text: "Upload thông tin Tin tức",
     to: `${Routes.UPLOAD}/news`,
     hidden: true,
   },
   {
     icon: <BarChartIcon />,
-    text: "Upload Hospital",
+    text: "Upload thông tin Bệnh viện",
     to: `${Routes.UPLOAD}/hospital`,
     hidden: true,
   },
@@ -102,19 +102,19 @@ export const adminPageList: PageListItem[] = [
 export const preLoginList: PageListItem[] = [
   {
     icon: <AssignmentIcon />,
-    text: "Login",
+    text: "Đăng nhập",
     to: Routes.LOGIN,
     hidden: false,
   },
   {
     icon: <AssignmentIcon />,
-    text: "Sign Up",
+    text: "Đăng ký",
     to: Routes.SIGN_UP,
     hidden: false,
   },
   {
     icon: <AssignmentIcon />,
-    text: "Forgot Password",
+    text: "Quên Mật khẩu",
     to: Routes.FORGOT_PASSWORD,
     hidden: false,
   },

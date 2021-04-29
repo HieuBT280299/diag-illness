@@ -3,11 +3,8 @@ import {
   Grid,
   MenuItem,
   TextField,
-  Typography,
 } from "@material-ui/core";
 import { useFormik } from "formik";
-import { useDispatch, useSelector } from "react-redux";
-import { getHospitalList } from "../../../redux/actions/creators/hospital";
 import { CITIES, DISTRICTS, WARDS } from "../../../shared/constants/geodata";
 import { sortByName } from "../../../shared/helper";
 
@@ -48,7 +45,7 @@ const HospitalDetailEdit = ({ row, closeDialog }: any) => {
               <TextField
                 fullWidth
                 name="name"
-                label="Name"
+                label="Tên"
                 variant="outlined"
                 value={formik.values.name}
                 onChange={formik.handleChange}
@@ -61,12 +58,12 @@ const HospitalDetailEdit = ({ row, closeDialog }: any) => {
                 select
                 fullWidth
                 name="cityCode"
-                label="City/Province"
+                label="Tỉnh/Thành phố"
                 variant="outlined"
                 value={formik.values.cityCode}
                 onChange={cityChange}
               >
-                <MenuItem value="0">--Select--</MenuItem>
+                <MenuItem value="0">--Lựa chọn--</MenuItem>
                 {CITIES.sort(sortByName).map((city) => (
                   <MenuItem key={city.id} value={city.id}>
                     {city.name}
@@ -79,12 +76,12 @@ const HospitalDetailEdit = ({ row, closeDialog }: any) => {
                 select
                 fullWidth
                 name="districtCode"
-                label="District"
+                label="Quận/Huyện"
                 variant="outlined"
                 value={formik.values.districtCode}
                 onChange={districtChange}
               >
-                <MenuItem value="0">--Select--</MenuItem>
+                <MenuItem value="0">--Lựa chọn--</MenuItem>
                 {DISTRICTS.filter(
                   (district) => district.upperId === formik.values.cityCode
                 )
@@ -101,12 +98,12 @@ const HospitalDetailEdit = ({ row, closeDialog }: any) => {
                 select
                 fullWidth
                 name="wardCode"
-                label="Ward/Commune"
+                label="Phường/Xã"
                 variant="outlined"
                 value={formik.values.wardCode}
                 onChange={formik.handleChange}
               >
-                <MenuItem value="0">--Select--</MenuItem>
+                <MenuItem value="0">--Lựa chọn--</MenuItem>
                 {WARDS.filter(
                   (ward) => ward.upperId === formik.values.districtCode
                 )
@@ -124,7 +121,7 @@ const HospitalDetailEdit = ({ row, closeDialog }: any) => {
               <TextField
                 fullWidth
                 name="number"
-                label="Detailed address"
+                label="Địa chỉ chi tiết"
                 variant="outlined"
                 value={formik.values.number}
                 onChange={formik.handleChange}
@@ -136,7 +133,7 @@ const HospitalDetailEdit = ({ row, closeDialog }: any) => {
               <TextField
                 fullWidth
                 name="phone"
-                label="Phone number"
+                label="Điện thoại"
                 variant="outlined"
                 value={formik.values.phone}
                 onChange={formik.handleChange}
@@ -160,7 +157,7 @@ const HospitalDetailEdit = ({ row, closeDialog }: any) => {
               <TextField
                 fullWidth
                 name="workingTime"
-                label="Working time"
+                label="Giờ làm việc"
                 variant="outlined"
                 value={formik.values.workingTime}
                 onChange={formik.handleChange}
@@ -176,10 +173,10 @@ const HospitalDetailEdit = ({ row, closeDialog }: any) => {
           style={{ marginTop: 12 }}
         >
           <Button type="submit" color="primary">
-            Submit
+            Lưu
           </Button>
           <Button onClick={closeDialog} color="secondary">
-            Close
+            Đóng
           </Button>
         </Grid>
       </form>

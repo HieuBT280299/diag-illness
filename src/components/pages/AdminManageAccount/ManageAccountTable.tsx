@@ -34,32 +34,32 @@ const useStyles = makeStyles({
 
 const headCells = [
   { id: "email", numeric: false, disablePadding: false, label: "Email" },
-  { id: "name", numeric: false, disablePadding: false, label: "Name" },
-  { id: "gender", numeric: false, disablePadding: false, label: "Gender" },
+  { id: "name", numeric: false, disablePadding: false, label: "Họ và tên" },
+  { id: "gender", numeric: false, disablePadding: false, label: "Giới tính" },
   {
     id: "dateOfBirth",
     numeric: false,
     disablePadding: false,
-    label: "Date of birth",
+    label: "Ngày sinh",
   },
-  { id: "address", numeric: false, disablePadding: false, label: "Address" },
+  { id: "address", numeric: false, disablePadding: false, label: "Địa chỉ" },
   {
     id: "role",
     numeric: false,
     disablePadding: false,
-    label: "Role",
+    label: "Loại tài khoản",
   },
   {
     id: "createAt",
     numeric: false,
     disablePadding: false,
-    label: "Created",
+    label: "Ngày tạo",
   },
   {
-    id: "modifyAt",
+    id: "lastAccess",
     numeric: false,
     disablePadding: false,
-    label: "Last modified",
+    label: "Đăng nhập lần cuối",
   },
   {
     id: "action",
@@ -147,13 +147,13 @@ const ManageAccountTable = () => {
 
         {totalEntries > 0 && (
           <Typography variant="h6" style={{ marginBottom: 12 }}>
-            Number of entries: {totalEntries || 0}
+            Số kết quả tìm được: {totalEntries || 0}
           </Typography>
         )}
 
         {totalEntries === 0 && searchData && (
           <Typography variant="h6" style={{ marginBottom: 12 }}>
-            No data matches your search
+            Không tìm được kết quả nào
           </Typography>
         )}
       </Grid>
@@ -189,14 +189,14 @@ const ManageAccountTable = () => {
                           {toLocalDateAndTime(row.createAt)}
                         </HeaderCell>
                         <HeaderCell width="10%">
-                          {toLocalDateAndTime(row.modifyAt)}
+                          {toLocalDateAndTime(row.lastAccess)}
                         </HeaderCell>
                         <HeaderCell width="10%">
                           <Link
                             style={{ cursor: "pointer" }}
                             onClick={() => detailsButtonClicked(row)}
                           >
-                            Details
+                            Chi tiết
                           </Link>
                         </HeaderCell>
                       </TableRow>
@@ -219,7 +219,7 @@ const ManageAccountTable = () => {
       </Grid>
       <CustomizedDialog
         open={dialogOpen}
-        title="User account details"
+        title="Chi tiết tài khoản"
         content={<AccountDetailContent row={selectedRow} />}
         actions={
           <>
@@ -230,11 +230,11 @@ const ManageAccountTable = () => {
                 style={{ marginRight: 8 }}
                 onClick={() => setConfirmDialogOpen(true)}
               >
-                Promote
+                Cấp quyền quản trị
               </Button>
             )}
             <Button onClick={toggleDialog} color="secondary">
-              Close
+              Đóng
             </Button>
           </>
         }
@@ -243,7 +243,9 @@ const ManageAccountTable = () => {
       <ConfirmDialog
         open={confirmDialogOpen}
         toggleDialog={toggleConfirmDialog}
-        content={<div>Are you sure to promote this account to admin?</div>}
+        content={
+          <div>Bạn có chắc muốn cấp quyền quản trị cho tài khoản này?</div>
+        }
         onYesButtonClicked={handlePromoteUser}
         onNoButtonClicked={toggleConfirmDialog}
       />

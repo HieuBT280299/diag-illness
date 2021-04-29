@@ -51,7 +51,7 @@ const ManageAccountSearchForm = () => {
   return (
     <>
       <Typography variant="h5" style={{ marginBottom: 12 }}>
-        Search account
+        Tìm kiếm tài khoản
       </Typography>
       <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
         <Grid container spacing={2}>
@@ -60,7 +60,7 @@ const ManageAccountSearchForm = () => {
               <TextField
                 fullWidth
                 name="name"
-                label="Name"
+                label="Tên"
                 variant="outlined"
                 value={formik.values.name}
                 onChange={formik.handleChange}
@@ -74,14 +74,14 @@ const ManageAccountSearchForm = () => {
                 select
                 fullWidth
                 name="gender"
-                label="Gender"
+                label="Giới tính"
                 variant="outlined"
                 value={formik.values.gender}
                 onChange={formik.handleChange}
               >
-                <MenuItem value="Any">Any</MenuItem>
-                <MenuItem value={0}>Male</MenuItem>
-                <MenuItem value={1}>Female</MenuItem>
+                <MenuItem value="Any">Mọi giới tính</MenuItem>
+                <MenuItem value={0}>Nam</MenuItem>
+                <MenuItem value={1}>Nữ</MenuItem>
               </TextField>
             </Grid>
             <Grid item xs={12} md={7} lg={5}>
@@ -89,7 +89,7 @@ const ManageAccountSearchForm = () => {
                 variant="outlined"
                 id="dateOfBirth"
                 name="dateOfBirth"
-                label="Date of birth"
+                label="Ngày sinh"
                 type="date"
                 fullWidth
                 value={formik.values.dateOfBirth}
@@ -106,7 +106,7 @@ const ManageAccountSearchForm = () => {
               <TextField
                 fullWidth
                 name="email"
-                label="Email address"
+                label="Email"
                 variant="outlined"
                 value={formik.values.email}
                 onChange={formik.handleChange}
@@ -116,7 +116,7 @@ const ManageAccountSearchForm = () => {
           <Grid item container style={{ marginTop: 12 }}>
             <Grid item>
               <Button type="submit" color="primary" variant="contained">
-                Search
+                Tìm kiếm
               </Button>
               <Button
                 type="reset"
@@ -124,7 +124,7 @@ const ManageAccountSearchForm = () => {
                 variant="outlined"
                 style={{ marginLeft: 12 }}
               >
-                Reset Form
+                Xoá
               </Button>
             </Grid>
           </Grid>

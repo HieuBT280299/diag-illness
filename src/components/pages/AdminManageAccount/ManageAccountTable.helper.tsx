@@ -8,36 +8,42 @@ export const getValueOf = (str: string) => {
 export const getGenderValue = (gender: number) => {
   switch (gender) {
     case Gender.MALE:
-      return "Male";
+      return "Nam";
     case Gender.FEMALE:
-      return "Female";
+      return "Nữ";
   }
 };
 
 export const getEnabledValue = (enabled: number) => {
   switch (enabled) {
     case 1:
-      return "Yes";
+      return "Có";
     case 0:
-      return "No";
+      return "Không";
   }
 };
 
 export const getRoleValue = (roleId: number) => {
   switch (roleId) {
     case RoleIDs.ROLE_USER:
-      return "User";
+      return "Người dùng";
     case RoleIDs.ROLE_ADMIN:
-      return "Admin";
+      return "Quản trị viên";
   }
 };
 
 export const toLocalDate = (dateStr: string) => {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString();
+  if (dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("vi-VN");
+  } else return "N/A";
 };
 
 export const toLocalDateAndTime = (dateStr: string) => {
-  const date = new Date(dateStr);
-  return date.toLocaleDateString() + " " + date.toLocaleTimeString();
+  if (dateStr) {
+    const date = new Date(dateStr);
+    return (
+      date.toLocaleDateString("vi-VN") + " " + date.toLocaleTimeString("vi-VN")
+    );
+  } else return "N/A";
 };

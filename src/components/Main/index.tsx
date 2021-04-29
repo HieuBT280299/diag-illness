@@ -11,7 +11,7 @@ const drawerWidth = 240;
 const Main = () => {
   const account = useSelector((state: any) => state.loginAccount?.account);
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
