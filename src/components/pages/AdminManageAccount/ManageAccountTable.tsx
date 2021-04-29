@@ -33,6 +33,7 @@ const useStyles = makeStyles({
 });
 
 const headCells = [
+  { id: "entry", numeric: true, disablePadding: false, label: "STT" },
   { id: "email", numeric: false, disablePadding: false, label: "Email" },
   { id: "name", numeric: false, disablePadding: false, label: "Họ và tên" },
   { id: "gender", numeric: false, disablePadding: false, label: "Giới tính" },
@@ -163,11 +164,14 @@ const ManageAccountTable = () => {
             <Table className={classes.table} aria-label="customized table">
               <ManageAccountTableHead />
               <TableBody>
-                {userList.map((row: any) => {
+                {userList.map((row: any, index: number) => {
                   return (
                     <>
                       <TableRow key={row.id}>
-                        <Cell width="15%">{getValueOf(row.email)}</Cell>
+                        <Cell width="5%">
+                          {(currentPage - 1) * pageSize + index + 1}
+                        </Cell>
+                        <Cell width="10%">{getValueOf(row.email)}</Cell>
                         <Cell width="15%">{getValueOf(row.name)}</Cell>
                         <Cell width="10%">{getGenderValue(row.gender)}</Cell>
                         <Cell width="10%">{toLocalDate(row.dateOfBirth)}</Cell>

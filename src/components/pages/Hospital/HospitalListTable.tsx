@@ -36,6 +36,7 @@ const Link = styled(MuiLink)`
 `;
 
 const headCells = [
+  { id: "entry", numeric: true, disablePadding: false, label: "STT" },
   { id: "name", numeric: false, disablePadding: false, label: "Tên bệnh viện" },
   { id: "address", numeric: false, disablePadding: false, label: "Địa chỉ" },
   {
@@ -170,25 +171,21 @@ const HospitalListTable = () => {
             <Table className={classes.table} aria-label="customized table">
               <HospitalListTableHead isAdmin={isAdmin} />
               <TableBody>
-                {hospitalList.map((row: any) => {
+                {hospitalList.map((row: any, index: number) => {
                   return (
                     <TableRow key={row.id}>
-                      <Cell width="20%">
-                        {getValueOf(row.name)}
+                      <Cell width="5%">
+                        {(currentPage - 1) * pageSize + index + 1}
                       </Cell>
-                      <Cell width="20%">{getFullAddress(row)}</Cell>
-                      <Cell width="10%">
-                        {getValueOf(row.workingTime)}
-                      </Cell>
+                      <Cell width="20%">{getValueOf(row.name)}</Cell>
+                      <Cell width="15%">{getFullAddress(row)}</Cell>
+                      <Cell width="10%">{getValueOf(row.workingTime)}</Cell>
                       <Cell width="20%">{getFullContact(row)}</Cell>
-                      <Cell width="20%">
-                        {getValueOf(row.service)}
-                      </Cell>
+                      <Cell width="20%">{getValueOf(row.service)}</Cell>
                       <Cell width="10%">
                         <Link onClick={() => detailsButtonClicked(row)}>
                           Chi tiết
                         </Link>
-
                         {isAdmin && (
                           <span>
                             {` | `}
