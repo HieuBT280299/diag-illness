@@ -6,7 +6,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import HeaderCell from "../../tables/HeaderCell";
+import Cell from "../../tables/Cell";
 import { Button, Grid, Link, Typography } from "@material-ui/core";
 import {
   getGenderValue,
@@ -74,13 +74,13 @@ const ManageAccountTableHead = () => {
     <TableHead>
       <TableRow>
         {headCells.map((headCell) => (
-          <HeaderCell
+          <Cell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "default"}
           >
             {headCell.label}
-          </HeaderCell>
+          </Cell>
         ))}
       </TableRow>
     </TableHead>
@@ -167,38 +167,26 @@ const ManageAccountTable = () => {
                   return (
                     <>
                       <TableRow key={row.id}>
-                        <HeaderCell width="15%">
-                          {getValueOf(row.email)}
-                        </HeaderCell>
-                        <HeaderCell width="10%">
-                          {getValueOf(row.name)}
-                        </HeaderCell>
-                        <HeaderCell width="5%">
-                          {getGenderValue(row.gender)}
-                        </HeaderCell>
-                        <HeaderCell width="10%">
-                          {toLocalDate(row.dateOfBirth)}
-                        </HeaderCell>
-                        <HeaderCell width="15%">
-                          {getValueOf(row.address)}
-                        </HeaderCell>
-                        <HeaderCell width="5%">
-                          {getRoleValue(row.roleId)}
-                        </HeaderCell>
-                        <HeaderCell width="10%">
+                        <Cell width="15%">{getValueOf(row.email)}</Cell>
+                        <Cell width="15%">{getValueOf(row.name)}</Cell>
+                        <Cell width="10%">{getGenderValue(row.gender)}</Cell>
+                        <Cell width="10%">{toLocalDate(row.dateOfBirth)}</Cell>
+                        <Cell width="10%">{getValueOf(row.address)}</Cell>
+                        <Cell width="10%">{getRoleValue(row.roleId)}</Cell>
+                        <Cell width="10%">
                           {toLocalDateAndTime(row.createAt)}
-                        </HeaderCell>
-                        <HeaderCell width="10%">
+                        </Cell>
+                        <Cell width="10%">
                           {toLocalDateAndTime(row.lastAccess)}
-                        </HeaderCell>
-                        <HeaderCell width="10%">
+                        </Cell>
+                        <Cell width="10%">
                           <Link
                             style={{ cursor: "pointer" }}
                             onClick={() => detailsButtonClicked(row)}
                           >
                             Chi tiết
                           </Link>
-                        </HeaderCell>
+                        </Cell>
                       </TableRow>
                     </>
                   );

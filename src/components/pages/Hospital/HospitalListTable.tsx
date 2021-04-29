@@ -6,7 +6,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import HeaderCell from "../../tables/HeaderCell";
+import Cell from "../../tables/Cell";
 import { Button, Grid, Link as MuiLink, Typography } from "@material-ui/core";
 import {
   getFullAddress,
@@ -64,13 +64,13 @@ const HospitalListTableHead = ({ isAdmin }: any) => {
     <TableHead>
       <TableRow>
         {headCells.map((headCell) => (
-          <HeaderCell
+          <Cell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "default"}
           >
             {headCell.label}
-          </HeaderCell>
+          </Cell>
         ))}
       </TableRow>
     </TableHead>
@@ -173,18 +173,18 @@ const HospitalListTable = () => {
                 {hospitalList.map((row: any) => {
                   return (
                     <TableRow key={row.id}>
-                      <HeaderCell width="20%">
+                      <Cell width="20%">
                         {getValueOf(row.name)}
-                      </HeaderCell>
-                      <HeaderCell width="20%">{getFullAddress(row)}</HeaderCell>
-                      <HeaderCell width="10%">
+                      </Cell>
+                      <Cell width="20%">{getFullAddress(row)}</Cell>
+                      <Cell width="10%">
                         {getValueOf(row.workingTime)}
-                      </HeaderCell>
-                      <HeaderCell width="20%">{getFullContact(row)}</HeaderCell>
-                      <HeaderCell width="20%">
+                      </Cell>
+                      <Cell width="20%">{getFullContact(row)}</Cell>
+                      <Cell width="20%">
                         {getValueOf(row.service)}
-                      </HeaderCell>
-                      <HeaderCell width="10%">
+                      </Cell>
+                      <Cell width="10%">
                         <Link onClick={() => detailsButtonClicked(row)}>
                           Chi tiết
                         </Link>
@@ -205,7 +205,7 @@ const HospitalListTable = () => {
                             }
                           </span>
                         )}
-                      </HeaderCell>
+                      </Cell>
                     </TableRow>
                   );
                 })}

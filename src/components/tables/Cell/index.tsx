@@ -1,11 +1,11 @@
 import { withStyles } from "@material-ui/core/styles";
 import TableCell from "@material-ui/core/TableCell";
 
-const HeaderCell = withStyles((theme) => ({
+const Cell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.warning.light,
     color: theme.palette.common.black,
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: "bold",
   },
   body: {
@@ -13,4 +13,4 @@ const HeaderCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-export default HeaderCell;
+export default Cell;
