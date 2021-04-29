@@ -16,7 +16,7 @@ import { putEditAccount } from "../../../redux/actions/creators/auth";
 
 export type ProfileDetails = {
   id: string;
-  email: string;
+  address: string;
   name: string;
   dateOfBirth: Date;
   gender: 1 | 0;
@@ -62,7 +62,7 @@ const Profile = () => {
     id: account.id,
     name: account.name,
     dateOfBirth: account.dateOfBirth,
-    email: account.email,
+    address: account.address,
     gender: account.gender,
   };
 
@@ -164,10 +164,10 @@ const Profile = () => {
               variant="outlined"
               required
               fullWidth
-              id="email"
-              label="Email"
-              name="email"
-              value={formik.values.email}
+              id="address"
+              label="Địa chỉ"
+              name="address"
+              value={formik.values.address}
               onChange={formik.handleChange}
               disabled={!isEditing}
             />
