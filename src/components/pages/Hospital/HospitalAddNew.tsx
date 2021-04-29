@@ -3,8 +3,20 @@ import { useFormik } from "formik";
 import { CITIES, DISTRICTS, WARDS } from "../../../shared/constants/geodata";
 import { sortByName } from "../../../shared/helper";
 
-const HospitalDetailEdit = ({ row, closeDialog }: any) => {
-  const initialValues = row;
+const HospitalAddNew = ({ closeDialog }: any) => {
+  const initialValues = {
+    name: "",
+    number: "",
+    phone: "",
+    email: "",
+    cityCode: "0",
+    districtCode: "0",
+    wardCode: "0",
+    workingTime: "",
+    introduction: "",
+    service: "",
+    department: "",
+  };
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
@@ -208,7 +220,7 @@ const HospitalDetailEdit = ({ row, closeDialog }: any) => {
           style={{ marginTop: 12 }}
         >
           <Button type="submit" color="primary">
-            Lưu
+            Thêm
           </Button>
           <Button onClick={closeDialog} color="secondary">
             Đóng
@@ -219,4 +231,4 @@ const HospitalDetailEdit = ({ row, closeDialog }: any) => {
   );
 };
 
-export default HospitalDetailEdit;
+export default HospitalAddNew;

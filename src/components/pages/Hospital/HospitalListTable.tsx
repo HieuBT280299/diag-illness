@@ -8,6 +8,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Cell from "../../tables/Cell";
 import { Button, Grid, Link as MuiLink, Typography } from "@material-ui/core";
+import { Link as RouteLink } from "react-router-dom";
 import {
   getFullAddress,
   getFullContact,
@@ -20,6 +21,7 @@ import { RoleIDs } from "../../../shared/constants";
 import styled from "styled-components";
 import HospitalDetailContent from "./HospitalDetailContent";
 import HospitalDetailEdit from "./HospitalDetailEdit";
+import HospitalAddNew from "./HospitalAddNew";
 import ConfirmDialog from "../../ConfirmDialog";
 import CustomizedDialog from "../../Dialog";
 
@@ -78,7 +80,7 @@ const HospitalListTableHead = ({ isAdmin }: any) => {
   );
 };
 
-type HospitalDialogType = "close" | "edit" | "view";
+type HospitalDialogType = "close" | "edit" | "view" | "add";
 
 const HospitalListTable = () => {
   const classes = useStyles();
@@ -98,6 +100,9 @@ const HospitalListTable = () => {
   const editButtonClicked = (row: any) => {
     setSelectedRow(row);
     setDialogOpen("edit");
+  };
+  const addButtonClicked = () => {
+    setDialogOpen("add");
   };
   const deleteButtonClicked = (row: any) => {
     setSelectedRow(row);
@@ -134,14 +139,31 @@ const HospitalListTable = () => {
     <Grid container>
       {isAdmin && (
         <Grid item container xs={12} md={6}>
-          <Button color="primary" variant="text">
+          <Button
+            color="primary"
+            variant="text"
+            component={RouteLink}
+            to="/upload/hospital"
+          >
             Thêm bằng file CSV
           </Button>
-          <Button color="primary" variant="text" style={{ marginLeft: 12 }}>
+          <Button
+            color="primary"
+            variant="text"
+            onClick={addButtonClicked}
+            style={{ marginLeft: 12 }}
+          >
             Thêm bằng form
           </Button>
         </Grid>
       )}
+
+      <CustomizedDialog
+        open={dialogOpen === "add"}
+        title="Thêm bệnh viện"
+        content={<HospitalAddNew closeDialog={closeDialog} />}
+        toggleDialog={closeDialog}
+      />
 
       <Grid
         item
