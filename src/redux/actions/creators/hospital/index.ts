@@ -18,25 +18,40 @@ export const getHospitalListFailed = (message: any) => {
 };
 
 export const getHospitalList = (
+  type: "simple" | "full",
   searchData: any,
   paginationData: any,
   token: string
 ) => (dispatch: any) => {
-  const paginationParams = qs.stringify(paginationData);
-  // console.log(paginationParams);
-
-  return fetch(
-    `${baseUrl}hospital?search=${getSearchParams(
-      searchData
-    )}&${paginationParams}`,
-    {
+  const { page, size } = paginationData;
+  const from = (page - 1) * size;
+  const simpleParams = {
+    q: `"${searchData}"`,
+    from,
+    size,
+  };
+  const data = {
+    full: {
+      url: `${baseUrl}hospital?search=${getSearchParams(
+        searchData
+      )}&${qs.stringify(paginationData)}`,
       method: "GET",
-      mode: "cors",
-      headers: {
-        Authorization: token,
-      },
-    }
-  )
+    },
+    simple: {
+      url: `${baseUrl}hospital/search?${qs.stringify(simpleParams)}`,
+      method: "GET",
+    },
+  };
+
+  console.log(data[type].url);
+
+  return fetch(data[type].url, {
+    method: data[type].method,
+    mode: "cors",
+    headers: {
+      Authorization: token,
+    },
+  })
     .then(
       (response) => {
         if (response.ok) {
@@ -64,6 +79,7 @@ export const getHospitalList = (
           data: response.data,
           paginationData,
           searchData,
+          type,
         };
         dispatch(getHospitalListSuccessfully(payload));
       }

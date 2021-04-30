@@ -14,14 +14,16 @@ const HospitalSearchFormSimple = ({ toggleSimpleSearch }: any) => {
 
   const paginationData = { page: 1, size: pageSize };
   const dispatch = useDispatch();
-  const dispatchHospitalList = (searchData: any) =>
-    dispatch(getHospitalList(searchData, paginationData, account.token));
+  const dispatchHospitalList = (searchData: string) =>
+    dispatch(
+      getHospitalList("simple", searchData, paginationData, account.token)
+    );
 
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
       alert(JSON.stringify(values));
-      // dispatchHospitalList(submitValues);
+      dispatchHospitalList(values.search);
     },
   });
 

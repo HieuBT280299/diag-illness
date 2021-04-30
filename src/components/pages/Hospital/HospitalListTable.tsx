@@ -126,12 +126,13 @@ const HospitalListTable = () => {
     currentPage,
     pageSize,
     searchData,
+    type,
   } = useSelector((state: any) => state.hospitals);
 
   const dispatch = useDispatch();
 
   const dispatchHospitalList = (paginationData: any) =>
-    dispatch(getHospitalList(searchData, paginationData, account.token));
+    dispatch(getHospitalList(type, searchData, paginationData, account.token));
   const dispatchDeleteHospitals = (deletedRecords: string[]) => {
     const data = {
       ids: deletedRecords,

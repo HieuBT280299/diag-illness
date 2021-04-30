@@ -27,7 +27,9 @@ const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
   const paginationData = { page: 1, size: pageSize };
   const dispatch = useDispatch();
   const dispatchHospitalList = (searchData: any) =>
-    dispatch(getHospitalList(searchData, paginationData, account.token));
+    dispatch(
+      getHospitalList("full", searchData, paginationData, account.token)
+    );
 
   const formik = useFormik({
     initialValues: initialValues,

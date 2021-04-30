@@ -10,6 +10,7 @@ export const Hospitals = (
     totalPages: 0,
     totalEntries: 0,
     searchData: null,
+    type: "simple",
     successMessage: null,
     deleteSuccessStatus: false,
   },
@@ -26,6 +27,7 @@ export const Hospitals = (
         totalEntries: action.payload?.data?.totalEntries,
         currentPage: action.payload?.paginationData?.page,
         searchData: action.payload?.searchData,
+        type: action.payload?.type,
       };
 
     case HospitalActionTypes.HOSPITALS_FAILED:
