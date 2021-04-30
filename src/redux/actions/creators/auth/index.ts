@@ -26,7 +26,7 @@ export const postSignUp = (
   callback: () => void
 ) => (dispatch: any) => {
   const data = JSON.stringify(registerDetails);
-  console.log(data);
+  // console.log(data);
   return fetch(baseUrl + "auth/register", {
     method: "POST",
     body: data,
@@ -55,7 +55,7 @@ export const postSignUp = (
           account: response.data,
           successMessage: response.message,
         };
-        console.log(payload);
+        // console.log(payload);
         dispatch(signUpSuccessfully(payload));
         callback();
       }
@@ -85,7 +85,7 @@ export const postConfirmSignUp = (
   callback: () => void
 ) => (dispatch: any) => {
   const data = JSON.stringify({ email, token });
-  console.log(data);
+  // console.log(data);
   return fetch(baseUrl + "auth/confirm", {
     method: "POST",
     body: data,
@@ -114,7 +114,7 @@ export const postConfirmSignUp = (
           account: response.data,
           successMessage: response.message,
         };
-        console.log(payload);
+        // console.log(payload);
         dispatch(confirmSignUpSuccessfully(payload));
         callback();
       }
@@ -189,7 +189,7 @@ export const loginFailed = (errMess: any) => {
 
 export const postLogin = (loginDetails: LoginDetails) => (dispatch: any) => {
   const data = JSON.stringify(loginDetails);
-  console.log(data);
+  // console.log(data);
   return fetch(baseUrl + "auth/login", {
     method: "POST",
     body: data,
@@ -293,7 +293,7 @@ export const putEditAccount = (
   token: string
 ) => (dispatch: any) => {
   const data = JSON.stringify(accountDetails);
-  console.log(data);
+  // console.log(data);
   return fetch(baseUrl + "users", {
     method: "PUT",
     mode: "cors",
@@ -322,7 +322,7 @@ export const putEditAccount = (
       } else {
         const data = response.data;
         const account = { ...data, token: token };
-        console.log(account);
+        // console.log(account);
         await dispatch(editAccountSuccessfully(account));
         setTimeout(() => {
           window.location.reload(false);
@@ -353,7 +353,7 @@ export const postChangePassword = (
   token: string
 ) => (dispatch: any) => {
   const data = JSON.stringify(changePasswordDetails);
-  console.log(data);
+  // console.log(data);
   //TODO
   return fetch(baseUrl + "auth/changePassword", {
     method: "POST",
@@ -407,7 +407,7 @@ export const postResetPassword = (
   callback: () => void
 ) => (dispatch: any) => {
   const data = JSON.stringify(resetPasswordDetails);
-  console.log(data);
+  // console.log(data);
   return fetch(baseUrl + "auth/forgotPassword", {
     method: "POST",
     body: data,

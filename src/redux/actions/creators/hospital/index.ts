@@ -23,7 +23,7 @@ export const getHospitalList = (
   token: string
 ) => (dispatch: any) => {
   const paginationParams = qs.stringify(paginationData);
-  console.log(paginationParams);
+  // console.log(paginationParams);
 
   return fetch(
     `${baseUrl}hospital?search=${getSearchParams(
