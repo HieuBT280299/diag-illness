@@ -9,6 +9,7 @@ import {
   preLoginList,
   PageListItem,
 } from "../../shared/constants";
+import { Tooltip } from "@material-ui/core";
 
 type ListItemProps = {
   list: PageListItem[];
@@ -27,14 +28,16 @@ const ListItems = ({ list, pathname, handleDrawerOpen }: ListItemProps) => {
             to={item.to}
             style={{ color: "inherit", textDecoration: "none" }}
           >
-            <ListItem
-              button
-              onMouseOver={handleDrawerOpen}
-              selected={item.to === pathname}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItem>
+            <Tooltip title={item.text} placement="right">
+              <ListItem
+                button
+                // onMouseOver={handleDrawerOpen}
+                selected={item.to === pathname}
+              >
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItem>
+            </Tooltip>
           </Link>
         ))}
     </List>
