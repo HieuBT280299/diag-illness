@@ -8,7 +8,6 @@ import {
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserList } from "../../../redux/actions/creators/user";
-import { sortByName } from "../../../shared/helper";
 
 export type AccountSearchFields = {
   email?: string;

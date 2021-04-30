@@ -5,11 +5,11 @@ const Cell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.warning.light,
     color: theme.palette.common.black,
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: "bold",
   },
   body: {
-    fontSize: 14,
+    fontSize: 12,
   },
 }))(TableCell);
 

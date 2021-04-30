@@ -4,11 +4,13 @@ export const getSearchParams = (searchData: any) => {
     switch (key) {
       case "name":
       case "email":
-        if (searchData[key]) params += ` AND ${key}:'*${searchData[key]}*'`;
+        if (searchData[key] !== null && searchData[key] !== "")
+          params += ` AND ${key}:'*${searchData[key]}*'`;
         break;
       case "gender":
       case "dateOfBirth":
-        if (searchData[key]) params += ` AND ${key}:${searchData[key]}`;
+        if (searchData[key] !== null)
+          params += ` AND ${key}:${searchData[key]}`;
         break;
     }
   });

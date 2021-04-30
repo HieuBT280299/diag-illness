@@ -166,33 +166,31 @@ const ManageAccountTable = () => {
               <TableBody>
                 {userList.map((row: any, index: number) => {
                   return (
-                    <>
-                      <TableRow key={row.id}>
-                        <Cell width="5%">
-                          {(currentPage - 1) * pageSize + index + 1}
-                        </Cell>
-                        <Cell width="10%">{getValueOf(row.email)}</Cell>
-                        <Cell width="15%">{getValueOf(row.name)}</Cell>
-                        <Cell width="10%">{getGenderValue(row.gender)}</Cell>
-                        <Cell width="10%">{toLocalDate(row.dateOfBirth)}</Cell>
-                        <Cell width="10%">{getValueOf(row.address)}</Cell>
-                        <Cell width="10%">{getRoleValue(row.roleId)}</Cell>
-                        <Cell width="10%">
-                          {toLocalDateAndTime(row.createAt)}
-                        </Cell>
-                        <Cell width="10%">
-                          {toLocalDateAndTime(row.lastAccess)}
-                        </Cell>
-                        <Cell width="10%">
-                          <Link
-                            style={{ cursor: "pointer" }}
-                            onClick={() => detailsButtonClicked(row)}
-                          >
-                            Chi tiết
-                          </Link>
-                        </Cell>
-                      </TableRow>
-                    </>
+                    <TableRow key={row.id}>
+                      <Cell width="5%">
+                        {(currentPage - 1) * pageSize + index + 1}
+                      </Cell>
+                      <Cell width="10%">{getValueOf(row.email)}</Cell>
+                      <Cell width="15%">{getValueOf(row.name)}</Cell>
+                      <Cell width="10%">{getGenderValue(row.gender)}</Cell>
+                      <Cell width="10%">{toLocalDate(row.dateOfBirth)}</Cell>
+                      <Cell width="10%">{getValueOf(row.address)}</Cell>
+                      <Cell width="10%">{getRoleValue(row.roleId)}</Cell>
+                      <Cell width="10%">
+                        {toLocalDateAndTime(row.createAt)}
+                      </Cell>
+                      <Cell width="10%">
+                        {toLocalDateAndTime(row.lastAccess)}
+                      </Cell>
+                      <Cell width="10%">
+                        <Link
+                          style={{ cursor: "pointer" }}
+                          onClick={() => detailsButtonClicked(row)}
+                        >
+                          Chi tiết
+                        </Link>
+                      </Cell>
+                    </TableRow>
                   );
                 })}
               </TableBody>

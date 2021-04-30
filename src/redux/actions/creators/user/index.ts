@@ -24,6 +24,7 @@ export const getUserList = (
 ) => (dispatch: any) => {
   const paginationParams = qs.stringify(paginationData);
   console.log(searchData);
+  console.log(getSearchParams(searchData));
 
   return fetch(
     `${baseUrl}users?search=${getSearchParams(searchData)}&${paginationParams}`,
