@@ -15,7 +15,10 @@ import {
 } from "./HospitalListTable.helper";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "@material-ui/lab/Pagination";
-import { getHospitalList } from "../../../redux/actions/creators/hospital";
+import {
+  getHospitalList,
+  deleteHospitals,
+} from "../../../redux/actions/creators/hospital";
 import { RoleIDs } from "../../../shared/constants";
 import styled from "styled-components";
 import HospitalDetailContent from "./HospitalDetailContent";
@@ -126,8 +129,15 @@ const HospitalListTable = () => {
   } = useSelector((state: any) => state.hospitals);
 
   const dispatch = useDispatch();
+
   const dispatchHospitalList = (paginationData: any) =>
     dispatch(getHospitalList(searchData, paginationData, account.token));
+  const dispatchDeleteHospitals = (deletedRecords: string[]) => {
+    const data = {
+      ids: deletedRecords,
+    };
+    dispatch(deleteHospitals(data, account.token));
+  };
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     console.log(value);
@@ -252,7 +262,9 @@ const HospitalListTable = () => {
         open={confirmDialogOpen}
         toggleDialog={toggleConfirmDialog}
         content={<div>Bạn có chắc chắn muốn xoá?</div>}
-        onYesButtonClicked={() => console.log(`delete id=${selectedRow.id}`)}
+        onYesButtonClicked={() =>
+          dispatchDeleteHospitals([`${selectedRow.id}`])
+        }
         onNoButtonClicked={toggleConfirmDialog}
       />
     </Grid>

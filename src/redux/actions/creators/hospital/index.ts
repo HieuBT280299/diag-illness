@@ -130,3 +130,60 @@ export const uploadHospitalCsv = (formData: any, token: string) => (
       console.log("Get hospital list ", error.message);
     });
 };
+
+export const deleteHospitalsSuccessfully = (payload: any) => {
+  return {
+    type: HospitalActionTypes.DELETE_HOSPITALS,
+    payload,
+  };
+};
+
+export const deleteHospitalsFailed = (message: any) => {
+  return {
+    type: HospitalActionTypes.DELETE_HOSPITALS_FAILED,
+    payload: message,
+  };
+};
+
+export const deleteHospitals = (data: any, token: string) => (
+  dispatch: any
+) => {
+  return fetch(`${baseUrl}hospital/delete`, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+    body: JSON.stringify(data),
+  })
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+          throw error;
+        }
+      },
+      (error) => {
+        var errMess = new Error(error.message);
+        throw errMess;
+      }
+    )
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      if (response.error) {
+        dispatch(deleteHospitalsFailed(response.message));
+      } else {
+        dispatch(deleteHospitalsSuccessfully(response.message));
+      }
+    })
+    .catch((error) => {
+      console.log("Delete hospitals ", error.message);
+    });
+};

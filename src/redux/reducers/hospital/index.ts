@@ -52,6 +52,22 @@ export const Hospitals = (
         successMessage: null,
       };
 
+    case HospitalActionTypes.DELETE_HOSPITALS:
+      return {
+        ...state,
+        isLoading: false,
+        successMessage: action.payload,
+        errMess: null,
+      };
+
+    case HospitalActionTypes.DELETE_HOSPITALS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        errMess: action.payload,
+        successMessage: null,
+      };
+
     default:
       return state;
   }
