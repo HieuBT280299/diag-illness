@@ -80,7 +80,7 @@ const TokenForm = ({ switchToEmailForm }: any) => {
   ) : (
     <form className={classes.form} onSubmit={formik.handleSubmit}>
       <Typography variant="body2" style={{ alignSelf: "start" }}>
-        {showResendMessage ? "Một mã xác nhận khác" : "Mã xác nhận"} đã được gửi
+        {showResendMessage ? "Một mã kích hoạt khác" : "Mã kích hoạt"} đã được gửi
         tới <b>{email}</b>
       </Typography>
       <TextField
@@ -89,7 +89,7 @@ const TokenForm = ({ switchToEmailForm }: any) => {
         required
         fullWidth
         id="token"
-        label="Mã xác nhận"
+        label="Mã kích hoạt"
         name="token"
         autoFocus
         onChange={formik.handleChange}

@@ -90,7 +90,7 @@ const ForgotPassword = () => {
             required
             fullWidth
             id="oldPassword"
-            label="Mật khẩu cũ"
+            label="Mật khẩu hiện tại"
             name="oldPassword"
             type="password"
             autoFocus

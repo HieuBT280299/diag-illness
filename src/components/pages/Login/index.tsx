@@ -58,62 +58,72 @@ const Login = () => {
 
   const classes = useStyles();
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Đăng nhập
-        </Typography>
-        <form className={classes.form} onSubmit={formik.handleSubmit}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            onChange={formik.handleChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Mật khẩu"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={formik.handleChange}
-          />
-          {errMess && <FormHelperText error>{errMess}</FormHelperText>}
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
+    <>
+      <Typography
+        component="h1"
+        variant="h6"
+        align="center"
+        style={{ marginBottom: 60 }}
+      >
+        Chào mừng bạn đã đến với Hệ thống hỗ trợ chẩn đoán bệnh
+      </Typography>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
             Đăng nhập
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link to={Routes.FORGOT_PASSWORD}>Quên mật khẩu?</Link>
+          </Typography>
+          <form className={classes.form} onSubmit={formik.handleSubmit}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              onChange={formik.handleChange}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Mật khẩu"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={formik.handleChange}
+            />
+            {errMess && <FormHelperText error>{errMess}</FormHelperText>}
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Đăng nhập
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link to={Routes.FORGOT_PASSWORD}>Quên mật khẩu?</Link>
+              </Grid>
+              <Grid item>
+                {"Không có tài khoản? "}
+                <Link to={Routes.SIGN_UP}>{"Đăng ký"}</Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              {"Không có tài khoản? "}
-              <Link to={Routes.SIGN_UP}>{"Đăng ký"}</Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+          </form>
+        </div>
+      </Container>
+    </>
   );
 };
 

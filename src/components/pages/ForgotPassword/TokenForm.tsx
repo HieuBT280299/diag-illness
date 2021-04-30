@@ -96,7 +96,7 @@ const TokenForm = ({ switchToEmailForm }: any) => {
         required
         fullWidth
         id="token"
-        label="Mã OTP"
+        label="Mã xác thực"
         name="token"
         autoFocus
         onChange={formik.handleChange}
