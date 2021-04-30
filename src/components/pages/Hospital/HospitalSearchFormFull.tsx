@@ -57,9 +57,6 @@ const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
 
   return (
     <>
-      <Typography variant="h5" style={{ marginBottom: 12 }}>
-        Tìm kiếm bệnh viện
-      </Typography>
       <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
         <Grid container spacing={2}>
           <Grid item container>

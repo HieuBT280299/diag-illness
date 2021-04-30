@@ -23,10 +23,8 @@ import { RoleIDs } from "../../../shared/constants";
 import styled from "styled-components";
 import HospitalDetailContent from "./HospitalDetailContent";
 import HospitalDetailEdit from "./HospitalDetailEdit";
-import HospitalAddNew from "./HospitalAddNew";
 import ConfirmDialog from "../../ConfirmDialog";
 import CustomizedDialog from "../../Dialog";
-import UploadSelectionMenu from "../../UploadSelectionMenu";
 
 const useStyles = makeStyles({
   table: {
@@ -83,7 +81,7 @@ const HospitalListTableHead = ({ isAdmin }: any) => {
   );
 };
 
-type HospitalDialogType = "close" | "edit" | "view" | "add";
+type HospitalDialogType = "close" | "edit" | "view";
 
 const HospitalListTable = () => {
   const classes = useStyles();
@@ -104,9 +102,7 @@ const HospitalListTable = () => {
     setSelectedRow(row);
     setDialogOpen("edit");
   };
-  const addButtonClicked = () => {
-    setDialogOpen("add");
-  };
+  
   const deleteButtonClicked = (row: any) => {
     setSelectedRow(row);
     setConfirmDialogOpen(true);
@@ -148,36 +144,22 @@ const HospitalListTable = () => {
 
   return (
     <Grid container>
-      {isAdmin && (
-        <Grid item container xs={12} md={6}>
-          <UploadSelectionMenu addButtonClicked={addButtonClicked} />
-        </Grid>
-      )}
-
-      <CustomizedDialog
-        open={dialogOpen === "add"}
-        title="Thêm bệnh viện"
-        content={<HospitalAddNew closeDialog={closeDialog} />}
-        toggleDialog={closeDialog}
-      />
-
       <Grid
         item
         container
         xs={12}
         md={6}
         direction="row"
-        justify={isAdmin ? "flex-end" : "flex-start"}
         alignItems="center"
       >
         {totalEntries > 0 && (
-          <Typography variant="h6" style={{ marginBottom: 12 }}>
+          <Typography variant="subtitle2" style={{ marginBottom: 12 }}>
             Số kết quả tìm được: {totalEntries || 0}
           </Typography>
         )}
 
         {totalEntries === 0 && searchData !== null && (
-          <Typography variant="h6" style={{ marginBottom: 12 }}>
+          <Typography variant="subtitle2" style={{ marginBottom: 12 }}>
             Không tìm được kết quả nào
           </Typography>
         )}
