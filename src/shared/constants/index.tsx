@@ -1,8 +1,10 @@
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import PeopleIcon from "@material-ui/icons/People";
-import BarChartIcon from "@material-ui/icons/BarChart";
-import AssignmentIcon from "@material-ui/icons/Assignment";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import RotateLeftIcon from '@material-ui/icons/RotateLeft';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import FiberNewIcon from '@material-ui/icons/FiberNew';
 
 export enum Gender {
   MALE = 0,
@@ -41,19 +43,19 @@ export type PageListItem = {
 
 export const userPageList: PageListItem[] = [
   {
-    icon: <DashboardIcon />,
+    icon: <AccountCircleIcon />,
     text: "Tài khoản của tôi",
     to: Routes.PROFILE,
     hidden: false,
   },
   {
-    icon: <ShoppingCartIcon />,
+    icon: <FindInPageIcon />,
     text: "Tin tức",
     to: Routes.NEWS,
     hidden: false,
   },
   {
-    icon: <BarChartIcon />,
+    icon: <LocalHospitalIcon />,
     text: "Tìm Bệnh viện",
     to: Routes.HOSPITAL,
     hidden: false,
@@ -68,31 +70,31 @@ export const userPageList: PageListItem[] = [
 
 export const adminPageList: PageListItem[] = [
   {
-    icon: <DashboardIcon />,
+    icon: <AccountCircleIcon />,
     text: "Quản lý Tài khoản",
     to: Routes.MANAGE_ACCOUNT,
     hidden: false,
   },
   {
-    icon: <ShoppingCartIcon />,
+    icon: <FindInPageIcon />,
     text: "Quản lý Tin tức",
     to: Routes.NEWS,
     hidden: false,
   },
   {
-    icon: <BarChartIcon />,
+    icon: <LocalHospitalIcon />,
     text: "Quản lý Bệnh viện",
     to: Routes.HOSPITAL,
     hidden: false,
   },
   {
-    icon: <BarChartIcon />,
+    icon: <CloudUploadIcon />,
     text: "Upload thông tin Tin tức",
     to: `${Routes.UPLOAD}/news`,
     hidden: true,
   },
   {
-    icon: <BarChartIcon />,
+    icon: <CloudUploadIcon />,
     text: "Upload thông tin Bệnh viện",
     to: `${Routes.UPLOAD}/hospital`,
     hidden: true,
@@ -101,19 +103,19 @@ export const adminPageList: PageListItem[] = [
 
 export const preLoginList: PageListItem[] = [
   {
-    icon: <AssignmentIcon />,
+    icon: <ExitToAppIcon />,
     text: "Đăng nhập",
     to: Routes.LOGIN,
     hidden: false,
   },
   {
-    icon: <AssignmentIcon />,
+    icon: <FiberNewIcon />,
     text: "Đăng ký",
     to: Routes.SIGN_UP,
     hidden: false,
   },
   {
-    icon: <AssignmentIcon />,
+    icon: <RotateLeftIcon />,
     text: "Quên Mật khẩu",
     to: Routes.FORGOT_PASSWORD,
     hidden: false,

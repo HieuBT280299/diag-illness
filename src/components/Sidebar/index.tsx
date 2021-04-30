@@ -17,6 +17,7 @@ type SidebarProps = RouteComponentProps<any> & {
   drawerWidth: number;
   open: boolean;
   handleDrawerClose: () => void;
+  handleDrawerOpen?: () => void;
 };
 
 const Sidebar = ({
@@ -24,6 +25,7 @@ const Sidebar = ({
   drawerWidth,
   open,
   handleDrawerClose,
+  handleDrawerOpen,
   location,
 }: SidebarProps) => {
   const useStyles = makeStyles((theme) => ({
@@ -94,12 +96,21 @@ const Sidebar = ({
       <Divider />
       {account ? (
         account.roleId === RoleIDs.ROLE_ADMIN ? (
-          <AdminPageListItems pathname={pathname} />
+          <AdminPageListItems
+            handleDrawerOpen={handleDrawerOpen}
+            pathname={pathname}
+          />
         ) : (
-          <UserPageListItems pathname={pathname} />
+          <UserPageListItems
+            handleDrawerOpen={handleDrawerOpen}
+            pathname={pathname}
+          />
         )
       ) : (
-        <PreLoginListItems pathname={pathname} />
+        <PreLoginListItems
+          handleDrawerOpen={handleDrawerOpen}
+          pathname={pathname}
+        />
       )}
     </Drawer>
   );

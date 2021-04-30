@@ -33,6 +33,7 @@ const Main = () => {
         drawerWidth={drawerWidth}
         open={open}
         handleDrawerClose={handleDrawerClose}
+        handleDrawerOpen={handleDrawerOpen}
       />
       <SwitchRoutes />
     </>

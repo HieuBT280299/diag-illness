@@ -13,9 +13,10 @@ import {
 type ListItemProps = {
   list: PageListItem[];
   pathname: string;
+  handleDrawerOpen?: () => void;
 };
 
-const ListItems = ({ list, pathname }: ListItemProps) => {
+const ListItems = ({ list, pathname, handleDrawerOpen }: ListItemProps) => {
   return (
     <List>
       {list
@@ -26,7 +27,11 @@ const ListItems = ({ list, pathname }: ListItemProps) => {
             to={item.to}
             style={{ color: "inherit", textDecoration: "none" }}
           >
-            <ListItem button selected={item.to === pathname}>
+            <ListItem
+              button
+              onMouseOver={handleDrawerOpen}
+              selected={item.to === pathname}
+            >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </ListItem>
@@ -36,14 +41,26 @@ const ListItems = ({ list, pathname }: ListItemProps) => {
   );
 };
 
-export const UserPageListItems = ({ pathname }: any) => (
-  <ListItems list={userPageList} pathname={pathname} />
+export const UserPageListItems = ({ pathname, handleDrawerOpen }: any) => (
+  <ListItems
+    handleDrawerOpen={handleDrawerOpen}
+    list={userPageList}
+    pathname={pathname}
+  />
 );
 
-export const AdminPageListItems = ({ pathname }: any) => (
-  <ListItems list={adminPageList} pathname={pathname} />
+export const AdminPageListItems = ({ pathname, handleDrawerOpen }: any) => (
+  <ListItems
+    handleDrawerOpen={handleDrawerOpen}
+    list={adminPageList}
+    pathname={pathname}
+  />
 );
 
-export const PreLoginListItems = ({ pathname }: any) => (
-  <ListItems list={preLoginList} pathname={pathname} />
+export const PreLoginListItems = ({ pathname, handleDrawerOpen }: any) => (
+  <ListItems
+    handleDrawerOpen={handleDrawerOpen}
+    list={preLoginList}
+    pathname={pathname}
+  />
 );
