@@ -70,6 +70,22 @@ export const Hospitals = (
         successMessage: null,
       };
 
+    case HospitalActionTypes.EDIT_HOSPITALS:
+      return {
+        ...state,
+        isLoading: false,
+        successMessage: action.payload,
+        errMess: null,
+      };
+
+    case HospitalActionTypes.EDIT_HOSPITALS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        errMess: action.payload,
+        successMessage: null,
+      };
+
     default:
       return state;
   }

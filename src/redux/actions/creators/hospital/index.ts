@@ -203,3 +203,58 @@ export const deleteHospitals = (data: any, token: string) => (
       console.log("Delete hospitals ", error.message);
     });
 };
+
+export const editHospitalSuccessfully = (payload: any) => {
+  return {
+    type: HospitalActionTypes.EDIT_HOSPITALS,
+    payload,
+  };
+};
+
+export const editHospitalFailed = (message: any) => {
+  return {
+    type: HospitalActionTypes.EDIT_HOSPITALS_FAILED,
+    payload: message,
+  };
+};
+
+export const editHospital = (data: any, token: string) => (dispatch: any) => {
+  return fetch(`${baseUrl}hospital/edit`, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+    body: JSON.stringify(data),
+  })
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+          throw error;
+        }
+      },
+      (error) => {
+        var errMess = new Error(error.message);
+        throw errMess;
+      }
+    )
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      if (response.error) {
+        dispatch(editHospitalFailed(response.message));
+      } else {
+        dispatch(editHospitalSuccessfully(response.message));
+      }
+    })
+    .catch((error) => {
+      console.log("Delete hospitals ", error.message);
+    });
+};

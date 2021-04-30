@@ -1,9 +1,15 @@
 import { Button, Grid, MenuItem, TextField } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { CITIES, DISTRICTS, WARDS } from "../../../shared/constants/geodata";
 import { sortByName } from "../../../shared/helper";
+import { editHospital } from "../../../redux/actions/creators/hospital";
 
 const HospitalDetailEdit = ({ row, closeDialog }: any) => {
+  const account = useSelector((state: any) => state.loginAccount?.account);
+  const dispatch = useDispatch();
+  const dispatchEditHospital = (data: any) =>
+    dispatch(editHospital(data, account.token));
   const initialValues = row;
   const formik = useFormik({
     initialValues: initialValues,
