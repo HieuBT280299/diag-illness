@@ -8,7 +8,6 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Cell from "../../tables/Cell";
 import { Button, Grid, Link as MuiLink, Typography } from "@material-ui/core";
-import { Link as RouteLink } from "react-router-dom";
 import {
   getFullAddress,
   getFullContact,
@@ -24,6 +23,7 @@ import HospitalDetailEdit from "./HospitalDetailEdit";
 import HospitalAddNew from "./HospitalAddNew";
 import ConfirmDialog from "../../ConfirmDialog";
 import CustomizedDialog from "../../Dialog";
+import UploadSelectionMenu from "../../UploadSelectionMenu";
 
 const useStyles = makeStyles({
   table: {
@@ -139,22 +139,7 @@ const HospitalListTable = () => {
     <Grid container>
       {isAdmin && (
         <Grid item container xs={12} md={6}>
-          <Button
-            color="primary"
-            variant="text"
-            component={RouteLink}
-            to="/upload/hospital"
-          >
-            Thêm bằng file CSV
-          </Button>
-          <Button
-            color="primary"
-            variant="text"
-            onClick={addButtonClicked}
-            style={{ marginLeft: 12 }}
-          >
-            Thêm bằng form
-          </Button>
+          <UploadSelectionMenu addButtonClicked={addButtonClicked} />
         </Grid>
       )}
 
