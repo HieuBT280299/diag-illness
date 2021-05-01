@@ -380,15 +380,18 @@ export const postChangePassword = (
     .then((response) => {
       return response.json();
     })
-    .then((response) => {
+    .then(async (response) => {
       if (response.error) {
         dispatch(changePasswordFailed(response.message));
       } else {
-        dispatch(changePasswordSuccessfully(response.message));
+        await dispatch(changePasswordSuccessfully(response.message));
+        await setTimeout(() => {
+          window.location.reload(false);
+        }, 1500);
       }
     })
     .catch((error) => {
-      console.log("Login ", error.message);
+      console.log("Change password ", error.message);
     });
 };
 

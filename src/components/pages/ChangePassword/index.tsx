@@ -49,7 +49,7 @@ const validationSchema = Yup.object().shape({
   }),
 });
 
-const ForgotPassword = () => {
+const ChangePassword = () => {
   const classes = useStyles();
   const account = useSelector((state: any) => state.loginAccount?.account);
   const managePassword = useSelector((state: any) => state.managePassword);
@@ -122,7 +122,9 @@ const ForgotPassword = () => {
           />
           <span style={{ color: "red" }}>{formik.errors.confirmPassword}</span>
           <span style={{ color: "red" }}>{managePassword.errMess}</span>
-          <span style={{ color: "green" }}>{managePassword.message}</span>
+          <span style={{ color: "green" }}>
+            {managePassword.successMessage}
+          </span>
           <Button
             type="submit"
             fullWidth
@@ -138,4 +140,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default React.memo(ForgotPassword);
+export default React.memo(ChangePassword);
