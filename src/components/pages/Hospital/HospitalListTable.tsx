@@ -83,6 +83,24 @@ const HospitalListTableHead = ({ isAdmin }: any) => {
 
 type HospitalDialogType = "close" | "edit" | "view";
 
+const mockData = [
+  {
+    id: "El_3AXkBZLAYSuhR5ttX",
+    name: "Bảo Hà Spa - CS3",
+    number: "109/6 Nguyễn Bỉnh Khiêm,",
+    ward: "Phường Đa Kao",
+    district: "Quận 1",
+    city: ", Hồ Chí Minh",
+    workingTime: "T2,T3,T4,T5,T6,T7,CN: 09:00 - 18:00",
+    phone: "",
+    website: "http://baohaspa.vn",
+    introduction:
+      " Bảo Hà Spa luôn làm việc bằng cả tấm lòng yêu thương, đồng cảm với khách hàng, bởi Bảo Hà Spa thấu hiểu cơ thể và tâm trãng mẹ bầu đang ở trạng thái vô cùng nhạy cảm. Sự chu đáo trong từng thao tác của Bảo Hà Spa giúp mẹ bầu luôn cảm thấy an toàn và thoải mái nhất.  Tại Bảo Hà Spa 100% chuyên viên có kỹ thuật chuyên môn cao, được đào tạo bài bản, chuyên nghiệp, được kiểm tra trình độ định kỳ và thường xuyên được nâng cao tay nghề bằng các khóa học cập nhất những kiến thức tiên tiến nhất.  Cá gói dịch vụ của Bảo Hà Spa được thiết kế dựa trên những nghiên cứu kỹ lưỡng về các gia đoạn phát triển thai kỳ, sự thay đổi của cơ thể mẹ, cấu trúc đặc điểm của các nhóm da và cơ. Trên cơ sở đó, các bác sĩ và chuyên gia đầu nghành nhi khoa, sản khoa và da liễu đã cùng Bảo Hà Spa xây dựng nên những gói dịch vụ chăm sóc phù hợp cho từng giai đoạn.  Các quy trình liệu pháp của Bảo Hà Spa còn có tác động tích cực đến thai nhi. Không những tuyệt đối an toàn cho bé, các bước chăm sóc mẹ cũng giúp bé tận hưởng được cảm giác thư giãn thoải mái, để bé đạt được mức phát triển cao nhất.  Ngay từ đầu Bảo Hà Spa đã lựa chọn đi theo dòng sản phẩm thiên nhiên thuần khiết với thành phần 100% là các thảo dược tự nhiên, được chọn lọc kỹ lưỡng và kiểm soát chặt chẽ về chất lượng, giúp phục hồi, duy trì và nuôi dưỡng sắc đẹp, để mẹ bầu và mẹ sau sinh luôn tự tin tỏa sáng.",
+    service: null,
+    department: "Khoa Da Liễu, Nhi Khoa, Sản Khoa",
+  },
+];
+
 const HospitalListTable = () => {
   const classes = useStyles();
   const [selectedRow, setSelectedRow] = useState<any>({});
@@ -102,15 +120,16 @@ const HospitalListTable = () => {
     setSelectedRow(row);
     setDialogOpen("edit");
   };
-  
+
   const deleteButtonClicked = (row: any) => {
     setSelectedRow(row);
     setConfirmDialogOpen(true);
   };
 
   const account = useSelector((state: any) => state.loginAccount?.account);
-  const hospitalList: any[] =
-    useSelector((state: any) => state.hospitals?.hospitals) || [];
+  // const hospitalList: any[] =
+  //   useSelector((state: any) => state.hospitals?.hospitals) || [];
+  const hospitalList = mockData;
 
   const isAdmin = useMemo(() => account.roleId === RoleIDs.ROLE_ADMIN, [
     account,
@@ -144,14 +163,7 @@ const HospitalListTable = () => {
 
   return (
     <Grid container>
-      <Grid
-        item
-        container
-        xs={12}
-        md={6}
-        direction="row"
-        alignItems="center"
-      >
+      <Grid item container xs={12} md={6} direction="row" alignItems="center">
         {totalEntries > 0 && (
           <Typography variant="subtitle2" style={{ marginBottom: 12 }}>
             Số kết quả tìm được: {totalEntries || 0}

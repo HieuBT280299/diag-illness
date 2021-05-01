@@ -13,6 +13,8 @@ export const Hospitals = (
     type: "simple",
     successMessage: null,
     deleteSuccessStatus: false,
+    editErrMess: null,
+    addNewErrMess: null,
   },
   action: { type: string; payload: any }
 ): any => {
@@ -75,14 +77,30 @@ export const Hospitals = (
         ...state,
         isLoading: false,
         successMessage: action.payload,
-        errMess: null,
+        editErrMess: null,
       };
 
     case HospitalActionTypes.EDIT_HOSPITALS_FAILED:
       return {
         ...state,
         isLoading: false,
-        errMess: action.payload,
+        editErrMess: action.payload,
+        successMessage: null,
+      };
+
+    case HospitalActionTypes.ADD_HOSPITALS:
+      return {
+        ...state,
+        isLoading: false,
+        successMessage: action.payload,
+        addNewErrMess: null,
+      };
+
+    case HospitalActionTypes.ADD_HOSPITALS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        addNewErrMess: action.payload,
         successMessage: null,
       };
 

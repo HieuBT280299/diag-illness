@@ -192,11 +192,14 @@ export const deleteHospitals = (data: any, token: string) => (
     .then((response) => {
       return response.json();
     })
-    .then((response) => {
+    .then(async (response) => {
       if (response.error) {
         dispatch(deleteHospitalsFailed(response.message));
       } else {
-        dispatch(deleteHospitalsSuccessfully(response.message));
+        await dispatch(deleteHospitalsSuccessfully(response.message));
+        await setTimeout(() => {
+          window.location.reload(false);
+        }, 500);
       }
     })
     .catch((error) => {
@@ -218,7 +221,11 @@ export const editHospitalFailed = (message: any) => {
   };
 };
 
-export const editHospital = (data: any, token: string) => (dispatch: any) => {
+export const editHospital = (
+  data: any,
+  token: string,
+  callback: () => void
+) => (dispatch: any) => {
   return fetch(`${baseUrl}hospital/edit`, {
     method: "POST",
     mode: "cors",
@@ -247,14 +254,81 @@ export const editHospital = (data: any, token: string) => (dispatch: any) => {
     .then((response) => {
       return response.json();
     })
-    .then((response) => {
+    .then(async (response) => {
       if (response.error) {
         dispatch(editHospitalFailed(response.message));
       } else {
-        dispatch(editHospitalSuccessfully(response.message));
+        await dispatch(editHospitalSuccessfully(response.message));
+        await callback();
+        await setTimeout(() => {
+          window.location.reload(false);
+        }, 500);
       }
     })
     .catch((error) => {
-      console.log("Delete hospitals ", error.message);
+      console.log("Edit hospitals ", error.message);
+    });
+};
+
+export const addNewHospitalSuccessfully = (payload: any) => {
+  return {
+    type: HospitalActionTypes.ADD_HOSPITALS,
+    payload,
+  };
+};
+
+export const addNewHospitalFailed = (message: any) => {
+  return {
+    type: HospitalActionTypes.ADD_HOSPITALS_FAILED,
+    payload: message,
+  };
+};
+
+export const addNewHospital = (
+  data: any,
+  token: string,
+  callback: () => void
+) => (dispatch: any) => {
+  return fetch(`${baseUrl}hospital/add`, {
+    method: "POST",
+    mode: "cors",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+    body: JSON.stringify(data),
+  })
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+          throw error;
+        }
+      },
+      (error) => {
+        var errMess = new Error(error.message);
+        throw errMess;
+      }
+    )
+    .then((response) => {
+      return response.json();
+    })
+    .then(async (response) => {
+      if (response.error) {
+        dispatch(addNewHospitalFailed(response.message));
+      } else {
+        await dispatch(addNewHospitalSuccessfully(response.message));
+        await callback();
+        await setTimeout(() => {
+          window.location.reload(false);
+        }, 500);
+      }
+    })
+    .catch((error) => {
+      console.log("Add hospitals ", error.message);
     });
 };

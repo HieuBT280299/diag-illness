@@ -1,4 +1,10 @@
-import { Button, Grid, MenuItem, TextField } from "@material-ui/core";
+import {
+  Button,
+  FormHelperText,
+  Grid,
+  MenuItem,
+  TextField,
+} from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { CITIES, DISTRICTS, WARDS } from "../../../shared/constants/geodata";
@@ -7,9 +13,10 @@ import { editHospital } from "../../../redux/actions/creators/hospital";
 
 const HospitalDetailEdit = ({ row, closeDialog }: any) => {
   const account = useSelector((state: any) => state.loginAccount?.account);
+  const { editErrMess } = useSelector((state: any) => state.hospitals);
   const dispatch = useDispatch();
   const dispatchEditHospital = (data: any) =>
-    dispatch(editHospital(data, account.token));
+    dispatch(editHospital(data, account.token, closeDialog));
   const initialValues = row;
   const formik = useFormik({
     initialValues: initialValues,
@@ -17,10 +24,24 @@ const HospitalDetailEdit = ({ row, closeDialog }: any) => {
       const submitValues = {
         ...values,
         cityCode: values.cityCode === "0" ? null : values.cityCode,
+        city:
+          values.cityCode === "0"
+            ? null
+            : CITIES.find((city) => city.id === values.cityCode)?.name,
         districtCode: values.districtCode === "0" ? null : values.districtCode,
+        district:
+          values.districtCode === "0"
+            ? null
+            : DISTRICTS.find((district) => district.id === values.districtCode)
+                ?.name,
         wardCode: values.wardCode === "0" ? null : values.wardCode,
+        ward:
+          values.wardCode === "0"
+            ? null
+            : WARDS.find((ward) => ward.id === values.wardCode)?.name,
       };
       alert(JSON.stringify(submitValues));
+      dispatchEditHospital(submitValues);
     },
   });
 
@@ -205,6 +226,7 @@ const HospitalDetailEdit = ({ row, closeDialog }: any) => {
               />
             </Grid>
           </Grid>
+          {editErrMess && <FormHelperText error>{editErrMess}</FormHelperText>}
         </Grid>
         <Grid
           item

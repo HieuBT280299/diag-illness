@@ -1,32 +1,60 @@
-import { Button, Grid, MenuItem, TextField } from "@material-ui/core";
+import {
+  Button,
+  FormHelperText,
+  Grid,
+  MenuItem,
+  TextField,
+} from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { CITIES, DISTRICTS, WARDS } from "../../../shared/constants/geodata";
 import { sortByName } from "../../../shared/helper";
+import { addNewHospital } from "../../../redux/actions/creators/hospital";
+
+const initialValues = {
+  name: "",
+  number: "",
+  phone: "",
+  email: "",
+  cityCode: "0",
+  districtCode: "0",
+  wardCode: "0",
+  workingTime: "",
+  introduction: "",
+  service: "",
+  department: "",
+};
 
 const HospitalAddNew = ({ closeDialog }: any) => {
-  const initialValues = {
-    name: "",
-    number: "",
-    phone: "",
-    email: "",
-    cityCode: "0",
-    districtCode: "0",
-    wardCode: "0",
-    workingTime: "",
-    introduction: "",
-    service: "",
-    department: "",
-  };
+  const account = useSelector((state: any) => state.loginAccount?.account);
+  const { addNewErrMess } = useSelector((state: any) => state.hospitals);
+  const dispatch = useDispatch();
+  const dispatchAddNewHospital = (data: any) =>
+    dispatch(addNewHospital(data, account.token, closeDialog));
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
       const submitValues = {
         ...values,
         cityCode: values.cityCode === "0" ? null : values.cityCode,
+        city:
+          values.cityCode === "0"
+            ? null
+            : CITIES.find((city) => city.id === values.cityCode)?.name,
         districtCode: values.districtCode === "0" ? null : values.districtCode,
+        district:
+          values.districtCode === "0"
+            ? null
+            : DISTRICTS.find((district) => district.id === values.districtCode)
+                ?.name,
         wardCode: values.wardCode === "0" ? null : values.wardCode,
+        ward:
+          values.wardCode === "0"
+            ? null
+            : WARDS.find((ward) => ward.id === values.wardCode)?.name,
       };
-      alert(JSON.stringify(submitValues));
+      alert(JSON.stringify([submitValues]));
+      dispatchAddNewHospital([submitValues]);
     },
   });
 
@@ -51,6 +79,7 @@ const HospitalAddNew = ({ closeDialog }: any) => {
                 fullWidth
                 name="name"
                 label="Tên"
+                required
                 variant="outlined"
                 value={formik.values.name}
                 onChange={formik.handleChange}
@@ -211,6 +240,9 @@ const HospitalAddNew = ({ closeDialog }: any) => {
               />
             </Grid>
           </Grid>
+          {addNewErrMess && (
+            <FormHelperText error>{addNewErrMess}</FormHelperText>
+          )}
         </Grid>
         <Grid
           item
