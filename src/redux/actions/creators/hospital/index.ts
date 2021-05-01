@@ -139,8 +139,7 @@ export const uploadHospitalCsv = (formData: any, token: string) => (
     mode: "cors",
     headers: {
       Authorization: token,
-      "Content-Type":
-        "multipart/form-data; boundary=<calculated when request is sent>",
+      "Content-Type": "multipart/form-data",
     },
     body: formData,
   })
