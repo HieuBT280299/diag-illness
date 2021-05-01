@@ -216,6 +216,8 @@ export const postLogin = (loginDetails: LoginDetails) => (dispatch: any) => {
       if (response.error) {
         if (response.data.email)
           dispatch(signUpSuccessfully({ account: response.data }));
+        else dispatch(signUpSuccessfully({ account: null }));
+
         dispatch(loginFailed(response.message));
       } else {
         // console.log(response);

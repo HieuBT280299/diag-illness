@@ -42,8 +42,10 @@ export type LoginDetails = {
 const initialValues: LoginDetails = { email: "", password: "" };
 
 const Login = () => {
-  const account = useSelector((state: any) => state.loginAccount?.account);
-  const errMess = useSelector((state: any) => state.loginAccount?.errMess);
+  const { account, errMess } = useSelector((state: any) => state.loginAccount);
+  const { registeredAccount } = useSelector(
+    (state: any) => state.registerAccount
+  );
 
   const dispatch = useDispatch();
   const dispatchPostLogin = (loginDetails: LoginDetails) =>
@@ -104,12 +106,14 @@ const Login = () => {
             {errMess && (
               <Grid container>
                 <FormHelperText error>{errMess}</FormHelperText>
-                <FormHelperText error>
-                  {
-                    "Nếu bạn đã đăng ký tài khoản nhưng chưa kích hoạt, vui lòng kích hoạt "
-                  }
-                  <Link to={`${Routes.SIGN_UP}/confirm`}>{"tại đây"}</Link>
-                </FormHelperText>
+                {registeredAccount && (
+                  <FormHelperText error>
+                    {
+                      "Nếu bạn đã đăng ký tài khoản nhưng chưa kích hoạt, vui lòng kích hoạt "
+                    }
+                    <Link to={`${Routes.SIGN_UP}/confirm`}>{"tại đây"}</Link>
+                  </FormHelperText>
+                )}
               </Grid>
             )}
             <Button
