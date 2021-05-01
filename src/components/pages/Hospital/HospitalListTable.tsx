@@ -127,9 +127,9 @@ const HospitalListTable = () => {
   };
 
   const account = useSelector((state: any) => state.loginAccount?.account);
-  // const hospitalList: any[] =
-  //   useSelector((state: any) => state.hospitals?.hospitals) || [];
-  const hospitalList = mockData;
+  const hospitalList: any[] =
+    useSelector((state: any) => state.hospitals?.hospitals) || [];
+  // const hospitalList = mockData;
 
   const isAdmin = useMemo(() => account.roleId === RoleIDs.ROLE_ADMIN, [
     account,

@@ -36,9 +36,23 @@ const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
     onSubmit: (values) => {
       const submitValues = {
         ...values,
-        cityCode: values.cityCode === "0" ? null : values.cityCode,
-        districtCode: values.districtCode === "0" ? null : values.districtCode,
-        wardCode: values.wardCode === "0" ? null : values.wardCode,
+        cityCode: values.cityCode === "0" ? undefined : values.cityCode,
+        city:
+          values.cityCode === "0"
+            ? undefined
+            : CITIES.find((city) => city.id === values.cityCode)?.name,
+        districtCode:
+          values.districtCode === "0" ? undefined : values.districtCode,
+        district:
+          values.districtCode === "0"
+            ? undefined
+            : DISTRICTS.find((district) => district.id === values.districtCode)
+                ?.name,
+        wardCode: values.wardCode === "0" ? undefined : values.wardCode,
+        ward:
+          values.wardCode === "0"
+            ? undefined
+            : WARDS.find((ward) => ward.id === values.wardCode)?.name,
       };
       dispatchHospitalList(submitValues);
     },

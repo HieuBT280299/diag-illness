@@ -30,20 +30,47 @@ export const getHospitalList = (
     from,
     size,
   };
+  const {
+    ward,
+    district,
+    city,
+    wardCode,
+    districtCode,
+    cityCode,
+    ...rest
+  } = searchData;
+  const fullBody = {
+    from,
+    size,
+    query: {
+      bool: {
+        must: [{ match: { ...rest } }],
+        filter: {
+          term: {
+            ward,
+            district,
+            city,
+            wardCode,
+            districtCode,
+            cityCode,
+          },
+        },
+      },
+    },
+  };
+  console.log(JSON.stringify(fullBody));
   const data = {
     full: {
-      url: `${baseUrl}hospital?search=${getSearchParams(
-        searchData
-      )}&${qs.stringify(paginationData)}`,
-      method: "GET",
+      url: `${baseUrl}hospital/search`,
+      method: "POST",
+      body: JSON.stringify(fullBody),
     },
     simple: {
       url: `${baseUrl}hospital/search?${qs.stringify(simpleParams)}`,
       method: "GET",
+      body: undefined,
     },
   };
-
-  console.log(data[type].url);
 
   return fetch(data[type].url, {
     method: data[type].method,
@@ -51,6 +78,7 @@ export const getHospitalList = (
     headers: {
       Authorization: token,
     },
+    body: data[type].method === "POST" ? data[type].body : undefined,
   })
     .then(
       (response) => {

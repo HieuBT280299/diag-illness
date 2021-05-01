@@ -23,21 +23,22 @@ const HospitalDetailEdit = ({ row, closeDialog }: any) => {
     onSubmit: (values) => {
       const submitValues = {
         ...values,
-        cityCode: values.cityCode === "0" ? null : values.cityCode,
+        cityCode: values.cityCode === "0" ? undefined : values.cityCode,
         city:
           values.cityCode === "0"
-            ? null
+            ? undefined
             : CITIES.find((city) => city.id === values.cityCode)?.name,
-        districtCode: values.districtCode === "0" ? null : values.districtCode,
+        districtCode:
+          values.districtCode === "0" ? undefined : values.districtCode,
         district:
           values.districtCode === "0"
-            ? null
+            ? undefined
             : DISTRICTS.find((district) => district.id === values.districtCode)
                 ?.name,
-        wardCode: values.wardCode === "0" ? null : values.wardCode,
+        wardCode: values.wardCode === "0" ? undefined : values.wardCode,
         ward:
           values.wardCode === "0"
-            ? null
+            ? undefined
             : WARDS.find((ward) => ward.id === values.wardCode)?.name,
       };
       alert(JSON.stringify(submitValues));
