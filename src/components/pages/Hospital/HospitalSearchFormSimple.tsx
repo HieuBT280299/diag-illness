@@ -22,7 +22,7 @@ const HospitalSearchFormSimple = ({ toggleSimpleSearch }: any) => {
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
-      alert(JSON.stringify(values));
+      // alert(JSON.stringify(values));
       dispatchHospitalList(values.search);
     },
   });

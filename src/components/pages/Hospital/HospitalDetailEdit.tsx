@@ -41,7 +41,7 @@ const HospitalDetailEdit = ({ row, closeDialog }: any) => {
             ? undefined
             : WARDS.find((ward) => ward.id === values.wardCode)?.name,
       };
-      alert(JSON.stringify(submitValues));
+      // alert(JSON.stringify(submitValues));
       dispatchEditHospital(submitValues);
     },
   });

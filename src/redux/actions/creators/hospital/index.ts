@@ -39,12 +39,16 @@ export const getHospitalList = (
     cityCode,
     ...rest
   } = searchData;
+  const mustFields = Object.keys(rest).map((key) => ({
+    match: { [key]: rest[key] },
+  }));
+  // console.log(mustFields);
   const fullBody = {
     from,
     size,
     query: {
       bool: {
-        must: [{ match: { ...rest } }],
+        must: mustFields,
         filter: {
           term: {
             ward,
@@ -139,7 +143,6 @@ export const uploadHospitalCsv = (formData: any, token: string) => (
     mode: "cors",
     headers: {
       Authorization: token,
-      "Content-Type": "multipart/form-data",
     },
     body: formData,
   })
