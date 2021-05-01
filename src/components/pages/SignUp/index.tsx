@@ -41,7 +41,7 @@ const SignUp = ({ fromLogin }: any) => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Đăng ký
+          {isTokenFormDisplaying ? "Kích hoạt tài khoản" : "Đăng ký"}
         </Typography>
         {isTokenFormDisplaying ? (
           <TokenForm

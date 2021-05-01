@@ -136,7 +136,7 @@ const TokenForm = ({ fromLogin }: any) => {
         color="primary"
         className={classes.submit}
       >
-        Đăng ký
+        Kích hoạt
       </Button>
       <Typography variant="subtitle1" style={{ alignSelf: "start" }}>
         {"Không nhận được mã? "}
