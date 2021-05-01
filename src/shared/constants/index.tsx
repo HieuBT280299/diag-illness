@@ -1,10 +1,10 @@
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
-import FindInPageIcon from '@material-ui/icons/FindInPage';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import RotateLeftIcon from '@material-ui/icons/RotateLeft';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import FiberNewIcon from '@material-ui/icons/FiberNew';
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
+import FindInPageIcon from "@material-ui/icons/FindInPage";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import RotateLeftIcon from "@material-ui/icons/RotateLeft";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import FiberNewIcon from "@material-ui/icons/FiberNew";
 
 export enum Gender {
   MALE = 0,
@@ -121,3 +121,6 @@ export const preLoginList: PageListItem[] = [
     hidden: false,
   },
 ];
+
+export const hospitalCsv = `id,name,number,ward,district,city,workingTime,introduction,services,department,website,link,phone
+107,Nha khoa Tương Lai,"76/1 Võ Thị Sáu,",Phường Tân Định,Quận 1,", Hồ Chí Minh","T2,T3,T4,T5,T6,T7: 08:00 - 19:30",,"Nhổ răng, Trám răng, Lấy vôi, Răng tháo lắp, Răng sứ, Tẩy trắng răng",Nha Khoa,,https://timbenhvien.vn/chi-tiet/nha-khoa-tuong-lai/357,028.3820.1003`;

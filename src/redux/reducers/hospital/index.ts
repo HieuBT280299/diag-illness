@@ -15,6 +15,9 @@ export const Hospitals = (
     deleteSuccessStatus: false,
     editErrMess: null,
     addNewErrMess: null,
+    uploadErrMess: null,
+    uploadSuccessMessage: null,
+    uploadedHospitals: null,
   },
   action: { type: string; payload: any }
 ): any => {
@@ -44,16 +47,18 @@ export const Hospitals = (
       return {
         ...state,
         isLoading: false,
-        successMessage: action.payload,
-        errMess: null,
+        uploadSuccessMessage: action.payload?.uploadSuccessMessage,
+        uploadedHospitals: action.payload?.uploadedHospitals,
+        uploadErrMess: null,
       };
 
     case HospitalActionTypes.UPLOAD_HOSPITALS_FAILED:
       return {
         ...state,
         isLoading: false,
-        errMess: action.payload,
-        successMessage: null,
+        uploadErrMess: action.payload,
+        uploadSuccessMessage: null,
+        uploadedHospitals: null,
       };
 
     case HospitalActionTypes.DELETE_HOSPITALS:

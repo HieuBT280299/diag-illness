@@ -31,7 +31,7 @@ const UploadCsvPage = ({ match }: any) => {
   const { type } = match.params;
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="lg">
       <CssBaseline />
       <div className={classes.paper}>
         <UploadCsvForm type={type} />

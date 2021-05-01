@@ -169,7 +169,11 @@ export const uploadHospitalCsv = (formData: any, token: string) => (
       if (response.error) {
         dispatch(uploadHospitalCsvFailed(response.message));
       } else {
-        dispatch(uploadHospitalCsvSuccessfully(response.message));
+        const payload = {
+          uploadedHospitals: response.data,
+          uploadSuccessMessage: response.message,
+        };
+        dispatch(uploadHospitalCsvSuccessfully(payload));
       }
     })
     .catch((error) => {
