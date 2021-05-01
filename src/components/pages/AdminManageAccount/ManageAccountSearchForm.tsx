@@ -123,7 +123,7 @@ const ManageAccountSearchForm = () => {
                 variant="outlined"
                 style={{ marginLeft: 12 }}
               >
-                Xoá
+                Xoá bộ lọc
               </Button>
             </Grid>
           </Grid>

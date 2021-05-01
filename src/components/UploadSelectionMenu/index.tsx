@@ -51,7 +51,7 @@ const UploadSelectionMenu = ({ addButtonClicked }: any) => {
       <Button
         aria-controls="customized-menu"
         aria-haspopup="true"
-        variant="text"
+        variant="contained"
         color="primary"
         onClick={handleClick}
       >

@@ -55,7 +55,7 @@ const HospitalSearchFormSimple = ({ toggleSimpleSearch }: any) => {
                 variant="outlined"
                 style={{ marginLeft: 12 }}
               >
-                Xoá
+                Xoá bộ lọc
               </Button>
               <Button
                 color="primary"
