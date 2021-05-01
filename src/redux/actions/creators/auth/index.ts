@@ -214,6 +214,8 @@ export const postLogin = (loginDetails: LoginDetails) => (dispatch: any) => {
     })
     .then((response) => {
       if (response.error) {
+        if (response.data.email)
+          dispatch(signUpSuccessfully({ account: response.data }));
         dispatch(loginFailed(response.message));
       } else {
         // console.log(response);

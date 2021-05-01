@@ -27,17 +27,28 @@ const useStyles = makeStyles((theme) => ({
 
 const initialValues = { token: "" };
 
-const TokenForm = ({ switchToEmailForm }: any) => {
+enum ConfirmStatus {
+  NOT_YET = 0,
+  SENT = 1,
+  RESENT = 2,
+}
+
+const TokenForm = ({ fromLogin }: any) => {
   const classes = useStyles();
 
   const [success, setSuccess] = useState(false);
-  const [showResendMessage, setShowResendMessage] = useState(false);
+  const [confirmStatus, setConfirmStatus] = useState<ConfirmStatus>(
+    fromLogin ? ConfirmStatus.NOT_YET : ConfirmStatus.SENT
+  );
   const confirmSignUpSuccessfully = () => {
     setSuccess(true);
-    setShowResendMessage(false);
+    setConfirmStatus(ConfirmStatus.SENT);
+  };
+  const sendSuccessfully = () => {
+    setConfirmStatus(ConfirmStatus.SENT);
   };
   const resendSuccessfully = () => {
-    setShowResendMessage(true);
+    setConfirmStatus(ConfirmStatus.RESENT);
   };
 
   const { registeredAccount, errMess, successMessage } = useSelector(
@@ -50,6 +61,9 @@ const TokenForm = ({ switchToEmailForm }: any) => {
 
   const dispatchPostConfirmSignUp = (token: string) =>
     dispatch(postConfirmSignUp(email, token, confirmSignUpSuccessfully));
+
+  const dispatchSendTokenSignUp = () =>
+    dispatch(resendTokenSignUp(email, sendSuccessfully));
 
   const dispatchResendTokenSignUp = () =>
     dispatch(resendTokenSignUp(email, resendSuccessfully));
@@ -79,10 +93,23 @@ const TokenForm = ({ switchToEmailForm }: any) => {
     </>
   ) : (
     <form className={classes.form} onSubmit={formik.handleSubmit}>
-      <Typography variant="body2" style={{ alignSelf: "start" }}>
-        {showResendMessage ? "Một mã kích hoạt khác" : "Mã kích hoạt"} đã được gửi
-        tới <b>{email}</b>
-      </Typography>
+      {confirmStatus !== ConfirmStatus.NOT_YET ? (
+        <Typography variant="body2" style={{ alignSelf: "start" }}>
+          {confirmStatus === ConfirmStatus.RESENT
+            ? "Một mã kích hoạt khác"
+            : "Mã kích hoạt"}{" "}
+          đã được gửi tới <b>{email}</b> (sẽ hết hạn sau 120 giây)
+        </Typography>
+      ) : (
+        <Typography variant="subtitle1" style={{ alignSelf: "start" }}>
+          <MuiLink
+            style={{ cursor: "pointer" }}
+            onClick={dispatchSendTokenSignUp}
+          >
+            Gửi mã kích hoạt
+          </MuiLink>
+        </Typography>
+      )}
       <TextField
         variant="outlined"
         margin="normal"

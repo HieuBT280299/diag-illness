@@ -63,6 +63,11 @@ const SwitchRoutes = () => {
       <Route exact path={`${Routes.SIGN_UP}`} component={SignUp} />
       <Route
         exact
+        path={`${Routes.SIGN_UP}/confirm`}
+        component={() => <SignUp fromLogin />}
+      />
+      <Route
+        exact
         path={`${Routes.FORGOT_PASSWORD}`}
         component={ForgotPassword}
       />

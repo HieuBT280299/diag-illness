@@ -101,7 +101,17 @@ const Login = () => {
               autoComplete="current-password"
               onChange={formik.handleChange}
             />
-            {errMess && <FormHelperText error>{errMess}</FormHelperText>}
+            {errMess && (
+              <Grid container>
+                <FormHelperText error>{errMess}</FormHelperText>
+                <FormHelperText error>
+                  {
+                    "Nếu bạn đã đăng ký tài khoản nhưng chưa kích hoạt, vui lòng kích hoạt "
+                  }
+                  <Link to={`${Routes.SIGN_UP}/confirm`}>{"tại đây"}</Link>
+                </FormHelperText>
+              </Grid>
+            )}
             <Button
               type="submit"
               fullWidth

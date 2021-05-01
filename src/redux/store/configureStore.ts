@@ -11,27 +11,30 @@ import storage from "redux-persist/lib/storage"; // defaults to localStorage for
 import { Hospitals } from "../reducers/hospital";
 import { Users } from "../reducers/user";
 
-const persistConfig = {
-  key: "root",
+// const persistConfig = {
+//   key: "root",
+//   storage,
+//   whitelist: ["loginAccount.account"],
+// };
+
+const loginConfig = {
+  key: "loginAccount",
   storage,
-  whitelist: ["loginAccount"],
+  blacklist: ["errMess"],
 };
 
 const rootReducer = combineReducers({
-  loginAccount: LoginAccount,
+  loginAccount: persistReducer(loginConfig, LoginAccount),
   managePassword: ManagePassword,
   registerAccount: RegisterAccount,
   hospitals: Hospitals,
   users: Users,
 });
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const ConfigureStore = () => {
-  const store: any = createStore(
-    persistedReducer,
-    applyMiddleware(thunk, logger)
-  );
+  const store: any = createStore(rootReducer, applyMiddleware(thunk, logger));
   const persistor = persistStore(store);
   return { persistor, store };
 };

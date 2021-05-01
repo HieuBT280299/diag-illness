@@ -20,9 +20,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUp = () => {
+const SignUp = ({ fromLogin }: any) => {
   const classes = useStyles();
-  const [isTokenFormDisplaying, setTokenFormDisplaying] = React.useState(false);
+  const [isTokenFormDisplaying, setTokenFormDisplaying] = React.useState(
+    fromLogin ? true : false
+  );
 
   const switchToTokenForm = () => {
     setTokenFormDisplaying(true);
@@ -42,7 +44,10 @@ const SignUp = () => {
           Đăng ký
         </Typography>
         {isTokenFormDisplaying ? (
-          <TokenForm switchToEmailForm={switchToEmailForm} />
+          <TokenForm
+            switchToEmailForm={switchToEmailForm}
+            fromLogin={fromLogin}
+          />
         ) : (
           <SignUpForm switchToTokenForm={switchToTokenForm} />
         )}
