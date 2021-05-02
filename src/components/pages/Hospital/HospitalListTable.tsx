@@ -81,6 +81,28 @@ export const HospitalListTableHead = () => {
   );
 };
 
+const mockData = [
+  {
+    city: " Hồ Chí Minh",
+    cityCode: "79",
+    department: "Khoa Da Liễu, Khoa Ngoại Chỉnh Hình",
+    district: "Quận 1",
+    districtCode: "760",
+    id: "5GAeD3kBZLAYSuhRNjIY",
+    introduction:
+      "Calla Lily Spa & Clinic được thiết kế tinh tế, gần gũi thiên nhiên, kết hợp với hương tinh dầu tự nhiên sẽ giúp quý khách xua tan đi những căn thẳng, mệt mỏi hằng ngày. Calla Lily Spa & Clinic chọn lọc những dòng mỹ phẩm cao cấp và chuyên nghiệp nhất trên thị trường hiện nay đến từ các nước như Úc, Mỹ, Pháp, Hàn, Nhật… với mong muốn đem lại cho quý khách làn da khỏe đẹp tối ưu. Đội ngũ nhân viên giàu kinh nghiệm, vững chuyên môn, được đào tạo bởi các chuyên gia thẩm mỹ trong và ngoài nước, chắc chắn mang lại cho quý khách chất lượng phục vụ tốt nhất.",
+    name: "Calla Lily Spa & Clinic - CS1",
+    number: "150/25 Nguyễn Trã",
+    phone: "028.3610.0167",
+    service:
+      "Chăm sóc da mặt, Body massage, Wax, Tắm trắng, Nối mi Hàn Quốc, Chăm sóc mắt, Liệu trình làm ốm bụng, Tắm tẩy tế bào chết & Ủ mịn da, Triệt lông vĩnh viễn không đau",
+    ward: "Phường Bến Thành",
+    wardCode: "26743",
+    website: "http://callalilyspa.com.vn/",
+    workingTime: "",
+  },
+];
+
 export type HospitalDialogType = "close" | "edit" | "view";
 
 const HospitalListTable = () => {
@@ -111,6 +133,8 @@ const HospitalListTable = () => {
   const account = useSelector((state: any) => state.loginAccount?.account);
   const hospitalList: any[] =
     useSelector((state: any) => state.hospitals?.hospitals) || [];
+
+  // const hospitalList = mockData;
 
   const isAdmin = useMemo(() => account.roleId === RoleIDs.ROLE_ADMIN, [
     account,
@@ -225,6 +249,7 @@ const HospitalListTable = () => {
           </>
         }
         toggleDialog={closeDialog}
+        maxWidth="md"
       />
       <CustomizedDialog
         open={dialogOpen === "edit"}
@@ -233,6 +258,7 @@ const HospitalListTable = () => {
           <HospitalDetailEdit row={selectedRow} closeDialog={closeDialog} />
         }
         toggleDialog={closeDialog}
+        maxWidth="md"
       />
       <ConfirmDialog
         open={confirmDialogOpen}

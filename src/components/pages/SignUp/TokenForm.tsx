@@ -98,7 +98,7 @@ const TokenForm = ({ fromLogin }: any) => {
           {confirmStatus === ConfirmStatus.RESENT
             ? "Một mã kích hoạt khác"
             : "Mã kích hoạt"}{" "}
-          đã được gửi tới <b>{email}</b> (sẽ hết hạn sau 120 giây)
+          đã được gửi tới <b>{email}</b> (sẽ hết hạn sau 5 phút)
         </Typography>
       ) : (
         <Typography variant="subtitle1" style={{ alignSelf: "start" }}>

@@ -66,6 +66,7 @@ const DialogActions = withStyles((theme: Theme) => ({
 
 export type DialogProps = {
   open: boolean;
+  maxWidth?: "lg" | "md" | "sm" | "xl" | "xs" | false;
   title?: string;
   content?: any;
   actions?: any;
@@ -78,12 +79,15 @@ export default function CustomizedDialog({
   content,
   actions,
   toggleDialog,
+  maxWidth,
 }: DialogProps) {
   return (
     <Dialog
       onClose={toggleDialog}
       aria-labelledby="customized-dialog-title"
       open={open}
+      disableBackdropClick
+      maxWidth={maxWidth}
     >
       <DialogTitle id="customized-dialog-title" onClose={toggleDialog}>
         {title}

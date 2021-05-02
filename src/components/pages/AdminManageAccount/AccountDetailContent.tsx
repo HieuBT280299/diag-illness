@@ -5,6 +5,7 @@ import {
   getRoleValue,
   getEnabledValue,
   toLocalDateAndTime,
+  getGenderValue,
 } from "./ManageAccountTable.helper";
 
 const Field = ({ title, content }: any) => {
@@ -31,6 +32,10 @@ const AccountDetailContent = ({ row }: any) => {
     {
       title: "Họ và tên",
       content: getValueOf(row.name),
+    },
+    {
+      title: "Giới tính",
+      content: getGenderValue(row.gender),
     },
     {
       title: "Ngày sinh",

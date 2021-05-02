@@ -141,19 +141,22 @@ const ManageAccountTable = () => {
     <Grid container>
       <Grid item xs={12}>
         {successMessage && (
-          <Typography variant="h6" style={{ marginBottom: 12, color: "green" }}>
+          <Typography
+            variant="subtitle2"
+            style={{ marginBottom: 12, color: "green" }}
+          >
             {successMessage}
           </Typography>
         )}
 
         {totalEntries > 0 && (
-          <Typography variant="h6" style={{ marginBottom: 12 }}>
+          <Typography variant="subtitle2" style={{ marginBottom: 12 }}>
             Số kết quả tìm được: {totalEntries || 0}
           </Typography>
         )}
 
         {totalEntries === 0 && searchData && (
-          <Typography variant="h6" style={{ marginBottom: 12 }}>
+          <Typography variant="subtitle2" style={{ marginBottom: 12 }}>
             Không tìm được kết quả nào
           </Typography>
         )}
