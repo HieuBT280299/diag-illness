@@ -8,22 +8,22 @@ const initialValues = {
   search: "",
 };
 
-const HospitalSearchFormSimple = ({ toggleSimpleSearch }: any) => {
-  const { pageSize } = useSelector((state: any) => state.hospitals);
-  const account = useSelector((state: any) => state.loginAccount?.account);
+const NewsSearchForm = ({ toggleSimpleSearch }: any) => {
+  //   const { pageSize } = useSelector((state: any) => state.hospitals);
+  //   const account = useSelector((state: any) => state.loginAccount?.account);
 
-  const paginationData = { page: 1, size: pageSize };
-  const dispatch = useDispatch();
-  const dispatchHospitalList = (searchData: string) =>
-    dispatch(
-      getHospitalList("simple", searchData, paginationData, account.token)
-    );
+  //   const paginationData = { page: 1, size: pageSize };
+  //   const dispatch = useDispatch();
+  //   const dispatchHospitalList = (searchData: string) =>
+  //     dispatch(
+  //       getHospitalList("simple", searchData, paginationData, account.token)
+  //     );
 
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
-      // alert(JSON.stringify(values));
-      dispatchHospitalList(values.search);
+      alert(JSON.stringify(values));
+      //   dispatchHospitalList(values.search);
     },
   });
 
@@ -55,14 +55,6 @@ const HospitalSearchFormSimple = ({ toggleSimpleSearch }: any) => {
             >
               Xoá bộ lọc
             </Button>
-            <Button
-              color="primary"
-              variant="outlined"
-              style={{ marginLeft: 12 }}
-              onClick={toggleSimpleSearch}
-            >
-              Tìm kiếm chi tiết
-            </Button>
           </Grid>
         </Grid>
       </Grid>
@@ -70,4 +62,4 @@ const HospitalSearchFormSimple = ({ toggleSimpleSearch }: any) => {
   );
 };
 
-export default React.memo(HospitalSearchFormSimple);
+export default React.memo(NewsSearchForm);
