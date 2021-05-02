@@ -7,7 +7,7 @@ import {
   RegisterAccount,
 } from "../reducers/auth";
 import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import storageSession from "redux-persist/lib/storage/session";
 import { Hospitals } from "../reducers/hospital";
 import { Users } from "../reducers/user";
 
@@ -19,7 +19,7 @@ import { Users } from "../reducers/user";
 
 const loginConfig = {
   key: "loginAccount",
-  storage,
+  storage: storageSession,
   blacklist: ["errMess"],
 };
 
