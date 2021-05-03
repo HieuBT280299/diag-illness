@@ -11,6 +11,9 @@ import { IconButton, CardActions, Link, Tooltip } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { getNewsList, deleteNews } from "../../../redux/actions/creators/news";
 import { RoleIDs } from "../../../shared/constants";
+import CustomizedDialog from "../../Dialog";
+import NewsDetailEdit from "./NewsDetailEdit";
+import ConfirmDialog from "../../ConfirmDialog";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -90,11 +93,34 @@ const getDomainFromUrl = (url: string) => {
   return domain;
 };
 
+export type NewsDialogType = "close" | "edit" | "view";
+
 const NewsList = () => {
   const classes = useStyles();
+  const [selectedRow, setSelectedRow] = useState<any>({});
+  const [dialogOpen, setDialogOpen] = useState<NewsDialogType>("close");
+  const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
+  const closeDialog = () => {
+    setDialogOpen("close");
+  };
+  const toggleConfirmDialog = () => {
+    setConfirmDialogOpen(!confirmDialogOpen);
+  };
+  const detailsButtonClicked = (row: any) => {
+    setSelectedRow(row);
+    setDialogOpen("view");
+  };
+  const editButtonClicked = (row: any) => {
+    setSelectedRow(row);
+    setDialogOpen("edit");
+  };
+
+  const deleteButtonClicked = (row: any) => {
+    setSelectedRow(row);
+    setConfirmDialogOpen(true);
+  };
   const account = useSelector((state: any) => state.loginAccount?.account);
   const newsList: any[] = useSelector((state: any) => state.news?.news) || [];
-
   // const newsList = mockData;
 
   const isAdmin = useMemo(() => account.roleId === RoleIDs.ROLE_ADMIN, [
@@ -143,8 +169,8 @@ const NewsList = () => {
       </Grid>
       {newsList.length > 0 && (
         <Grid container spacing={4}>
-          {newsList.map(({ id, title, link, tag }) => (
-            <Grid item key={id} xs={12} sm={6} md={4}>
+          {newsList.map((row) => (
+            <Grid item key={row.id} xs={12} sm={6} md={4}>
               <Card className={classes.card}>
                 {/* <Link to="/">
             <CardMedia
@@ -155,33 +181,33 @@ const NewsList = () => {
           </Link> */}
                 <CardContent className={classes.cardContent}>
                   <Link
-                    href={link}
+                    href={row.link}
                     style={{ color: "inherit", textDecoration: "none" }}
                   >
-                    <Typography variant="h6">{title}</Typography>
+                    <Typography variant="h6">{row.title}</Typography>
 
                     <Typography
                       gutterBottom
                       variant="subtitle1"
                       color="primary"
                     >
-                      {getDomainFromUrl(link)}
+                      {getDomainFromUrl(row.link)}
                     </Typography>
                     <Typography variant="body2">
                       <b>{"Từ khoá liên quan: "}</b>
-                      {tag.toString().replaceAll(",", ", ")}
+                      {row.tag.toString().replaceAll(",", ", ")}
                     </Typography>
                   </Link>
                 </CardContent>
                 {isAdmin && (
                   <CardActions disableSpacing>
                     <Tooltip title="Sửa đổi" aria-label="add">
-                      <IconButton>
+                      <IconButton onClick={() => editButtonClicked(row)}>
                         <EditIcon />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Xoá" aria-label="add">
-                      <IconButton>
+                      <IconButton onClick={() => deleteButtonClicked(row)}>
                         <DeleteIcon />
                       </IconButton>
                     </Tooltip>
@@ -197,6 +223,22 @@ const NewsList = () => {
               onChange={handleChange}
             />
           </Grid>
+          <CustomizedDialog
+            open={dialogOpen === "edit"}
+            title="Sửa thông tin tin tức"
+            content={
+              <NewsDetailEdit row={selectedRow} closeDialog={closeDialog} />
+            }
+            toggleDialog={closeDialog}
+            maxWidth="md"
+          />
+          <ConfirmDialog
+            open={confirmDialogOpen}
+            toggleDialog={toggleConfirmDialog}
+            content={<div>Bạn có chắc chắn muốn xoá?</div>}
+            onYesButtonClicked={() => dispatchDeleteNews([`${selectedRow.id}`])}
+            onNoButtonClicked={toggleConfirmDialog}
+          />
         </Grid>
       )}
     </>
