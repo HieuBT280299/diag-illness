@@ -175,12 +175,12 @@ const NewsList = () => {
                 </CardContent>
                 {isAdmin && (
                   <CardActions disableSpacing>
-                    <Tooltip title="Edit" aria-label="add">
+                    <Tooltip title="Sửa đổi" aria-label="add">
                       <IconButton>
                         <EditIcon />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip title="Delete" aria-label="add">
+                    <Tooltip title="Xoá" aria-label="add">
                       <IconButton>
                         <DeleteIcon />
                       </IconButton>
