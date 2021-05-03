@@ -2,28 +2,26 @@ import React from "react";
 import { Button, Grid, TextField } from "@material-ui/core";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { getHospitalList } from "../../../redux/actions/creators/hospital";
+import { getNewsList } from "../../../redux/actions/creators/news";
 
 const initialValues = {
   search: "",
 };
 
 const NewsSearchForm = ({ toggleSimpleSearch }: any) => {
-  //   const { pageSize } = useSelector((state: any) => state.hospitals);
-  //   const account = useSelector((state: any) => state.loginAccount?.account);
+  const { pageSize } = useSelector((state: any) => state.news);
+  const account = useSelector((state: any) => state.loginAccount?.account);
 
-  //   const paginationData = { page: 1, size: pageSize };
-  //   const dispatch = useDispatch();
-  //   const dispatchHospitalList = (searchData: string) =>
-  //     dispatch(
-  //       getHospitalList("simple", searchData, paginationData, account.token)
-  //     );
+  const paginationData = { page: 1, size: pageSize };
+  const dispatch = useDispatch();
+  const dispatchNewsList = (searchData: string) =>
+    dispatch(getNewsList("simple", searchData, paginationData, account.token));
 
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
       alert(JSON.stringify(values));
-      //   dispatchHospitalList(values.search);
+      dispatchNewsList(values.search);
     },
   });
 

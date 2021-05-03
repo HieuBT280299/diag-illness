@@ -9,6 +9,7 @@ import {
 import { persistStore, persistReducer } from "redux-persist";
 import storageSession from "redux-persist/lib/storage/session";
 import { Hospitals } from "../reducers/hospital";
+import { News } from "../reducers/news";
 import { Users } from "../reducers/user";
 
 // const persistConfig = {
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   managePassword: ManagePassword,
   registerAccount: RegisterAccount,
   hospitals: Hospitals,
+  news: News,
   users: Users,
 });
 

@@ -1,13 +1,16 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
+import React, { useMemo, useState } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import Pagination from "@material-ui/lab/Pagination";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { Link } from "@material-ui/core";
+import { IconButton, CardActions, Link, Tooltip } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+import { getNewsList, deleteNews } from "../../../redux/actions/creators/news";
+import { RoleIDs } from "../../../shared/constants";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -89,40 +92,114 @@ const getDomainFromUrl = (url: string) => {
 
 const NewsList = () => {
   const classes = useStyles();
+  const account = useSelector((state: any) => state.loginAccount?.account);
+  const newsList: any[] = useSelector((state: any) => state.news?.news) || [];
+
+  // const newsList = mockData;
+
+  const isAdmin = useMemo(() => account.roleId === RoleIDs.ROLE_ADMIN, [
+    account,
+  ]);
+
+  const {
+    totalPages,
+    totalEntries,
+    currentPage,
+    pageSize,
+    searchData,
+    type,
+  } = useSelector((state: any) => state.news);
+
+  const dispatch = useDispatch();
+
+  const dispatchNewsList = (paginationData: any) =>
+    dispatch(getNewsList(type, searchData, paginationData, account.token));
+  const dispatchDeleteNews = (deletedRecords: string[]) => {
+    const data = {
+      ids: deletedRecords,
+    };
+    dispatch(deleteNews(data, account.token));
+  };
+
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    console.log(value);
+    const paginationData = { page: value, size: pageSize };
+    dispatchNewsList(paginationData);
+  };
   return (
-      <Grid container spacing={4}>
-        {mockData.map(({ id, title, link, tag }) => (
-          <Grid item key={id} xs={12} sm={6} md={4}>
-            <Card className={classes.card}>
-              {/* <Link to="/">
+    <>
+      <Grid container direction="row" alignItems="center">
+        {totalEntries > 0 && (
+          <Typography variant="subtitle2" style={{ marginBottom: 12 }}>
+            Số kết quả tìm được: {totalEntries || 0}
+          </Typography>
+        )}
+
+        {totalEntries === 0 && searchData !== null && (
+          <Typography variant="subtitle2" style={{ marginBottom: 12 }}>
+            Không tìm được kết quả nào
+          </Typography>
+        )}
+      </Grid>
+      {newsList.length > 0 && (
+        <Grid container spacing={4}>
+          {newsList.map(({ id, title, link, tag }) => (
+            <Grid item key={id} xs={12} sm={6} md={4}>
+              <Card className={classes.card}>
+                {/* <Link to="/">
             <CardMedia
               className={classes.cardMedia}
               image="https://source.unsplash.com/random"
               title="Image title"
             />
           </Link> */}
-              <CardContent className={classes.cardContent}>
-                <Link
-                  href={link}
-                  style={{ color: "inherit", textDecoration: "none" }}
-                >
-                  <Typography variant="h5" component="h2">
-                    {title}
-                  </Typography>
+                <CardContent className={classes.cardContent}>
+                  <Link
+                    href={link}
+                    style={{ color: "inherit", textDecoration: "none" }}
+                  >
+                    <Typography variant="h6">{title}</Typography>
 
-                  <Typography gutterBottom variant="subtitle1" color="primary">
-                    {getDomainFromUrl(link)}
-                  </Typography>
-                  <Typography variant="body2">
-                    <b>{"Từ khoá liên quan: "}</b>
-                    {tag.toString().replaceAll(",", ", ")}
-                  </Typography>
-                </Link>
-              </CardContent>
-            </Card>
+                    <Typography
+                      gutterBottom
+                      variant="subtitle1"
+                      color="primary"
+                    >
+                      {getDomainFromUrl(link)}
+                    </Typography>
+                    <Typography variant="body2">
+                      <b>{"Từ khoá liên quan: "}</b>
+                      {tag.toString().replaceAll(",", ", ")}
+                    </Typography>
+                  </Link>
+                </CardContent>
+                {isAdmin && (
+                  <CardActions disableSpacing>
+                    <Tooltip title="Edit" aria-label="add">
+                      <IconButton>
+                        <EditIcon />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete" aria-label="add">
+                      <IconButton>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </CardActions>
+                )}
+              </Card>
+            </Grid>
+          ))}
+          <Grid item xs={12} style={{ marginTop: 12 }}>
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handleChange}
+            />
           </Grid>
-        ))}
-      </Grid>
+        </Grid>
+      )}
+    </>
   );
 };
 
