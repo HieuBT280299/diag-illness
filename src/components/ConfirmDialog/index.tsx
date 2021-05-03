@@ -15,15 +15,15 @@ export default function ConfirmDialog({
   const actionButtons = (
     <>
       <Button onClick={onYesButtonClicked} color="primary">
-        Yes
+        Có
       </Button>
       <Button onClick={onNoButtonClicked} color="default">
-        No
+        Không
       </Button>
     </>
   );
 
   return (
-    <CustomizedDialog {...rest} title="Confirmation" actions={actionButtons} />
+    <CustomizedDialog {...rest} title="Xác nhận" actions={actionButtons} />
   );
 }
