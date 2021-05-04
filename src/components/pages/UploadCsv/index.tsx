@@ -1,6 +1,7 @@
 import { Container, CssBaseline, makeStyles } from "@material-ui/core";
 import React from "react";
 import HospitalCsvUpload from "./HospitalCsvUpload";
+import NewsCsvUpload from "./NewsCsvUpload";
 
 enum UploadCsvType {
   NEWS = "news",
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 const UploadCsvForm = ({ type }: any) => {
   switch (type) {
     case UploadCsvType.NEWS:
-      return <div></div>;
+      return <NewsCsvUpload />;
     case UploadCsvType.HOSPITAL:
       return <HospitalCsvUpload />;
     default:

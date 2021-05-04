@@ -1,9 +1,28 @@
 import React from "react";
 import { Container, Grid, Typography } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { RoleIDs } from "../../../shared/constants";
 import NewsList from "./NewsList";
 import NewsSearchForm from "./NewsSearchForm";
+import UploadSelectionMenu from "../../UploadSelectionMenu";
+import CustomizedDialog from "../../Dialog";
 
 const News = () => {
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+
+  const closeDialog = () => {
+    setDialogOpen(false);
+  };
+  const addButtonClicked = () => {
+    setDialogOpen(true);
+  };
+
+  const account = useSelector((state: any) => state.loginAccount?.account);
+
+  const isAdmin = React.useMemo(() => account.roleId === RoleIDs.ROLE_ADMIN, [
+    account,
+  ]);
+
   return (
     <Container component="main" maxWidth="lg">
       <Grid container>
@@ -12,6 +31,17 @@ const News = () => {
             <Typography variant="h5" style={{ marginBottom: 12 }}>
               Tìm kiếm tin tức
             </Typography>
+            {isAdmin && (
+              <Grid item container xs={12} md={6} justify="flex-end">
+                <UploadSelectionMenu addButtonClicked={addButtonClicked} />
+                {/* <CustomizedDialog
+                  open={dialogOpen}
+                  title="Thêm bệnh viện"
+                  content={<HospitalAddNew closeDialog={closeDialog} />}
+                  toggleDialog={closeDialog}
+                /> */}
+              </Grid>
+            )}
           </Grid>
 
           <NewsSearchForm />

@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { editNews } from "../../../redux/actions/creators/news";
+import { getTagArray } from "./NewsList.helper";
 
 const DisabledTextField = withStyles({
   root: {
@@ -30,9 +31,8 @@ const NewsDetailEdit = ({ row, closeDialog }: any) => {
     initialValues: initialValues,
     onSubmit: (values) => {
       const { id, tag } = values;
-      const stringTag = tag.toString().replace(", ", ",");
-      const arrayTag = stringTag.split(",");
-      const submitValues = { id, tag: arrayTag };
+      const tags = getTagArray(tag);
+      const submitValues = { id, tag: tags };
       // alert(JSON.stringify(submitValues));
       dispatchEditNews(submitValues);
     },

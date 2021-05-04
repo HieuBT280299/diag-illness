@@ -14,6 +14,7 @@ import { RoleIDs } from "../../../shared/constants";
 import CustomizedDialog from "../../Dialog";
 import NewsDetailEdit from "./NewsDetailEdit";
 import ConfirmDialog from "../../ConfirmDialog";
+import { displayTags, getDomainFromUrl } from "./NewsList.helper";
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const mockData = [
+export const mockData = [
   {
     id: "MGAUCnkBZLAYSuhRDCF6",
     title: "Khi nào nên cho bé đi khám sức khỏe tổng quát",
@@ -88,11 +89,6 @@ const mockData = [
   },
 ];
 
-const getDomainFromUrl = (url: string) => {
-  const domain = new URL(url).hostname;
-  return domain;
-};
-
 export type NewsDialogType = "close" | "edit" | "view";
 
 const NewsList = () => {
@@ -105,10 +101,6 @@ const NewsList = () => {
   };
   const toggleConfirmDialog = () => {
     setConfirmDialogOpen(!confirmDialogOpen);
-  };
-  const detailsButtonClicked = (row: any) => {
-    setSelectedRow(row);
-    setDialogOpen("view");
   };
   const editButtonClicked = (row: any) => {
     setSelectedRow(row);
@@ -195,7 +187,7 @@ const NewsList = () => {
                     </Typography>
                     <Typography variant="body2">
                       <b>{"Từ khoá liên quan: "}</b>
-                      {row.tag.toString().replaceAll(",", ", ")}
+                      {displayTags(row.tag)}
                     </Typography>
                   </Link>
                 </CardContent>
