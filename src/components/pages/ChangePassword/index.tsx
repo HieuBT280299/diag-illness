@@ -6,10 +6,11 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useFormik } from "formik";
-import { Button, TextField } from "@material-ui/core";
+import { Button, Snackbar, TextField } from "@material-ui/core";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { postChangePassword } from "../../../redux/actions/creators/auth";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 export type ChangePasswordDetails = {
   email: string;
@@ -58,6 +59,15 @@ const ChangePassword = () => {
   const dispatchPostChangePassword = (
     changePasswordDetails: ChangePasswordDetails
   ) => dispatch(postChangePassword(changePasswordDetails, account.token));
+
+  const handleSnackbarClose = (
+    event?: React.SyntheticEvent,
+    reason?: string
+  ) => {
+    setTimeout(() => {
+      window.location.reload(false);
+    }, 1500);
+  };
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -122,9 +132,6 @@ const ChangePassword = () => {
           />
           <span style={{ color: "red" }}>{formik.errors.confirmPassword}</span>
           <span style={{ color: "red" }}>{managePassword.errMess}</span>
-          <span style={{ color: "green" }}>
-            {managePassword.successMessage}
-          </span>
           <Button
             type="submit"
             fullWidth
@@ -136,6 +143,19 @@ const ChangePassword = () => {
           </Button>
         </form>
       </div>
+      <Snackbar
+        open={Boolean(managePassword.successMessage)}
+        onClose={handleSnackbarClose}
+      >
+        <Alert
+          variant="filled"
+          onClose={handleSnackbarClose}
+          severity="success"
+        >
+          <AlertTitle>Thành công</AlertTitle>
+          {managePassword.successMessage}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };

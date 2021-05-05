@@ -385,9 +385,6 @@ export const postChangePassword = (
         dispatch(changePasswordFailed(response.message));
       } else {
         await dispatch(changePasswordSuccessfully(response.message));
-        await setTimeout(() => {
-          window.location.reload(false);
-        }, 1500);
       }
     })
     .catch((error) => {

@@ -39,6 +39,7 @@ const HospitalSearchFormSimple = ({ toggleSimpleSearch }: any) => {
               variant="outlined"
               value={formik.values.search}
               onChange={formik.handleChange}
+              required
             />
           </Grid>
         </Grid>
