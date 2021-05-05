@@ -89,7 +89,7 @@ export const promoteUserFailed = (message: any) => {
 export const postPromoteUser = (email: string, token: string) => (
   dispatch: any
 ) => {
-  return fetch(`${baseUrl}users?email=${email}`, {
+  return fetch(`${baseUrl}users/grant?email=${email}`, {
     method: "POST",
     mode: "cors",
     headers: {
