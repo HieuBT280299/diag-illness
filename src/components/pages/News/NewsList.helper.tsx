@@ -1,6 +1,10 @@
 export const getDomainFromUrl = (url: string) => {
-  const domain = new URL(url).hostname;
-  return domain;
+  try {
+    const domain = new URL(url).hostname;
+    return domain;
+  } catch (e: any) {
+    return url;
+  }
 };
 
 export const displayTags = (tags: string[]) => {

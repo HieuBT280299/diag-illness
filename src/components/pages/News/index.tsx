@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RoleIDs } from "../../../shared/constants";
 import NewsList from "./NewsList";
 import NewsSearchForm from "./NewsSearchForm";
+import NewsAddNew from "./NewsAddNew";
 import UploadSelectionMenu from "../../UploadSelectionMenu";
 import CustomizedDialog from "../../Dialog";
 
@@ -34,12 +35,12 @@ const News = () => {
             {isAdmin && (
               <Grid item container xs={12} md={6} justify="flex-end">
                 <UploadSelectionMenu addButtonClicked={addButtonClicked} />
-                {/* <CustomizedDialog
+                <CustomizedDialog
                   open={dialogOpen}
-                  title="Thêm bệnh viện"
-                  content={<HospitalAddNew closeDialog={closeDialog} />}
+                  title="Thêm tin tức"
+                  content={<NewsAddNew closeDialog={closeDialog} />}
                   toggleDialog={closeDialog}
-                /> */}
+                />
               </Grid>
             )}
           </Grid>
