@@ -20,7 +20,7 @@ const NewsSearchForm = ({ toggleSimpleSearch }: any) => {
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
-      alert(JSON.stringify(values));
+      // alert(JSON.stringify(values));
       dispatchNewsList(values.search);
     },
   });
@@ -37,7 +37,6 @@ const NewsSearchForm = ({ toggleSimpleSearch }: any) => {
               variant="outlined"
               value={formik.values.search}
               onChange={formik.handleChange}
-              required
             />
           </Grid>
         </Grid>

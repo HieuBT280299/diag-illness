@@ -13,6 +13,7 @@ import { getTagArray } from "./NewsList.helper";
 const initialValues = {
   title: "",
   link: "",
+  body: "",
   tag: "",
 };
 
@@ -56,6 +57,20 @@ const NewsAddNew = ({ closeDialog }: any) => {
                 fullWidth
                 name="link"
                 label="Đường dẫn"
+                variant="outlined"
+                value={formik.values.link}
+                onChange={formik.handleChange}
+              />
+            </Grid>
+          </Grid>
+          <Grid item container>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                multiline
+                rows={8}
+                name="body"
+                label="Nội dung"
                 variant="outlined"
                 value={formik.values.link}
                 onChange={formik.handleChange}

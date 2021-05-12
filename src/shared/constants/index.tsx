@@ -125,5 +125,7 @@ export const preLoginList: PageListItem[] = [
 export const hospitalCsv = `id,name,number,ward,district,city,workingTime,introduction,services,department,website,link,phone
 107,Nha khoa Tương Lai,"76/1 Võ Thị Sáu,",Phường Tân Định,Quận 1,", Hồ Chí Minh","T2,T3,T4,T5,T6,T7: 08:00 - 19:30",,"Nhổ răng, Trám răng, Lấy vôi, Răng tháo lắp, Răng sứ, Tẩy trắng răng",Nha Khoa,,https://timbenhvien.vn/chi-tiet/nha-khoa-tuong-lai/357,028.3820.1003`;
 
-export const newsCsv = `id,name,number,ward,district,city,workingTime,introduction,services,department,website,link,phone
-107,Nha khoa Tương Lai,"76/1 Võ Thị Sáu,",Phường Tân Định,Quận 1,", Hồ Chí Minh","T2,T3,T4,T5,T6,T7: 08:00 - 19:30",,"Nhổ răng, Trám răng, Lấy vôi, Răng tháo lắp, Răng sứ, Tẩy trắng răng",Nha Khoa,,https://timbenhvien.vn/chi-tiet/nha-khoa-tuong-lai/357,028.3820.1003`;
+export const newsCsv = `title,body,tag,link
+"Test Title 1","Body 1","Tag 1,Tag 2","link test"
+"Test Title 2","Body 2","Tag 1,Tag 2","link test"
+`;

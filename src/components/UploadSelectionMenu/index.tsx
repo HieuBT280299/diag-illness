@@ -35,7 +35,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-const UploadSelectionMenu = ({ addButtonClicked }: any) => {
+const UploadSelectionMenu = ({ addButtonClicked, type }: any) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -66,8 +66,8 @@ const UploadSelectionMenu = ({ addButtonClicked }: any) => {
       >
         <StyledMenuItem>
           <RouteLink
-            to="/upload/hospital"
-            style={{ textDecoration: "none", color: 'inherit' }}
+            to={`/upload/${type}`}
+            style={{ textDecoration: "none", color: "inherit" }}
           >
             Thêm bằng file CSV
           </RouteLink>

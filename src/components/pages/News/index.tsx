@@ -34,7 +34,7 @@ const News = () => {
             </Typography>
             {isAdmin && (
               <Grid item container xs={12} md={6} justify="flex-end">
-                <UploadSelectionMenu addButtonClicked={addButtonClicked} />
+                <UploadSelectionMenu addButtonClicked={addButtonClicked} type="news" />
                 <CustomizedDialog
                   open={dialogOpen}
                   title="Thêm tin tức"

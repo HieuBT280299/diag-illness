@@ -29,17 +29,9 @@ export const getHospitalList = (
     from,
     size,
   };
-  const {
-    ward,
-    district,
-    city,
-    wardCode,
-    districtCode,
-    cityCode,
-    ...rest
-  } = searchData;
-  const mustFields = Object.keys(rest).map((key) => ({
-    match: { [key]: rest[key] },
+
+  const mustFields = Object.keys(searchData).map((key) => ({
+    match: { [key]: searchData[key] },
   }));
   // console.log(mustFields);
   const fullBody = {
@@ -48,16 +40,6 @@ export const getHospitalList = (
     query: {
       bool: {
         must: mustFields,
-        filter: {
-          term: {
-            ward,
-            district,
-            city,
-            wardCode,
-            districtCode,
-            cityCode,
-          },
-        },
       },
     },
   };
