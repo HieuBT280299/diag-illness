@@ -30,7 +30,7 @@ const NewsAddNew = ({ closeDialog }: any) => {
       const { tag, ...rest } = values;
       const tags = getTagArray(tag);
       const submitValues = { tag: tags, ...rest };
-      alert(JSON.stringify(submitValues));
+      // alert(JSON.stringify(submitValues));
       dispatchAddNewNews(submitValues);
     },
   });
