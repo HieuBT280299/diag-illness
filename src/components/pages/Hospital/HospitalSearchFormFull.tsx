@@ -33,27 +33,31 @@ const HospitalSearchForm = ({ toggleSimpleSearch }: any) => {
 
   const formik = useFormik({
     initialValues: initialValues,
-    onSubmit: (values) => {
+    onSubmit: (values: any) => {
       const submitValues = {
         ...values,
-        cityCode: values.cityCode === "0" ? undefined : values.cityCode,
+        cityCode: values.cityCode === "0" ? "" : values.cityCode,
         city:
           values.cityCode === "0"
-            ? undefined
+            ? ""
             : CITIES.find((city) => city.id === values.cityCode)?.name,
-        districtCode:
-          values.districtCode === "0" ? undefined : values.districtCode,
+        districtCode: values.districtCode === "0" ? "" : values.districtCode,
         district:
           values.districtCode === "0"
-            ? undefined
+            ? ""
             : DISTRICTS.find((district) => district.id === values.districtCode)
                 ?.name,
-        wardCode: values.wardCode === "0" ? undefined : values.wardCode,
+        wardCode: values.wardCode === "0" ? "" : values.wardCode,
         ward:
           values.wardCode === "0"
-            ? undefined
+            ? ""
             : WARDS.find((ward) => ward.id === values.wardCode)?.name,
       };
+
+      Object.keys(submitValues).forEach(
+        (k: string) => submitValues[k] === "" && delete submitValues[k]
+      );
+      // alert(JSON.stringify(submitValues));
       dispatchHospitalList(submitValues);
     },
   });

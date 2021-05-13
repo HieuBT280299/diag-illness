@@ -8,9 +8,11 @@ export const getDomainFromUrl = (url: string) => {
 };
 
 export const displayTags = (tags: string[]) => {
-  return tags.toString().replaceAll(",", ", ");
+  if (tags) return tags.toString().replaceAll(",", ", ");
+  return "";
 };
 
 export const getTagArray = (tagString: string) => {
-  return tagString.toString().replace(", ", ",").split(",");
+  if (tagString) return tagString.toString().replace(", ", ",").split(",");
+  return [];
 };
