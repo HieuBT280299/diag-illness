@@ -1,5 +1,5 @@
 .main-container {
-  margin-top: -40px;
+  margin-top: -24px;
   overflow: hidden;
   display: block;
   position: relative;
@@ -59,7 +59,7 @@
 }
 
 .talk {
-  padding-top: 100px;
+  padding-top: 32px;
 }
 
 .talk > h1 {
@@ -109,12 +109,16 @@
 }
 
 .icon-bra-ails {
-  padding-bottom: 30px;
+  padding-bottom: 16px;
 }
 
 .icon-ails {
   color: #3f3d56 !important;
-  font-size: 40px;
+  font-size: 32px;
+}
+
+p.lead {
+  font-size: 1rem;
 }
 
 .footer {

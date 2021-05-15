@@ -95,9 +95,9 @@ function Content({ type }: any) {
                 <div className="features-icons-icon d-flex  icon-bra-ails">
                   <i className="icon-screen-desktop m-auto text-primary icon-ails"></i>
                 </div>
-                <h5>
+                <h6>
                   <b>Nhanh chóng</b>
-                </h5>
+                </h6>
                 <p className="lead mb-0">
                   Tìm kiếm thông tin một cách nhanh chóng và đầy đủ
                 </p>
@@ -108,9 +108,9 @@ function Content({ type }: any) {
                 <div className="features-icons-icon d-flex  icon-bra-ails">
                   <i className="icon-layers m-auto text-primary icon-ails"></i>
                 </div>
-                <h5>
+                <h6>
                   <b>Đáng tin cậy</b>
-                </h5>
+                </h6>
                 <p className="lead mb-0">
                   Thông tin luôn được đảm bảo chính xác và toàn vẹn
                 </p>
@@ -121,9 +121,9 @@ function Content({ type }: any) {
                 <div className="features-icons-icon d-flex  icon-bra-ails">
                   <i className="icon-check m-auto text-primary icon-ails"></i>
                 </div>
-                <h5>
+                <h6>
                   <b>Dễ sử dụng</b>
-                </h5>
+                </h6>
                 <p className="lead mb-0">
                   Hệ thống được thiết kế đơn giản và dễ sử dụng với mọi đối
                   tượng

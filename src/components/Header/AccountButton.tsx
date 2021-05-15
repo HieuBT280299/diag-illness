@@ -38,6 +38,7 @@ const AccountButton = () => {
         aria-haspopup="true"
         onClick={handleMenu}
         color="inherit"
+        style={{ outline: "none" }}
       >
         <AccountCircle />
       </IconButton>
