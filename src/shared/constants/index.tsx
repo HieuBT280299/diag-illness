@@ -5,6 +5,7 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import FiberNewIcon from "@material-ui/icons/FiberNew";
+import HomeIcon from "@material-ui/icons/Home";
 
 export enum Gender {
   MALE = 0,
@@ -18,7 +19,7 @@ export enum RoleIDs {
 
 export enum Routes {
   //general routes
-  HOME = "/home",
+  HOME = "/",
   LOGIN = "/login",
   SIGN_UP = "/signup",
   FORGOT_PASSWORD = "/forgotpassword",
@@ -42,6 +43,12 @@ export type PageListItem = {
 };
 
 export const userPageList: PageListItem[] = [
+  {
+    icon: <HomeIcon />,
+    text: "Trang chủ",
+    to: Routes.HOME,
+    hidden: false,
+  },
   {
     icon: <AccountCircleIcon />,
     text: "Tài khoản của tôi",
@@ -69,6 +76,12 @@ export const userPageList: PageListItem[] = [
 ];
 
 export const adminPageList: PageListItem[] = [
+  {
+    icon: <HomeIcon />,
+    text: "Trang chủ",
+    to: Routes.HOME,
+    hidden: false,
+  },
   {
     icon: <AccountCircleIcon />,
     text: "Quản lý Tài khoản",
@@ -102,6 +115,12 @@ export const adminPageList: PageListItem[] = [
 ];
 
 export const preLoginList: PageListItem[] = [
+  {
+    icon: <HomeIcon />,
+    text: "Hệ thống hỗ trợ chẩn đoán bệnh",
+    to: Routes.HOME,
+    hidden: true,
+  },
   {
     icon: <ExitToAppIcon />,
     text: "Đăng nhập",

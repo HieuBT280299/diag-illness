@@ -46,7 +46,7 @@ export const getHospitalList =
       },
     };
     // alert(JSON.stringify(Object.keys(searchData)));
-    // alert(JSON.stringify(fullBody));
+    console.log(JSON.stringify(fullBody));
     const data = {
       full: {
         url: `${baseUrl}hospital/search`,

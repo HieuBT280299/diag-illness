@@ -5,6 +5,7 @@ import { RoleIDs, Routes } from "../../shared/constants";
 import AdminManageAccount from "../pages/AdminManageAccount";
 import ChangePassword from "../pages/ChangePassword";
 import ForgotPassword from "../pages/ForgotPassword";
+import Home from "../pages/Home";
 import Hospital from "../pages/Hospital";
 import Login from "../pages/Login";
 import News from "../pages/News";
@@ -28,6 +29,7 @@ const SwitchRoutes = () => {
   const SwitchRoutes = account ? (
     account.roleId === RoleIDs.ROLE_ADMIN ? (
       <Switch>
+        <Route exact path={Routes.HOME} component={Home} />
         <Route
           exact
           path={`${Routes.MANAGE_ACCOUNT}`}
@@ -42,10 +44,11 @@ const SwitchRoutes = () => {
           path={`${Routes.CHANGE_PASSWORD}`}
           component={ChangePassword}
         />
-        <Redirect to={`${Routes.HOSPITAL}`} />
+        <Redirect to={`${Routes.HOME}`} />
       </Switch>
     ) : (
       <Switch>
+        <Route exact path={Routes.HOME} component={Home} />
         <Route exact path={`${Routes.NEWS}`} component={News} />
         <Route exact path={`${Routes.HOSPITAL}`} component={Hospital} />
         <Route exact path={`${Routes.PROFILE}`} component={Profile} />
@@ -54,12 +57,13 @@ const SwitchRoutes = () => {
           path={`${Routes.CHANGE_PASSWORD}`}
           component={ChangePassword}
         />
-        <Redirect to={`${Routes.HOSPITAL}`} />
+        <Redirect to={`${Routes.HOME}`} />
       </Switch>
     )
   ) : (
     <Switch>
-      <Route path={`${Routes.LOGIN}`} component={Login} />
+      <Route exact path={Routes.HOME} component={Home} />
+      <Route exact path={`${Routes.LOGIN}`} component={Login} />
       <Route exact path={`${Routes.SIGN_UP}`} component={SignUp} />
       <Route
         exact
@@ -71,7 +75,7 @@ const SwitchRoutes = () => {
         path={`${Routes.FORGOT_PASSWORD}`}
         component={ForgotPassword}
       />
-      <Redirect to={`${Routes.LOGIN}`} />
+      <Redirect to={`${Routes.HOME}`} />
     </Switch>
   );
 
