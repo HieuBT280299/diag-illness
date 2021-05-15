@@ -8,7 +8,7 @@ function Content({ type }: any) {
     <div>
       <div className="container content">
         <div className="row">
-          <div className="col-sm-6 talk">
+          <div className="col-sm-8 talk">
             <h1>Hệ thống hỗ trợ chẩn đoán bệnh</h1>
             <br />
             <h6 className="bold-four">
@@ -24,62 +24,64 @@ function Content({ type }: any) {
               mạo.
             </h6>
             <br />
-            {type === HomeContentType.ADMIN && (
-              <h6>
-                <Link
-                  className="btn btn-dark start start-two"
-                  to={Routes.HOSPITAL}
-                >
-                  Quản lí Bệnh viện
-                </Link>
-                <Link
-                  className="btn btn-dark start start-two ml-3"
-                  to={Routes.NEWS}
-                >
-                  Quản lí Tin tức
-                </Link>
-                <Link
-                  className="btn btn-dark start start-two ml-3"
-                  to={Routes.MANAGE_ACCOUNT}
-                >
-                  Quản lí Tài khoản
-                </Link>
-              </h6>
-            )}
-            {type === HomeContentType.USER && (
-              <h6>
-                <Link
-                  className="btn btn-dark start start-two"
-                  to={Routes.HOSPITAL}
-                >
-                  Tìm kiếm Bệnh viện
-                </Link>
-                <Link
-                  className="btn btn-dark start start-two ml-3"
-                  to={Routes.NEWS}
-                >
-                  Tìm kiếm Tin tức
-                </Link>
-              </h6>
-            )}
-            {type === HomeContentType.GUEST && (
-              <h6>
-                <Link
-                  className="btn btn-dark start start-two"
-                  to={Routes.LOGIN}
-                >
-                  Đăng nhập
-                </Link>
-                <Link
-                  className="btn btn-dark start start-two ml-3"
-                  to={Routes.SIGN_UP}
-                >
-                  Đăng ký
-                </Link>
-              </h6>
-            )}
+            <div className="container">
+              {type === HomeContentType.ADMIN && (
+                <div className="row">
+                  <Link
+                    className="btn btn-dark start start-two col-sm-3"
+                    to={Routes.HOSPITAL}
+                  >
+                    Quản lí Bệnh viện
+                  </Link>
+                  <Link
+                    className="btn btn-dark start start-two ml-3 col-sm-3"
+                    to={Routes.NEWS}
+                  >
+                    Quản lí Tin tức
+                  </Link>
+                  <Link
+                    className="btn btn-dark start start-two ml-3 col-sm-3"
+                    to={Routes.MANAGE_ACCOUNT}
+                  >
+                    Quản lí Tài khoản
+                  </Link>
+                </div>
+              )}
+              {type === HomeContentType.USER && (
+                <div className="row">
+                  <Link
+                    className="btn btn-dark start start-two col-sm-4"
+                    to={Routes.HOSPITAL}
+                  >
+                    Tìm kiếm Bệnh viện
+                  </Link>
+                  <Link
+                    className="btn btn-dark start start-two ml-3 col-sm-4"
+                    to={Routes.NEWS}
+                  >
+                    Tìm kiếm Tin tức
+                  </Link>
+                </div>
+              )}
+              {type === HomeContentType.GUEST && (
+                <div className="row">
+                  <Link
+                    className="btn btn-dark start start-two col-sm-4"
+                    to={Routes.LOGIN}
+                  >
+                    Đăng nhập
+                  </Link>
+                  <Link
+                    className="btn btn-dark start start-two ml-3 col-sm-4"
+                    to={Routes.SIGN_UP}
+                  >
+                    Đăng ký
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
-          <div className="col-sm-6 showcase-img">
+          <div className="col-sm-4 showcase-img">
             {/* <div className="circle"></div> */}
           </div>
         </div>
