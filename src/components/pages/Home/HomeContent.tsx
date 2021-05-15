@@ -91,7 +91,7 @@ function Content({ type }: any) {
         <div className="container">
           <div className="row">
             <div className="col-lg-4">
-              <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+              <div className="features-icons-item mx-auto mb-2 mt-2 mt-lg-3 mb-lg-3">
                 <div className="features-icons-icon d-flex  icon-bra-ails">
                   <i className="icon-screen-desktop m-auto text-primary icon-ails"></i>
                 </div>
@@ -104,7 +104,7 @@ function Content({ type }: any) {
               </div>
             </div>
             <div className="col-lg-4">
-              <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+              <div className="features-icons-item mx-auto mb-2 mt-2 mt-lg-3 mb-lg-3">
                 <div className="features-icons-icon d-flex  icon-bra-ails">
                   <i className="icon-layers m-auto text-primary icon-ails"></i>
                 </div>
@@ -117,7 +117,7 @@ function Content({ type }: any) {
               </div>
             </div>
             <div className="col-lg-4">
-              <div className="features-icons-item mx-auto mb-0 mb-lg-3">
+              <div className="features-icons-item mx-auto mb-2 mt-2 mt-lg-3 mb-lg-3">
                 <div className="features-icons-icon d-flex  icon-bra-ails">
                   <i className="icon-check m-auto text-primary icon-ails"></i>
                 </div>
