@@ -167,7 +167,7 @@ export const crawlJson = `{
   "startUrl":"https://vinmec.com/vi/tin-tuc/",
   "patternUrl": "^https://vinmec.com/vi/tin-tuc/(([a-z]|[-])+)/(([a-z]|[-])+)/((([a-z]|[-])+)/)*$",
   "data": {
-      "title":"normalize-space(//*[@id=\"vue-bootstrap\"]/div[2]/div[2]/h1/text())",
-      "tag":"//*[@id=\"vue-bootstrap\"]/div[2]/div[3]/div[3]/a/text()"
+      "title":"normalize-space(//*[@id=\\"vue-bootstrap\\"]/div[2]/div[2]/h1/text())",
+      "tag":"//*[@id=\\"vue-bootstrap\\"]/div[2]/div[3]/div[3]/a/text()"
   }
 }`;

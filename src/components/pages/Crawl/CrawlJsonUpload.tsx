@@ -5,8 +5,14 @@ import {
   TextareaAutosize,
   makeStyles,
   Typography,
+  Snackbar,
 } from "@material-ui/core";
+import { useFormik } from "formik";
 import { crawlJson } from "../../../shared/constants";
+import { useSelector, useDispatch } from "react-redux";
+import { uploadCrawlJson } from "../../../redux/actions/creators/crawl";
+import { Alert, AlertTitle } from "@material-ui/lab";
+import { toLocalDateAndTime } from "./CrawlDataTable.helper";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -21,49 +27,57 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const initialValues = {
+  json: "",
+};
+
 const CrawlJsonUpload = () => {
   const classes = useStyles();
-  //   const [file, setFile] = useState<string | Blob>("");
+  const account = useSelector((state: any) => state.loginAccount?.account);
+  const crawl = useSelector((state: any) => state.crawl);
+  const dispatch = useDispatch();
+  const dispatchUploadCrawlJson = (jsonData: any) =>
+    dispatch(uploadCrawlJson(account?.id, jsonData, account?.token));
 
-  //   const account = useSelector((state: any) => state.loginAccount?.account);
-  //   const uploadedNews: any[] =
-  //     useSelector((state: any) => state.news?.uploadedNews) || [];
-
-  //   const { uploadErrMess, uploadSuccessMessage } = useSelector(
-  //     (state: any) => state.news
-  //   );
-
-  //   const dispatch = useDispatch();
-  //   const dispatchUploadCrawlJson = (formData: any) =>
-  //     dispatch(uploadCrawlJson(formData, account.token));
-
-  const handleSubmit = (e: any) => {
-    // if (file !== "") {
-    //   const formData = new FormData();
-    //   formData.append("csvfile", file);
-    //   dispatchUploadCrawlJson(formData);
-    // } else {
-    //   console.log("null");
-    // }
-  };
+  const formik = useFormik({
+    initialValues: initialValues,
+    onSubmit: (values) => {
+      const minifiedJson = values.json
+        .replaceAll("\n", "")
+        .replaceAll(/ /g, "");
+      const submitValues = JSON.parse(minifiedJson);
+      console.log(JSON.stringify(submitValues));
+      dispatchUploadCrawlJson(submitValues);
+    },
+  });
 
   return (
     <>
       <Grid container spacing={6}>
         <Grid item container xs={12} md={6}>
-          <form className={classes.form}>
+          <form
+            className={classes.form}
+            onSubmit={formik.handleSubmit}
+            onReset={formik.handleReset}
+          >
             <Typography variant="h6">
               Nhập đoạn JSON bạn muốn upload vào đây
             </Typography>
             <Grid item xs={12}>
               <TextareaAutosize
+                name="json"
+                value={formik.values.json}
+                onChange={formik.handleChange}
                 rowsMin={4}
                 style={{ width: "100%", resize: "none" }}
               />
             </Grid>
             <Grid item xs={12}>
+              <span style={{ color: "red" }}>{crawl.uploadErrMess}</span>
+            </Grid>
+            <Grid item xs={12}>
               <Button
-                onClick={handleSubmit}
+                type="submit"
                 variant="contained"
                 color="primary"
                 className={classes.submit}
@@ -84,24 +98,19 @@ const CrawlJsonUpload = () => {
           />
         </Grid>
       </Grid>
-      {/* <Grid container style={{ marginTop: 36 }}>
-        {uploadErrMess && (
-          <Typography
-            variant="subtitle2"
-            style={{ marginBottom: 12, color: "red" }}
-          >
-            {uploadErrMess}
-          </Typography>
-        )}
-        {uploadSuccessMessage && (
-          <Typography
-            variant="subtitle2"
-            style={{ marginBottom: 12, color: "green" }}
-          >
-            {uploadSuccessMessage}
-          </Typography>
-        )}
-      </Grid> */}
+      <Snackbar
+        open={Boolean(crawl.uploadSuccessMessage)}
+        // onClose={handleSnackbarClose}
+      >
+        <Alert
+          variant="filled"
+          // onClose={handleSnackbarClose}
+          severity="success"
+        >
+          <AlertTitle>Thành công</AlertTitle>
+          {`Upload JSON thành công lúc ${toLocalDateAndTime(crawl.uploadTime)}`}
+        </Alert>
+      </Snackbar>
     </>
   );
 };

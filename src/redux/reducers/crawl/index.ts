@@ -10,13 +10,9 @@ export const Crawl = (
     totalPages: 0,
     totalEntries: 0,
     searchData: null,
-    successMessage: null,
-    deleteSuccessStatus: false,
-    editErrMess: null,
-    addNewErrMess: null,
     uploadErrMess: null,
     uploadSuccessMessage: null,
-    uploadedCrawl: null,
+    uploadTime: null,
   },
   action: { type: string; payload: any }
 ): any => {
@@ -38,7 +34,6 @@ export const Crawl = (
         ...state,
         isLoading: false,
         errMess: action.payload,
-        successMessage: null,
       };
 
     case CrawlActionTypes.UPLOAD_CRAWL:
@@ -46,8 +41,17 @@ export const Crawl = (
         ...state,
         isLoading: false,
         uploadSuccessMessage: action.payload?.uploadSuccessMessage,
-        uploadedCrawl: action.payload?.uploadedCrawl,
+        uploadTime: action.payload?.uploadTime,
         uploadErrMess: null,
+      };
+
+    case CrawlActionTypes.UPLOAD_CRAWL_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        uploadErrMess: action.payload,
+        uploadSuccessMessage: null,
+        uploadTime: null,
       };
 
     default:
