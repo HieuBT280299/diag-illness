@@ -4,6 +4,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { RoleIDs, Routes } from "../../shared/constants";
 import AdminManageAccount from "../pages/AdminManageAccount";
 import ChangePassword from "../pages/ChangePassword";
+import Crawl from "../pages/Crawl";
+import CrawlJsonUpload from "../pages/Crawl/CrawlJsonUpload";
 import ForgotPassword from "../pages/ForgotPassword";
 import Home from "../pages/Home";
 import Hospital from "../pages/Hospital";
@@ -36,6 +38,12 @@ const SwitchRoutes = () => {
           component={AdminManageAccount}
         />
         <Route exact path={`${Routes.NEWS}`} component={News} />
+        <Route exact path={`${Routes.CRAWL}`} component={Crawl} />
+        <Route
+          exact
+          path={`${Routes.CRAWL}/upload`}
+          component={CrawlJsonUpload}
+        />
         <Route exact path={`${Routes.HOSPITAL}`} component={Hospital} />
         <Route path={`${Routes.UPLOAD}/:type`} component={UploadCsvPage} />
         <Route exact path={`${Routes.PROFILE}`} component={Profile} />

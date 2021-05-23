@@ -1,0 +1,15 @@
+export const FETCH_CRAWL = "FETCH_CRAWL";
+export const CRAWL_FAILED = "CRAWL_FAILED";
+export const CRAWL_LOADING = "CRAWL_LOADING";
+
+export const UPLOAD_CRAWL = "UPLOAD_CRAWL";
+export const UPLOAD_CRAWL_FAILED = "UPLOAD_CRAWL_FAILED";
+
+export const DELETE_CRAWL = "DELETE_CRAWL";
+export const DELETE_CRAWL_FAILED = "DELETE_CRAWL_FAILED";
+
+export const EDIT_CRAWL = "EDIT_CRAWL";
+export const EDIT_CRAWL_FAILED = "EDIT_CRAWL_FAILED";
+
+export const ADD_CRAWL = "ADD_CRAWL";
+export const ADD_CRAWL_FAILED = "ADD_CRAWL_FAILED";

@@ -35,7 +35,15 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-const UploadSelectionMenu = ({ addButtonClicked, type }: any) => {
+type UploadSelectionMenuProps = {
+  addButtonClicked: any;
+  type?: string;
+};
+
+const UploadSelectionMenu = ({
+  addButtonClicked,
+  type,
+}: UploadSelectionMenuProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -64,14 +72,16 @@ const UploadSelectionMenu = ({ addButtonClicked, type }: any) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
-          <RouteLink
-            to={`/upload/${type}`}
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            Thêm bằng file CSV
-          </RouteLink>
-        </StyledMenuItem>
+        {type && (
+          <StyledMenuItem>
+            <RouteLink
+              to={`/upload/${type}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              Thêm bằng file CSV
+            </RouteLink>
+          </StyledMenuItem>
+        )}
         <StyledMenuItem onClick={addButtonClicked}>
           Thêm bằng form
         </StyledMenuItem>

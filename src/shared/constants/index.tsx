@@ -33,6 +33,7 @@ export enum Routes {
   //admin routes
   MANAGE_ACCOUNT = "/manageaccount",
   UPLOAD = "/upload",
+  CRAWL = "/crawl",
 }
 
 export type PageListItem = {
@@ -102,6 +103,18 @@ export const adminPageList: PageListItem[] = [
   },
   {
     icon: <CloudUploadIcon />,
+    text: "Thu thập dữ liệu",
+    to: Routes.CRAWL,
+    hidden: false,
+  },
+  {
+    icon: <CloudUploadIcon />,
+    text: "Thu thập dữ liệu",
+    to: `${Routes.CRAWL}/upload`,
+    hidden: true,
+  },
+  {
+    icon: <CloudUploadIcon />,
     text: "Upload thông tin Tin tức",
     to: `${Routes.UPLOAD}/news`,
     hidden: true,
@@ -148,3 +161,13 @@ export const newsCsv = `title,body,tag,link
 "Test Title 1","Body 1","Tag 1,Tag 2","link test"
 "Test Title 2","Body 2","Tag 1,Tag 2","link test"
 `;
+
+export const crawlJson = `{
+  "prefixUrl": "https://vinmec.com/vi/tin-tuc/",
+  "startUrl":"https://vinmec.com/vi/tin-tuc/",
+  "patternUrl": "^https://vinmec.com/vi/tin-tuc/(([a-z]|[-])+)/(([a-z]|[-])+)/((([a-z]|[-])+)/)*$",
+  "data": {
+      "title":"normalize-space(//*[@id=\"vue-bootstrap\"]/div[2]/div[2]/h1/text())",
+      "tag":"//*[@id=\"vue-bootstrap\"]/div[2]/div[3]/div[3]/a/text()"
+  }
+}`;

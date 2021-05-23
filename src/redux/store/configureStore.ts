@@ -11,6 +11,7 @@ import storageSession from "redux-persist/lib/storage/session";
 import { Hospitals } from "../reducers/hospital";
 import { News } from "../reducers/news";
 import { Users } from "../reducers/user";
+import { Crawl } from "../reducers/crawl";
 
 // const persistConfig = {
 //   key: "root",
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   registerAccount: RegisterAccount,
   hospitals: Hospitals,
   news: News,
+  crawl: Crawl,
   users: Users,
 });
 
