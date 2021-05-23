@@ -67,53 +67,12 @@ const CrawlDataTableHead = () => {
   );
 };
 
-const mockData = [
-  {
-    id: 1,
-    createAt: "2021-05-20T19:03:30.000+0000",
-    modifyAt: "2021-05-20T19:03:30.000+0000",
-    crawlId: 8,
-    prefixUrl: "https://vinmec.com/vi/tin-tuc/",
-    startUrl: "https://vinmec.com/vi/tin-tuc/",
-    patternUrl:
-      "^https://vinmec.com/vi/tin-tuc/(([a-z]|[-])+)/(([a-z]|[-])+)/((([a-z]|[-])+)/)*$",
-    data: '{title=normalize-space(//*[@id="vue-bootstrap"]/div[2]/div[2]/h1/text()), tag=//*[@id="vue-bootstrap"]/div[2]/div[3]/div[3]/a/text()}',
-    finishAt: null,
-  },
-  {
-    id: 2,
-    createAt: "2021-05-20T19:04:06.000+0000",
-    modifyAt: "2021-05-20T19:04:06.000+0000",
-    crawlId: 8,
-    prefixUrl: "https://vinmec.com/vi/tin-tuc/",
-    startUrl: "https://vinmec.com/vi/tin-tuc/",
-    patternUrl:
-      "^https://vinmec.com/vi/tin-tuc/(([a-z]|[-])+)/(([a-z]|[-])+)/((([a-z]|[-])+)/)*$",
-    data: '{title=normalize-space(//*[@id="vue-bootstrap"]/div[2]/div[2]/h1/text()), tag=//*[@id="vue-bootstrap"]/div[2]/div[3]/div[3]/a/text()}',
-    finishAt: "2021-05-20T19:10:06.000+0000",
-  },
-  {
-    id: 3,
-    createAt: "2021-05-20T19:05:25.000+0000",
-    modifyAt: "2021-05-20T19:05:25.000+0000",
-    crawlId: 8,
-    prefixUrl: "https://vinmec.com/vi/tin-tuc/",
-    startUrl: "https://vinmec.com/vi/tin-tuc/",
-    patternUrl:
-      "^https://vinmec.com/vi/tin-tuc/(([a-z]|[-])+)/(([a-z]|[-])+)/((([a-z]|[-])+)/)*$",
-    data: '{title=normalize-space(//*[@id="vue-bootstrap"]/div[2]/div[2]/h1/text()), tag=//*[@id="vue-bootstrap"]/div[2]/div[3]/div[3]/a/text()}',
-    finishAt: null,
-  },
-];
-
 const CrawlDataTable = () => {
   const classes = useStyles();
 
   const account = useSelector((state: any) => state.loginAccount?.account);
   const crawlList: any[] =
     useSelector((state: any) => state.crawl?.crawl) || [];
-
-  //   const crawlList: any[] = mockData;
 
   const {
     totalPages,
@@ -174,9 +133,9 @@ const CrawlDataTable = () => {
                       </Cell>
                       <Cell width="15%">{row.prefixUrl}</Cell>
                       <Cell width="15%">{row.startUrl}</Cell>
-                      <Cell width="15%">{row.patternUrl}</Cell>
+                      <Cell width="20%">{row.patternUrl}</Cell>
                       <Cell width="20%">{row.data}</Cell>
-                      <Cell width="15%">{getStatusValue(row.finishAt)}</Cell>
+                      <Cell width="10%">{getStatusValue(row.finishAt)}</Cell>
                     </TableRow>
                   );
                 })}

@@ -31,26 +31,18 @@ const CrawlSearchForm = () => {
   const formik = useFormik({
     initialValues: initialValues,
     onSubmit: (values) => {
+      const submitValues = {
+        id: account?.id,
+        ...values,
+      };
       // alert(JSON.stringify(values));
-      dispatchCrawlList(values);
+      dispatchCrawlList(submitValues);
     },
   });
 
   return (
     <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
       <Grid container spacing={2}>
-        <Grid item container>
-          <Grid item xs={12} lg={9}>
-            <TextField
-              fullWidth
-              name="userId"
-              label="ID người dùng"
-              variant="outlined"
-              value={formik.values.userId}
-              onChange={formik.handleChange}
-            />
-          </Grid>
-        </Grid>
         <Grid item container>
           <Grid item xs={12} lg={9}>
             <TextField
