@@ -26,37 +26,47 @@ function Content({ type }: any) {
             <br />
             <div className="container">
               {type === HomeContentType.ADMIN && (
-                <div className="row">
-                  <Link
-                    className="btn btn-dark start start-two col-sm-3"
-                    to={Routes.HOSPITAL}
-                  >
-                    Quản lí Bệnh viện
-                  </Link>
-                  <Link
-                    className="btn btn-dark start start-two ml-3 col-sm-3"
-                    to={Routes.NEWS}
-                  >
-                    Quản lí Tin tức
-                  </Link>
-                  <Link
-                    className="btn btn-dark start start-two ml-3 col-sm-3"
-                    to={Routes.MANAGE_ACCOUNT}
-                  >
-                    Quản lí Tài khoản
-                  </Link>
-                </div>
+                <>
+                  <div className="row">
+                    <Link
+                      className="btn btn-dark start start-two m-2 col-sm-4"
+                      to={Routes.HOSPITAL}
+                    >
+                      Quản lí Bệnh viện
+                    </Link>
+                    <Link
+                      className="btn btn-dark start start-two m-2 col-sm-4"
+                      to={Routes.NEWS}
+                    >
+                      Quản lí Tin tức
+                    </Link>
+                  </div>
+                  <div className="row">
+                    <Link
+                      className="btn btn-dark start start-two m-2 col-sm-4"
+                      to={Routes.MANAGE_ACCOUNT}
+                    >
+                      Quản lí Tài khoản
+                    </Link>
+                    <Link
+                      className="btn btn-dark start start-two m-2 col-sm-4"
+                      to={Routes.CRAWL}
+                    >
+                      Thu thập dữ liệu
+                    </Link>
+                  </div>
+                </>
               )}
               {type === HomeContentType.USER && (
                 <div className="row">
                   <Link
-                    className="btn btn-dark start start-two col-sm-4"
+                    className="btn btn-dark start start-two m-2 col-sm-4"
                     to={Routes.HOSPITAL}
                   >
                     Tìm kiếm Bệnh viện
                   </Link>
                   <Link
-                    className="btn btn-dark start start-two ml-3 col-sm-4"
+                    className="btn btn-dark start start-two m-2 col-sm-4"
                     to={Routes.NEWS}
                   >
                     Tìm kiếm Tin tức
@@ -66,13 +76,13 @@ function Content({ type }: any) {
               {type === HomeContentType.GUEST && (
                 <div className="row">
                   <Link
-                    className="btn btn-dark start start-two col-sm-4"
+                    className="btn btn-dark start start-two m-2 col-sm-4"
                     to={Routes.LOGIN}
                   >
                     Đăng nhập
                   </Link>
                   <Link
-                    className="btn btn-dark start start-two ml-3 col-sm-4"
+                    className="btn btn-dark start start-two m-2 col-sm-4"
                     to={Routes.SIGN_UP}
                   >
                     Đăng ký
