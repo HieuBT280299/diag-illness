@@ -42,7 +42,7 @@ const headCells = [
   },
   { id: "data", numeric: false, disablePadding: false, label: "Dữ liệu" },
   {
-    id: "finishAt",
+    id: "status",
     numeric: false,
     disablePadding: false,
     label: "Trạng thái",
@@ -133,9 +133,15 @@ const CrawlDataTable = () => {
                       </Cell>
                       <Cell width="15%">{row.prefixUrl}</Cell>
                       <Cell width="15%">{row.startUrl}</Cell>
-                      <Cell width="20%">{row.patternUrl}</Cell>
+                      <Cell width="15%">{row.patternUrl}</Cell>
                       <Cell width="20%">{row.data}</Cell>
-                      <Cell width="10%">{getStatusValue(row.finishAt)}</Cell>
+                      <Cell width="15%">
+                        {getStatusValue(row.finishAt)}
+                        <br />
+                        {row.finishAt &&
+                          `Thời gian: ${toLocalDateAndTime(row.finishAt)}`}
+                      </Cell>
+                      {/* <Cell width="15%">{toLocalDateAndTime(row.finishAt)}</Cell> */}
                     </TableRow>
                   );
                 })}

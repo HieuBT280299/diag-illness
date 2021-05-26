@@ -24,7 +24,7 @@ export const getStatusValue = (status: string | null) => {
           textAlign: "center",
         }}
       >
-        Đã xử lí xong
+        Đã xử lý xong
       </div>
     );
   return (
@@ -37,7 +37,7 @@ export const getStatusValue = (status: string | null) => {
         textAlign: "center",
       }}
     >
-      Đang xử lí
+      Đang xử lý
     </div>
   );
 };

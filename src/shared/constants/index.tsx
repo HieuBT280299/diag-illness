@@ -166,8 +166,17 @@ export const crawlJson = `{
   "prefixUrl": "https://vinmec.com/vi/tin-tuc/",
   "startUrl":"https://vinmec.com/vi/tin-tuc/",
   "patternUrl": "^https://vinmec.com/vi/tin-tuc/(([a-z]|[-])+)/(([a-z]|[-])+)/((([a-z]|[-])+)/)*$",
+  "elasticsearchIndex":"test-news",
   "data": {
       "title":"normalize-space(//*[@id=\\"vue-bootstrap\\"]/div[2]/div[2]/h1/text())",
       "tag":"//*[@id=\\"vue-bootstrap\\"]/div[2]/div[3]/div[3]/a/text()"
   }
 }`;
+
+export const crawlGuide = `Hệ thống thu thập dữ liệu bằng framework Scrapy của Python, sẽ đi đến tất cả các đường dẫn có trong các trang đi qua.
+prefixUrl: là tiền tố của đường dẫn, tránh việc thu thập các trang web khác, có thể gây lỗi.
+startUrl: là đường dẫn của trang đầu tiên khi thu thập
+patternUrl: là mẫu của đường dẫn tại trang cần thu thập cuối cùng, định dạng theo chuẩn Python Regular Expression, có thể tham khảo thêm cách viết tại: https://www.w3schools.com/python/python_regex.asp
+elasticsearchIndex: là tên của index muốn lưu trên elasticsearch, nếu muốn thu thập dữ liệu bệnh viện thì elasticsearchIndex là “hospital”, nếu muốn thu thập dữ liệu bài báo thì elasticsearchIndex là “news”. Khi đó, nên thu thập đầy đủ các trường theo định dạng mà hệ thống có sẵn. Ví dụ: dữ liệu bệnh viện sẽ có các trường: name, number, ward, district, city, workingTime, introduction, services, department, website, link, phone. Dữ liệu bài báo sẽ có các trường: title, body, tag, link.
+data: gồm các trường muốn thu thập, định dạng là [tên trường] : [xpath của trường đó].
+`;

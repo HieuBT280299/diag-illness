@@ -8,7 +8,7 @@ import {
   Snackbar,
 } from "@material-ui/core";
 import { useFormik } from "formik";
-import { crawlJson } from "../../../shared/constants";
+import { crawlGuide, crawlJson } from "../../../shared/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { uploadCrawlJson } from "../../../redux/actions/creators/crawl";
 import { Alert, AlertTitle } from "@material-ui/lab";
@@ -32,6 +32,7 @@ const initialValues = {
 };
 
 const CrawlJsonUpload = () => {
+  const [showGuide, setShowGuide] = React.useState(false);
   const classes = useStyles();
   const account = useSelector((state: any) => state.loginAccount?.account);
   const crawl = useSelector((state: any) => state.crawl);
@@ -96,6 +97,30 @@ const CrawlJsonUpload = () => {
             defaultValue={crawlJson}
             style={{ width: "100%", resize: "none" }}
           />
+        </Grid>
+
+        <Grid container spacing={6} justify="flex-end">
+          <Grid item xs={12} md={6}>
+            {showGuide ? (
+              <Typography variant="h6">Giải thích</Typography>
+            ) : (
+              <Button
+                color="secondary"
+                variant="contained"
+                onClick={() => setShowGuide(true)}
+              >
+                Giải thích
+              </Button>
+            )}
+            {showGuide && (
+              <TextareaAutosize
+                readOnly
+                rowsMin={4}
+                defaultValue={crawlGuide}
+                style={{ width: "100%", resize: "none" }}
+              />
+            )}
+          </Grid>
         </Grid>
       </Grid>
       <Snackbar
