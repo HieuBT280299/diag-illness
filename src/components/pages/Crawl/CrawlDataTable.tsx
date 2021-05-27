@@ -40,7 +40,7 @@ const headCells = [
     disablePadding: false,
     label: "Pattern URL",
   },
-  { id: "data", numeric: false, disablePadding: false, label: "Dữ liệu" },
+  { id: "elasticsearchIndex", numeric: false, disablePadding: false, label: "Elasticsearch Index" },
   {
     id: "status",
     numeric: false,
@@ -133,8 +133,8 @@ const CrawlDataTable = () => {
                       </Cell>
                       <Cell width="15%">{row.prefixUrl}</Cell>
                       <Cell width="15%">{row.startUrl}</Cell>
-                      <Cell width="15%">{row.patternUrl}</Cell>
-                      <Cell width="20%">{row.data}</Cell>
+                      <Cell width="20%">{row.patternUrl}</Cell>
+                      <Cell width="15%">{row.elasticsearchIndex}</Cell>
                       <Cell width="15%">
                         {getStatusValue(row.finishAt)}
                         <br />
