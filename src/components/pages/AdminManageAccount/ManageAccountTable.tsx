@@ -187,7 +187,7 @@ const ManageAccountTable = () => {
                       </Cell>
                       <Cell width="10%">
                         <Link
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: "pointer", color: "#007bff" }}
                           onClick={() => detailsButtonClicked(row)}
                         >
                           Chi tiết

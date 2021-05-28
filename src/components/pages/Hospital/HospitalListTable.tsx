@@ -136,18 +136,13 @@ const HospitalListTable = () => {
 
   // const hospitalList = mockData;
 
-  const isAdmin = useMemo(() => account.roleId === RoleIDs.ROLE_ADMIN, [
-    account,
-  ]);
+  const isAdmin = useMemo(
+    () => account.roleId === RoleIDs.ROLE_ADMIN,
+    [account]
+  );
 
-  const {
-    totalPages,
-    totalEntries,
-    currentPage,
-    pageSize,
-    searchData,
-    type,
-  } = useSelector((state: any) => state.hospitals);
+  const { totalPages, totalEntries, currentPage, pageSize, searchData, type } =
+    useSelector((state: any) => state.hospitals);
 
   const dispatch = useDispatch();
 
@@ -200,20 +195,29 @@ const HospitalListTable = () => {
                       <Cell width="20%">{getFullContact(row)}</Cell>
                       <Cell width="20%">{getValueOf(row.service)}</Cell>
                       <Cell width="10%">
-                        <Link onClick={() => detailsButtonClicked(row)}>
+                        <Link
+                          style={{ cursor: "pointer", color: "#007bff" }}
+                          onClick={() => detailsButtonClicked(row)}
+                        >
                           Chi tiết
                         </Link>
                         {isAdmin && (
                           <span>
                             {` | `}
                             {
-                              <Link onClick={() => editButtonClicked(row)}>
+                              <Link
+                                style={{ cursor: "pointer", color: "#007bff" }}
+                                onClick={() => editButtonClicked(row)}
+                              >
                                 Sửa
                               </Link>
                             }
                             {` | `}
                             {
-                              <Link onClick={() => deleteButtonClicked(row)}>
+                              <Link
+                                style={{ cursor: "pointer", color: "#007bff" }}
+                                onClick={() => deleteButtonClicked(row)}
+                              >
                                 Xoá
                               </Link>
                             }

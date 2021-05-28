@@ -145,7 +145,7 @@ const TokenForm = ({ switchToEmailForm }: any) => {
       <Typography variant="subtitle1" style={{ alignSelf: "start" }}>
         {"Không nhận được mã? "}
         <MuiLink
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", color: "#007bff" }}
           onClick={dispatchSendForgotPasswordToken}
         >
           Gửi lại mã

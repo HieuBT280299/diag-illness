@@ -103,7 +103,7 @@ const TokenForm = ({ fromLogin }: any) => {
       ) : (
         <Typography variant="subtitle1" style={{ alignSelf: "start" }}>
           <MuiLink
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", color: "#007bff" }}
             onClick={dispatchSendTokenSignUp}
           >
             Gửi mã kích hoạt
@@ -141,7 +141,7 @@ const TokenForm = ({ fromLogin }: any) => {
       <Typography variant="subtitle1" style={{ alignSelf: "start" }}>
         {"Không nhận được mã? "}
         <MuiLink
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", color: "#007bff" }}
           onClick={dispatchResendTokenSignUp}
         >
           Gửi lại mã
