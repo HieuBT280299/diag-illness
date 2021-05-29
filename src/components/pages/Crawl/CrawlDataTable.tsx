@@ -7,11 +7,17 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Cell from "../../tables/Cell";
-import { Grid, Typography } from "@material-ui/core";
+import { Button, Grid, Link, Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "@material-ui/lab/Pagination";
 import { getCrawlList } from "../../../redux/actions/creators/crawl";
-import { getStatusValue, toLocalDateAndTime } from "./CrawlDataTable.helper";
+import {
+  getValueOf,
+  getStatusValue,
+  toLocalDateAndTime,
+} from "./CrawlDataTable.helper";
+import CustomizedDialog from "../../Dialog";
+import CrawlDataContent from "./CrawlDataContent";
 
 const useStyles = makeStyles({
   table: {
@@ -40,12 +46,23 @@ const headCells = [
     disablePadding: false,
     label: "Pattern URL",
   },
-  { id: "elasticsearchIndex", numeric: false, disablePadding: false, label: "Elasticsearch Index" },
+  {
+    id: "elasticsearchIndex",
+    numeric: false,
+    disablePadding: false,
+    label: "Elasticsearch Index",
+  },
   {
     id: "status",
     numeric: false,
     disablePadding: false,
     label: "Trạng thái",
+  },
+  {
+    id: "action",
+    numeric: false,
+    disablePadding: false,
+    label: "",
   },
 ];
 
@@ -69,6 +86,15 @@ const CrawlDataTableHead = () => {
 
 const CrawlDataTable = () => {
   const classes = useStyles();
+  const [selectedRow, setSelectedRow] = React.useState<any>({});
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const toggleDialog = () => {
+    setDialogOpen(!dialogOpen);
+  };
+  const detailsButtonClicked = (row: any) => {
+    setSelectedRow(row);
+    setDialogOpen(true);
+  };
 
   const account = useSelector((state: any) => state.loginAccount?.account);
   const crawlList: any[] =
@@ -131,17 +157,26 @@ const CrawlDataTable = () => {
                       <Cell width="15%">
                         {toLocalDateAndTime(row.createAt)}
                       </Cell>
-                      <Cell width="15%">{row.prefixUrl}</Cell>
-                      <Cell width="15%">{row.startUrl}</Cell>
-                      <Cell width="20%">{row.patternUrl}</Cell>
-                      <Cell width="15%">{row.elasticsearchIndex}</Cell>
+                      <Cell width="10%">{getValueOf(row.prefixUrl)}</Cell>
+                      <Cell width="10%">{getValueOf(row.startUrl)}</Cell>
+                      <Cell width="15%">{getValueOf(row.patternUrl)}</Cell>
                       <Cell width="15%">
+                        {getValueOf(row.elasticsearchIndex)}
+                      </Cell>
+                      <Cell width="20%">
                         {getStatusValue(row.finishAt)}
                         <br />
                         {row.finishAt &&
                           `Thời gian: ${toLocalDateAndTime(row.finishAt)}`}
                       </Cell>
-                      {/* <Cell width="15%">{toLocalDateAndTime(row.finishAt)}</Cell> */}
+                      <Cell width="10%">
+                        <Link
+                          style={{ cursor: "pointer", color: "#007bff" }}
+                          onClick={() => detailsButtonClicked(row)}
+                        >
+                          Chi tiết
+                        </Link>
+                      </Cell>
                     </TableRow>
                   );
                 })}
@@ -159,6 +194,17 @@ const CrawlDataTable = () => {
           />
         )}
       </Grid>
+      <CustomizedDialog
+        open={dialogOpen}
+        title="Chi tiết"
+        content={<CrawlDataContent row={selectedRow} />}
+        actions={
+          <Button onClick={toggleDialog} color="secondary">
+            Đóng
+          </Button>
+        }
+        toggleDialog={toggleDialog}
+      />
     </Grid>
   );
 };
